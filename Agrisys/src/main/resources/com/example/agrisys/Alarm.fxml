@@ -5,14 +5,14 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="608.0" prefWidth="348.0" style="-fx-border-color: black; -fx-border-width: 2: -fx-padding: 10;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.agrisys.Alarm">
+<AnchorPane prefHeight="608.0" prefWidth="348.0" style="-fx-border-color: black; -fx-border-width: 2; -fx-padding: 10;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.agrisys.AlarmController">
    <children>
-      <Button layoutX="208.0" layoutY="26.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="115.0" text="Delete Alarm" />
-      <TableView layoutX="45.0" layoutY="26.0" prefHeight="565.0" prefWidth="115.0">
-        <columns>
-          <TableColumn prefWidth="114.40001220703125" text="Responder" />
-        </columns>
-      </TableView>
+       <TableView fx:id="ResponderTable" layoutX="20" layoutY="20" prefHeight="200" prefWidth="250">
+           <columns>
+               <TableColumn fx:id="responderColumn" prefWidth="240" text="Responder" />
+           </columns>
+       </TableView>
+       <Button fx:id="DeleteAlarmButton" layoutX="290" layoutY="20" text="Delete Alarm" />
+       <Button fx:id="BackToMenuButton" layoutX="290" layoutY="60" text="Back to Menu" />
    </children>
 </AnchorPane>

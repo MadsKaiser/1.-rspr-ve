@@ -19,11 +19,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args) throws Exception {
-        // Opretter databaseforbindelse
-       // DatabaseConnection.getConnection();
-
-        // Starter applikationen
+    public static void main(String[] args) {
         launch(args);
-    }
+    };
 }
