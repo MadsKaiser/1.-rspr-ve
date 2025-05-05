@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="646.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.agrisys.MenuController">
    <children>
-      <Button layoutX="660.0" layoutY="72.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Export CSV" />
+      <Button fx:id="CSVButton" layoutX="660.0" layoutY="72.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Export CSV" />
       <Separator layoutX="632.0" layoutY="4.0" orientation="VERTICAL" prefHeight="638.0" prefWidth="7.0" />
       <PieChart layoutX="34.0" layoutY="27.0" prefHeight="179.0" prefWidth="234.0" />
       <LineChart layoutX="14.0" layoutY="259.0" prefHeight="210.0" prefWidth="255.0">
@@ -40,7 +40,7 @@
             <NumberAxis side="LEFT" />
          </yAxis>
       </StackedAreaChart>
-      <Button layoutX="660.0" layoutY="27.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Alarm" />
+      <Button fx:id="AlarmButton" layoutX="660.0" layoutY="27.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Alarm" />
       <TextField layoutX="34.0" layoutY="470.0" prefHeight="146.0" prefWidth="562.0" />
    </children>
 </AnchorPane>
