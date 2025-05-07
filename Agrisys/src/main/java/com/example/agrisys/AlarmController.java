@@ -29,19 +29,13 @@ public class AlarmController {
     private Button BackToMenuButton;
 
     private final ObservableList<String> responderData = FXCollections.observableArrayList();
-    private final Map<String, String> roles = new HashMap<>(); // Tilføjet for at definere 'roles'
+    private final Map<String, String> roles = new HashMap<>();
 
     public void initialize() {
-        // Brug den eksisterende kolonne
         responderColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
-
-        // Sæt data i TableView
         ResponderTable.setItems(responderData);
-
-        // Dummy data
         responderData.addAll("Test 1", "Test 2", "Test 3");
 
-        // Slet valgte række
         DeleteAlarmButton.setOnAction(e -> {
             String selectedItem = ResponderTable.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
@@ -49,25 +43,31 @@ public class AlarmController {
             }
         });
 
-        // Tilbage til menu
         BackToMenuButton.setOnAction(e -> {
             try {
-                FXMLLoader loader;
-                Parent root;
+                // Fetch the current user's role correctly
+                String currentUser = UserManager.getInstance().getCurrentUser();
 
-                if (roles.getOrDefault("MortenSuper", "").equals("SUPERUSER")) {
-                    loader = new FXMLLoader(getClass().getResource("SMenu.fxml"));
-                    root = loader.load();
+
+                String role = UserManager.getInstance().getRoles().getOrDefault(currentUser, "USER");
+
+                if ("SUPERUSER".equals(role)) {
+                    switchToScene("SMenu.fxml");
                 } else {
-                    loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
-                    root = loader.load();
+                    switchToScene("Menu.fxml");
                 }
-
-                Stage stage = (Stage) BackToMenuButton.getScene().getWindow();
-                stage.setScene(new Scene(root));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
         });
+
+    }
+
+    private void switchToScene(String fxmlFile) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+        Parent root = loader.load();
+        Stage stage = (Stage) BackToMenuButton.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 }
+

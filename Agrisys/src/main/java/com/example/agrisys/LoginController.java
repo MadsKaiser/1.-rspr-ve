@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 
 public class LoginController {
 
@@ -28,18 +27,8 @@ public class LoginController {
     @FXML
     private Button forgotLoginButton;
 
-    public final Map<String, String> users = new HashMap<>();
-    public final Map<String, String> roles = new HashMap<>(); // Stores user roles
-
     @FXML
     public void initialize() {
-        // Add a superuser and a normal user
-        users.put("MortenSuper", "Babløg");
-        roles.put("MortenSuper", "SUPERUSER");
-
-        users.put("normaluser", "normalpassword");
-        roles.put("normaluser", "USER");
-
         loginButton.setOnAction(event -> handleLogin());
         forgotLoginButton.setOnAction(event -> handleForgotLogin());
 
@@ -55,12 +44,16 @@ public class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
+        HashMap<String, String> users = UserManager.getInstance().getUsers();
+        HashMap<String, String> roles = UserManager.getInstance().getRoles();
+
         if (username.isEmpty() || password.isEmpty()) {
             showAlert("Error", "Please fill in both fields.");
         } else if (users.containsKey(username) && users.get(username).equals(password)) {
             String role = roles.get(username);
+            UserManager.getInstance().setCurrentUser(username);
             showAlert("Success", "Login successful! Role: " + role);
-
+            UserManager.getInstance().setCurrentUser(username);
             if ("SUPERUSER".equals(role)) {
                 switchToScene("SMenu.fxml");
             } else {
@@ -68,6 +61,8 @@ public class LoginController {
             }
         } else {
             showAlert("Error", "Invalid username or password.");
+
+
         }
     }
 
