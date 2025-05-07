@@ -42,5 +42,6 @@
       </StackedAreaChart>
       <Button fx:id="AlarmButton" layoutX="660.0" layoutY="27.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Alarm" />
       <TextField layoutX="34.0" layoutY="470.0" prefHeight="146.0" prefWidth="562.0" />
+      <Button fx:id="LogoutButton" layoutX="660.0" layoutY="590.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Logout" />
    </children>
 </AnchorPane>

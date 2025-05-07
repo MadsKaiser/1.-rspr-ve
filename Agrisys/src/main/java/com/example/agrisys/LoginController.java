@@ -28,8 +28,8 @@ public class LoginController {
     @FXML
     private Button forgotLoginButton;
 
-    private final Map<String, String> users = new HashMap<>();
-    private final Map<String, String> roles = new HashMap<>(); // Stores user roles
+    public final Map<String, String> users = new HashMap<>();
+    public final Map<String, String> roles = new HashMap<>(); // Stores user roles
 
     @FXML
     public void initialize() {

@@ -13,6 +13,8 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AlarmController {
     @FXML
@@ -27,6 +29,7 @@ public class AlarmController {
     private Button BackToMenuButton;
 
     private final ObservableList<String> responderData = FXCollections.observableArrayList();
+    private final Map<String, String> roles = new HashMap<>(); // Tilføjet for at definere 'roles'
 
     public void initialize() {
         // Brug den eksisterende kolonne
@@ -49,8 +52,17 @@ public class AlarmController {
         // Tilbage til menu
         BackToMenuButton.setOnAction(e -> {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
-                Parent root = loader.load();
+                FXMLLoader loader;
+                Parent root;
+
+                if (roles.getOrDefault("MortenSuper", "").equals("SUPERUSER")) {
+                    loader = new FXMLLoader(getClass().getResource("SMenu.fxml"));
+                    root = loader.load();
+                } else {
+                    loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+                    root = loader.load();
+                }
+
                 Stage stage = (Stage) BackToMenuButton.getScene().getWindow();
                 stage.setScene(new Scene(root));
             } catch (IOException ex) {

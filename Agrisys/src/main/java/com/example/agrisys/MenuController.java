@@ -13,7 +13,9 @@ public class MenuController {
     @FXML
     private Button AlarmButton;
     @FXML
-    private Button CSVButton;
+    private Button ExportCSVButton;
+    @FXML
+    private Button LogoutButton;
 
     public void initialize() {
         AlarmButton.setOnAction(e -> {
@@ -33,5 +35,24 @@ public class MenuController {
                 ex.printStackTrace();
             }
         });
+
+        LogoutButton.setOnAction(e -> {
+            try {
+                // Load the Login.fxml file
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+                Parent root = loader.load();
+
+                // Get the current window (stage) from the button
+                Stage stage = (Stage) LogoutButton.getScene().getWindow();
+
+                // Set the new scene
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 }
+
