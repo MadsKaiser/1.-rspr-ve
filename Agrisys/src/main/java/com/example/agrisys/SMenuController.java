@@ -28,16 +28,10 @@ public class SMenuController {
     public void initialize() {
         AlarmButton.setOnAction(e -> {
             try {
-                // Load the FXML file
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Alarm.fxml"));
                 Parent root = loader.load();
-
-                // Get the current window (stage) from the button
                 Stage stage = (Stage) AlarmButton.getScene().getWindow();
-
-                // Set the new scene
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
+                stage.setScene(new Scene(root));
                 stage.show();
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -46,16 +40,10 @@ public class SMenuController {
 
         WidgetsButton.setOnAction(e -> {
             try {
-                // Load the FXML file
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Widget.fxml"));
                 Parent root = loader.load();
-
-                // Get the current window (stage) from the button
                 Stage stage = (Stage) WidgetsButton.getScene().getWindow();
-
-                // Set the new scene
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
+                stage.setScene(new Scene(root));
                 stage.show();
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -64,16 +52,22 @@ public class SMenuController {
 
         LogoutButton.setOnAction(e -> {
             try {
-                // Load the Login.fxml file
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
                 Parent root = loader.load();
-
-                // Get the current window (stage) from the button
                 Stage stage = (Stage) LogoutButton.getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
 
-                // Set the new scene
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
+        ExportCSVButton.setOnAction(e -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("Export.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) ExportCSVButton.getScene().getWindow();
+                stage.setScene(new Scene(root));
                 stage.show();
             } catch (IOException ex) {
                 ex.printStackTrace();

@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="411.0" prefWidth="732.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.agrisys.ImportCSV">
+<AnchorPane prefHeight="411.0" prefWidth="732.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.agrisys.ImportController">
    <children>
       <Button fx:id="ImportCSVButton" layoutX="27.0" layoutY="24.0" mnemonicParsing="false" onAction="#OnImportCSVButton" text="Import CSV" />
       <Button fx:id="BrowseButton" layoutX="643.0" layoutY="117.0" mnemonicParsing="false" onAction="#OnBrowseButton" prefHeight="26.0" prefWidth="77.0" text="Browse" />
