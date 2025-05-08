@@ -16,12 +16,28 @@ public class DashboardController {
     private Label widget2;
 
     @FXML
+    private Label widget3;
+
+    @FXML
+    private Label widget4;
+
+    @FXML
+    private Label widget5;
+
+    @FXML
+    private Label widget6;
+
+    @FXML
     private Pane dashboardPane;
 
     @FXML
     public void initialize() {
         makeDraggable(widget1);
         makeDraggable(widget2);
+        makeDraggable(widget3);
+        makeDraggable(widget4);
+        makeDraggable(widget5);
+        makeDraggable(widget6);
         setupDashboardDrop();
     }
 

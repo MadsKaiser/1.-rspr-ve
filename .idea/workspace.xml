@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/DashboardController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Agrisys/src/main/resources/com/example/agrisys/Dashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/resources/com/example/agrisys/ImportCSV.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/resources/com/example/agrisys/ImportCSV.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/resources/com/example/agrisys/Widget.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/resources/com/example/agrisys/Widget.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/ImportCSV.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/ImportCSV.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/Widget.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/Widget.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/resources/com/example/agrisys/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/resources/com/example/agrisys/Dashboard.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +50,7 @@
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Morten&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -100,7 +94,8 @@
       <workItem from="1746601639126" duration="15000" />
       <workItem from="1746613219658" duration="2630000" />
       <workItem from="1746691236496" duration="1026000" />
-      <workItem from="1746692280228" duration="512000" />
+      <workItem from="1746692280228" duration="604000" />
+      <workItem from="1746692913664" duration="1984000" />
     </task>
     <servers />
   </component>
