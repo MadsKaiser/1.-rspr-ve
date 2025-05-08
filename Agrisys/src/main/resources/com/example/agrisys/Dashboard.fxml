@@ -14,7 +14,8 @@
       <Label fx:id="widget4" style="-fx-background-color: lightgreen; -fx-padding: 10;" text="Widget 4" />
       <Label fx:id="widget5" style="-fx-background-color: lightblue; -fx-padding: 10;" text="Widget 5" />
       <Label fx:id="widget6" style="-fx-background-color: lightgreen; -fx-padding: 10;" text="Widget 6" />
+      <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="83.0" text="Add to menu" />
     </VBox>
     <Pane fx:id="dashboardPane" layoutY="8.0" prefHeight="392.0" prefWidth="491.0" style="-fx-border-color: black;" />
-   <Button layoutX="497.0" layoutY="333.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="98.0" text="Add to menu" />
+   <Button fx:id="BackToMenuButton" layoutX="518.0" layoutY="366.0" mnemonicParsing="false" text="Back" />
 </AnchorPane>

@@ -1,11 +1,18 @@
 package com.example.agrisys;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class DashboardController {
 
@@ -31,6 +38,9 @@ public class DashboardController {
     private Pane dashboardPane;
 
     @FXML
+    private Button BackToMenuButton;
+
+    @FXML
     public void initialize() {
         makeDraggable(widget1);
         makeDraggable(widget2);
@@ -39,6 +49,18 @@ public class DashboardController {
         makeDraggable(widget5);
         makeDraggable(widget6);
         setupDashboardDrop();
+
+        BackToMenuButton.setOnAction(e -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("SMenu.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) BackToMenuButton.getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException ex) {
+                showError("Error", "Failed to load the menu scene.");
+            }
+        });
     }
 
     private void makeDraggable(Label widget) {
@@ -66,12 +88,16 @@ public class DashboardController {
                 Label newWidget = new Label(db.getString());
                 newWidget.setLayoutX(event.getX());
                 newWidget.setLayoutY(event.getY());
-                newWidget.setStyle("-fx-background-color: lightgray; -fx-padding: 10;");
+                newWidget.setStyle("-fx-background-color: lightgray; -fx-padding: 10; -fx-border-color: black;");
                 dashboardPane.getChildren().add(newWidget);
                 success = true;
             }
             event.setDropCompleted(success);
             event.consume();
         });
+    }
+
+    private void showError(String title, String message) {
+        System.err.println(title + ": " + message);
     }
 }
