@@ -73,5 +73,17 @@ public class SMenuController {
                 ex.printStackTrace();
             }
         });
+
+        ImportCSVButton.setOnAction(e -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ImportCSV.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) ImportCSVButton.getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 }
