@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -53,6 +54,8 @@ public class SMenuController {
     private Label Label5;
     @FXML
     private Label Label6;
+    @FXML
+    private AnchorPane Anchor; // AnchorPane for graph placement
 
     @FXML
     private void toggleMenuVisibility() {
@@ -78,13 +81,20 @@ public class SMenuController {
         DashboardsButton.setOnAction(e -> loadScene("Dashboard.fxml", DashboardsButton));
 
         // Set actions for widgets to toggle corresponding label visibility
-        Widget1.setOnAction(event -> Label1.setVisible(Widget1.isSelected()));
+        Widget1.setOnAction(event -> Label1.setVisible(Widget1.isSelected()));//skriv kode der laver widgets
         Widget2.setOnAction(event -> Label2.setVisible(Widget2.isSelected()));
         Widget3.setOnAction(event -> Label3.setVisible(Widget3.isSelected()));
         Widget4.setOnAction(event -> Label4.setVisible(Widget4.isSelected()));
         Widget5.setOnAction(event -> Label5.setVisible(Widget5.isSelected()));
         Widget6.setOnAction(event -> Label6.setVisible(Widget6.isSelected()));
+
+        Widget1.setOnAction(e -> {
+            if (Widget1.isSelected()) {
+                GraphPlaceholder.addGraphToPane(Anchor);
+            }
+        });
     }
+
 
     private void loadScene(String fxmlFile, Button button) {
         try {

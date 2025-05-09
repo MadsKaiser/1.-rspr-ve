@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="646.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.agrisys.SMenuController">
+<AnchorPane fx:id="Anchor" prefHeight="646.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.agrisys.SMenuController">
    <children>
       <Button fx:id="ExportCSVButton" layoutX="660.0" layoutY="72.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Export CSV" />
       <Separator layoutX="632.0" layoutY="4.0" orientation="VERTICAL" prefHeight="638.0" prefWidth="7.0" />
@@ -21,8 +21,8 @@
       <VBox fx:id="VBoxSMenu" layoutX="14.0" layoutY="10.0" prefHeight="629.0" prefWidth="611.0">
          <children>
             <ScrollPane prefHeight="631.0" prefWidth="611.0">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="614.0" prefWidth="609.0">
+               <content>
+                  <AnchorPane fx:id="InnerAnchor" minHeight="0.0" minWidth="0.0" prefHeight="614.0" prefWidth="609.0">
                      <children>
                         <VBox layoutY="6.0" prefHeight="610.0" prefWidth="611.0">
                            <children>
@@ -34,8 +34,9 @@
                               <Label fx:id="Label6" prefHeight="127.0" prefWidth="594.0" text="Label" />
                            </children>
                         </VBox>
-                     </children></AnchorPane>
-              </content>
+                     </children>
+                  </AnchorPane>
+               </content>
             </ScrollPane>
          </children>
       </VBox>
@@ -53,7 +54,6 @@
             <CheckBox mnemonicParsing="false" text="CheckBox" />
             <CheckBox mnemonicParsing="false" text="CheckBox" />
             <CheckBox mnemonicParsing="false" text="CheckBox" />
-
          </children>
       </VBox>
    </children>
