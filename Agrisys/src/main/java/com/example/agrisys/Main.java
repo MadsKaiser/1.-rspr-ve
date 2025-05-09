@@ -6,8 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -19,11 +17,15 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public static void main(String[] args) throws Exception {
-        // Opretter databaseforbindelse
-       // DatabaseConnection.getConnection();
+    public static void main(String[] args) {
+        try {
+            // Opretter databaseforbindelse
+            DatabaseManager.getConnection();
 
-        // Starter applikationen
-        launch(args);
+            // Starter applikationen
+            launch(args);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
