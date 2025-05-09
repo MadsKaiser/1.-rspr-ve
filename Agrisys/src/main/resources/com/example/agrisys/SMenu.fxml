@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,20 +12,48 @@
    <children>
       <Button fx:id="ExportCSVButton" layoutX="660.0" layoutY="72.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Export CSV" />
       <Separator layoutX="632.0" layoutY="4.0" orientation="VERTICAL" prefHeight="638.0" prefWidth="7.0" />
-      <PieChart layoutX="34.0" layoutY="27.0" prefHeight="179.0" prefWidth="234.0" />
-      <Button fx:id="AlarmButton" layoutX="660.0" layoutY="246.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Alarm" />
+      <Button fx:id="AlarmButton" layoutX="660.0" layoutY="165.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Alarm" />
       <Button fx:id="KPIButton" layoutX="660.0" layoutY="117.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="KPI" />
       <Button fx:id="ImportCSVButton" layoutX="660.0" layoutY="27.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Import CSV" />
-      <Button fx:id="WidgetsButton" layoutX="660.0" layoutY="160.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Widgets" />
-      <Button fx:id="DashboardsButton" layoutX="660.0" layoutY="203.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Dashboards" />
+      <Button fx:id="WidgetsButton" layoutX="660.0" layoutY="264.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Widgets" />
+      <Button fx:id="DashboardsButton" layoutX="660.0" layoutY="214.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Dashboards" />
       <Button fx:id="LogoutButton" layoutX="660.0" layoutY="590.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Logout" />
       <VBox fx:id="VBoxSMenu" layoutX="14.0" layoutY="10.0" prefHeight="629.0" prefWidth="611.0">
          <children>
             <ScrollPane prefHeight="631.0" prefWidth="611.0">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="614.0" prefWidth="609.0">
+                     <children>
+                        <VBox layoutY="6.0" prefHeight="610.0" prefWidth="611.0">
+                           <children>
+                              <Label fx:id="Label1" prefHeight="127.0" prefWidth="594.0" text="Label" />
+                              <Label fx:id="Label2" prefHeight="127.0" prefWidth="594.0" text="Label" />
+                              <Label fx:id="Label3" prefHeight="127.0" prefWidth="594.0" text="Label" />
+                              <Label fx:id="Label4" prefHeight="127.0" prefWidth="594.0" text="Label" />
+                              <Label fx:id="Label5" prefHeight="127.0" prefWidth="594.0" text="Label" />
+                              <Label fx:id="Label6" prefHeight="127.0" prefWidth="594.0" text="Label" />
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
               </content>
             </ScrollPane>
+         </children>
+      </VBox>
+      <VBox fx:id="hiddenMenu" layoutX="648.0" layoutY="325.0" prefHeight="204.0" prefWidth="102.0" visible="false">
+         <children>
+            <CheckBox fx:id="Widget1" mnemonicParsing="false" text="CheckBox" />
+            <CheckBox fx:id="Widget2" mnemonicParsing="false" text="CheckBox" />
+            <CheckBox fx:id="Widget3" mnemonicParsing="false" text="CheckBox" />
+            <CheckBox fx:id="Widget4" mnemonicParsing="false" text="CheckBox" />
+            <CheckBox fx:id="Widget5" mnemonicParsing="false" text="CheckBox" />
+            <CheckBox fx:id="Widget6" mnemonicParsing="false" text="CheckBox" />
+            <CheckBox mnemonicParsing="false" text="CheckBox" />
+            <CheckBox mnemonicParsing="false" text="CheckBox" />
+            <CheckBox mnemonicParsing="false" text="CheckBox" />
+            <CheckBox mnemonicParsing="false" text="CheckBox" />
+            <CheckBox mnemonicParsing="false" text="CheckBox" />
+            <CheckBox mnemonicParsing="false" text="CheckBox" />
+
          </children>
       </VBox>
    </children>
