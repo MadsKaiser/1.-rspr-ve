@@ -7,15 +7,15 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.agrisys.DashboardController">
-    <VBox layoutX="508.0" layoutY="22.0" prefHeight="283.0" prefWidth="71.0" spacing="10">
+    <VBox layoutX="508.0" layoutY="22.0" prefHeight="344.0" prefWidth="71.0" spacing="10">
         <Label fx:id="widget1" style="-fx-background-color: lightblue; -fx-padding: 10;" text="Widget 1" />
         <Label fx:id="widget2" style="-fx-background-color: lightgreen; -fx-padding: 10;" text="Widget 2" />
       <Label fx:id="widget3" style="-fx-background-color: lightblue; -fx-padding: 10;" text="Widget 3" />
       <Label fx:id="widget4" style="-fx-background-color: lightgreen; -fx-padding: 10;" text="Widget 4" />
       <Label fx:id="widget5" style="-fx-background-color: lightblue; -fx-padding: 10;" text="Widget 5" />
       <Label fx:id="widget6" style="-fx-background-color: lightgreen; -fx-padding: 10;" text="Widget 6" />
+      <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="83.0" text="Add to menu" />
     </VBox>
     <Pane fx:id="dashboardPane" layoutY="8.0" prefHeight="392.0" prefWidth="491.0" style="-fx-border-color: black;" />
-   <Button layoutX="496.0" layoutY="315.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="98.0" text="Add to menu" />
-   <Button fx:id="CancelButton" layoutX="518.0" layoutY="371.0" mnemonicParsing="false" onAction="#CancelButton" text="Cancel" />
+   <Button fx:id="BackToMenuButton" layoutX="518.0" layoutY="366.0" mnemonicParsing="false" text="Back" />
 </AnchorPane>

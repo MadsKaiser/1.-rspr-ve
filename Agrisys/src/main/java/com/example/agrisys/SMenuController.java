@@ -85,5 +85,16 @@ public class SMenuController {
                 ex.printStackTrace();
             }
         });
+        DashboardsButton.setOnAction(e -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) DashboardsButton.getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 }
