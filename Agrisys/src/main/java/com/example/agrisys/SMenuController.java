@@ -76,6 +76,7 @@ public class SMenuController {
         ExportCSVButton.setOnAction(e -> loadScene("Export.fxml", ExportCSVButton));
         ImportCSVButton.setOnAction(e -> loadScene("ImportCSV.fxml", ImportCSVButton));
         DashboardsButton.setOnAction(e -> loadScene("Dashboard.fxml", DashboardsButton));
+        ExportCSVButton.setOnAction(e -> loadScene("Export.fxml", ExportCSVButton));
 
         // Set actions for widgets to toggle corresponding label visibility
         Widget1.setOnAction(event -> Label1.setVisible(Widget1.isSelected()));
