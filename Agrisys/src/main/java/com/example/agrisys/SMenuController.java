@@ -110,12 +110,12 @@ public class SMenuController {
         scatterChart.setTitle("Responder vs FCR");
 
         try (Connection connection = DatabaseManager.getConnection()) {
-            String query = "SELECT Responder, Duration FROM dbo.[Visit data]";
+            String query = "SELECT Responder, FCR FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
 
             XYChart.Series<Number, Number> series = new XYChart.Series<>();
-            series.setName("PPT Data");
+            series.setName("PPT data");
 
             while (resultSet.next()) {
                 double responder = resultSet.getDouble("Responder");
