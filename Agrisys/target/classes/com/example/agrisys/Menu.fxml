@@ -1,47 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
-<?import javafx.scene.chart.StackedAreaChart?>
-<?import javafx.scene.chart.StackedBarChart?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="646.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.agrisys.MenuController">
    <children>
       <Button fx:id="CSVButton" layoutX="660.0" layoutY="72.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Export CSV" />
       <Separator layoutX="632.0" layoutY="4.0" orientation="VERTICAL" prefHeight="638.0" prefWidth="7.0" />
       <PieChart layoutX="34.0" layoutY="27.0" prefHeight="179.0" prefWidth="234.0" />
-      <LineChart layoutX="14.0" layoutY="259.0" prefHeight="210.0" prefWidth="255.0">
-         <xAxis>
-            <CategoryAxis side="BOTTOM" />
-         </xAxis>
-         <yAxis>
-            <NumberAxis side="LEFT" />
-         </yAxis>
-      </LineChart>
-      <StackedBarChart layoutX="301.0" layoutY="14.0" prefHeight="210.0" prefWidth="227.0">
-         <xAxis>
-            <CategoryAxis side="BOTTOM" />
-         </xAxis>
-         <yAxis>
-            <NumberAxis side="LEFT" />
-         </yAxis>
-      </StackedBarChart>
-      <StackedAreaChart layoutX="301.0" layoutY="260.0" prefHeight="210.0" prefWidth="227.0">
-         <xAxis>
-            <NumberAxis side="BOTTOM" />
-         </xAxis>
-         <yAxis>
-            <NumberAxis side="LEFT" />
-         </yAxis>
-      </StackedAreaChart>
       <Button fx:id="AlarmButton" layoutX="660.0" layoutY="27.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Alarm" />
-      <TextField layoutX="34.0" layoutY="470.0" prefHeight="146.0" prefWidth="562.0" />
       <Button fx:id="LogoutButton" layoutX="660.0" layoutY="590.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Logout" />
+      <VBox fx:id="VBoxMenu" layoutX="14.0" layoutY="17.0" prefHeight="619.0" prefWidth="611.0">
+         <children>
+            <ScrollPane prefHeight="623.0" prefWidth="611.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+              </content>
+            </ScrollPane>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
