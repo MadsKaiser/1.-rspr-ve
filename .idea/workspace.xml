@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="Widget hide menu">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/DashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/DashboardController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/ImportController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/ImportController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/Menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/Menu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenuController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/module-info.class" afterDir="false" />
-    </list>
+    <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="Widget hide menu" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -112,6 +103,7 @@
       <workItem from="1746785381106" duration="2445000" />
       <workItem from="1746790401054" duration="20000" />
       <workItem from="1747035549470" duration="11000" />
+      <workItem from="1747036358372" duration="13000" />
     </task>
     <task id="LOCAL-00001" summary="Widget hide menu">
       <option name="closed" value="true" />
