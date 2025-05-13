@@ -86,15 +86,20 @@ public class SMenuController {
         DashboardsButton.setOnAction(e -> loadScene("Dashboard.fxml", DashboardsButton));
 
         Widget1.setOnAction(event -> {
-            Label1.setVisible(Widget1.isSelected());
             if (Widget1.isSelected()) {
                 addLineChartToPane();
             }
+            else {
+                Anchor.getChildren().removeIf(node -> node instanceof LineChart);
+            }
+
         });
         Widget2.setOnAction(event -> {
-            Label2.setVisible(Widget2.isSelected());
             if (Widget2.isSelected()) {
                 addScatterChartToPane();
+            }
+            else {
+                Anchor.getChildren().removeIf(node -> node instanceof ScatterChart);
             }
         });
         Widget3.setOnAction(event -> Label3.setVisible(Widget3.isSelected()));
@@ -135,30 +140,29 @@ public class SMenuController {
             e.printStackTrace();
         }
 
-        Anchor.getChildren().clear();
-        Anchor.getChildren().add(lineChart);
+        Anchor.getChildren().add(lineChart); // Add to existing content
     }
 
     private void addScatterChartToPane() {
         NumberAxis xAxis = new NumberAxis();
-        xAxis.setLabel("Daglig tilvækst");
+        xAxis.setLabel("Weight gain");
 
         NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel("FCR");
 
         ScatterChart<Number, Number> scatterChart = new ScatterChart<>(xAxis, yAxis);
-        scatterChart.setTitle("FCR vs. tilvækst");
+        scatterChart.setTitle("FCR vs. Weight gain");
 
         try (Connection connection = DatabaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(
-                     "SELECT [Weight gain kg], FCR FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]");
+                     "SELECT [Weight_gain_kg], FCR FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]");
              ResultSet resultSet = statement.executeQuery()) {
 
             XYChart.Series<Number, Number> series = new XYChart.Series<>();
-            series.setName("Foderudnyttelse vs Tilvækst");
+            series.setName("Foderudnyttelse vs Weight gain");
 
             while (resultSet.next()) {
-                double weightGain = resultSet.getDouble("Weight gain kg");
+                double weightGain = resultSet.getDouble("Weight_gain_kg");
                 double fcr = resultSet.getDouble("FCR");
                 if (fcr < -500 || fcr > 1000 || weightGain < 0) {
                     continue; // Skip invalid values
@@ -171,8 +175,7 @@ public class SMenuController {
             e.printStackTrace();
         }
 
-        Anchor.getChildren().clear();
-        Anchor.getChildren().add(scatterChart);
+        Anchor.getChildren().add(scatterChart); // Add to existing content
     }
 
     private void loadScene(String fxmlFile, Button button) {
