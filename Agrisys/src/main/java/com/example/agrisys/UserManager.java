@@ -14,11 +14,11 @@ public class UserManager {
         roles = new HashMap<>();
 
         // Add a superuser and a normal user
-        users.put("MortenSuper", "Babløg");
-        roles.put("MortenSuper", "SUPERUSER");
+        users.put("s", "s");
+        roles.put("s", "SUPERUSER");
 
-        users.put("normaluser", "normalpassword");
-        roles.put("normaluser", "USER");
+        users.put("b", "b");
+        roles.put("b", "USER");
     }
 
     public static UserManager getInstance() {
