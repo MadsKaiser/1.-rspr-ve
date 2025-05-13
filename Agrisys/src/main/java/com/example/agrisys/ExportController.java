@@ -2,7 +2,10 @@ package com.example.agrisys;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
@@ -16,6 +19,9 @@ public class ExportController {
 
     @FXML
     private Button ExportButton;
+
+    @FXML
+    private Button BackButton;
 
     @FXML
     void onExportButton(ActionEvent event) {
@@ -40,6 +46,9 @@ public class ExportController {
 
                 // Show success alert
                 showAlert(Alert.AlertType.INFORMATION, "Export Successful", "The file has been exported successfully.");
+
+                // Navigate back to the SMenu
+                navigateToSMenu(event);
             } catch (IOException e) {
                 // Show error alert
                 showAlert(Alert.AlertType.ERROR, "Export Failed", "An error occurred while exporting the file.");
@@ -47,7 +56,31 @@ public class ExportController {
         }
     }
 
-    // Helper method to show alerts
+    @FXML
+    void onBackButton(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SMenu.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Navigation Error", "Failed to load the menu scene.");
+        }
+    }
+
+    private void navigateToSMenu(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SMenu.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Navigation Error", "Failed to load the menu scene.");
+        }
+    }
+
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
