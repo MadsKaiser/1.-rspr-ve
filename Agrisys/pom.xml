@@ -13,7 +13,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.10.2</junit.version>
     </properties>
-
+    <dependency>
+        <groupId>com.microsoft.sqlserver</groupId>
+        <artifactId>mssql-jdbc</artifactId>
+        <version>12.2.0.jre11</version> <!-- Brug den version, der passer til din Java-version -->
+    </dependency>
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
