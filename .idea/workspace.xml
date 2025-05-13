@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="Widget plus SQL">
+    <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="Widget 1 og 2 og ny bruger og adganskode">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/GraphPlaceholder.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/GraphPlaceholder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/SMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/SMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/UserManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenuController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/UserManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/UserManager.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +110,7 @@
       <workItem from="1746775841266" duration="8163000" />
       <workItem from="1746785381106" duration="2445000" />
       <workItem from="1746790345825" duration="2058000" />
-      <workItem from="1747041483139" duration="15446000" />
+      <workItem from="1747041483139" duration="18475000" />
     </task>
     <task id="LOCAL-00001" summary="Widget hide menu">
       <option name="closed" value="true" />
@@ -143,7 +144,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747125557629</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Widget 1 og 2 og ny bruger og adganskode">
+      <option name="closed" value="true" />
+      <created>1747130094647</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1747130094647</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,7 +161,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Widget hide menu" />
     <MESSAGE value="Widget plus SQL" />
-    <option name="LAST_COMMIT_MESSAGE" value="Widget plus SQL" />
+    <MESSAGE value="Widget 1 og 2 og ny bruger og adganskode" />
+    <option name="LAST_COMMIT_MESSAGE" value="Widget 1 og 2 og ny bruger og adganskode" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

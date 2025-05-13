@@ -1,9 +1,7 @@
 package com.example.agrisys;
 
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -16,9 +14,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 public class SMenuController {
     @FXML
@@ -64,12 +59,16 @@ public class SMenuController {
     @FXML
     private AnchorPane Anchor;
 
+    private GraphPlaceholder graphPlaceholder;
+
     @FXML
     private void toggleMenuVisibility() {
         hiddenMenu.setVisible(!hiddenMenu.isVisible());
     }
 
     public void initialize() {
+        graphPlaceholder = new GraphPlaceholder(Anchor);
+
         hiddenMenu.setVisible(false);
         Label1.setVisible(false);
         Label2.setVisible(false);
@@ -87,95 +86,24 @@ public class SMenuController {
 
         Widget1.setOnAction(event -> {
             if (Widget1.isSelected()) {
-                addLineChartToPane();
-            }
-            else {
+                graphPlaceholder.addLineChart();
+            } else {
                 Anchor.getChildren().removeIf(node -> node instanceof LineChart);
             }
-
         });
+
         Widget2.setOnAction(event -> {
             if (Widget2.isSelected()) {
-                addScatterChartToPane();
-            }
-            else {
+                graphPlaceholder.addScatterChart();
+            } else {
                 Anchor.getChildren().removeIf(node -> node instanceof ScatterChart);
             }
         });
+
         Widget3.setOnAction(event -> Label3.setVisible(Widget3.isSelected()));
         Widget4.setOnAction(event -> Label4.setVisible(Widget4.isSelected()));
         Widget5.setOnAction(event -> Label5.setVisible(Widget5.isSelected()));
         Widget6.setOnAction(event -> Label6.setVisible(Widget6.isSelected()));
-    }
-
-    private void addLineChartToPane() {
-        NumberAxis xAxis = new NumberAxis();
-        xAxis.setLabel("Responder Index");
-
-        NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("FCR");
-
-        LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
-        lineChart.setTitle("Responder Index vs FCR");
-
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     "SELECT Responder, FCR FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]");
-             ResultSet resultSet = statement.executeQuery()) {
-
-            XYChart.Series<Number, Number> series = new XYChart.Series<>();
-            series.setName("Foderudnyttelse");
-
-            int index = 1; // Start index for responders
-            while (resultSet.next()) {
-                double fcr = resultSet.getDouble("FCR");
-                if (fcr < -500 || fcr > 1000) {
-                    continue; // Skip invalid FCR values
-                }
-                series.getData().add(new XYChart.Data<>(index++, fcr));
-            }
-
-            lineChart.getData().add(series);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        Anchor.getChildren().add(lineChart); // Add to existing content
-    }
-
-    private void addScatterChartToPane() {
-        NumberAxis xAxis = new NumberAxis();
-        xAxis.setLabel("Weight gain");
-
-        NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("FCR");
-
-        ScatterChart<Number, Number> scatterChart = new ScatterChart<>(xAxis, yAxis);
-        scatterChart.setTitle("FCR vs. Weight gain");
-
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     "SELECT [Weight_gain_kg], FCR FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]");
-             ResultSet resultSet = statement.executeQuery()) {
-
-            XYChart.Series<Number, Number> series = new XYChart.Series<>();
-            series.setName("Foderudnyttelse vs Weight gain");
-
-            while (resultSet.next()) {
-                double weightGain = resultSet.getDouble("Weight_gain_kg");
-                double fcr = resultSet.getDouble("FCR");
-                if (fcr < -500 || fcr > 1000 || weightGain < 0) {
-                    continue; // Skip invalid values
-                }
-                series.getData().add(new XYChart.Data<>(weightGain, fcr));
-            }
-
-            scatterChart.getData().add(series);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        Anchor.getChildren().add(scatterChart); // Add to existing content
     }
 
     private void loadScene(String fxmlFile, Button button) {
