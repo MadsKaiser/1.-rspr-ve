@@ -2,14 +2,15 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.agrisys.PigDataController" spacing="10" alignment="CENTER" style="-fx-padding: 10;">
     <!-- Input Field -->
-    <TextField fx:id="pigNumberField" promptText="Enter Pig Number" />
+    <TextField fx:id="responderIdField" promptText="Enter Responder ID" />
 
     <!-- Fetch Button -->
-    <Button text="Get Pig Data" onAction="#handleFetchPigData" />
+    <Button text="Get Responder Data" onAction="#handleFetchResponderData" />
 
-    <!-- Data Display Area -->
-    <TextArea fx:id="pigDataArea" editable="false" prefHeight="200" prefWidth="300" />
+    <!-- Widget Container -->
+    <VBox fx:id="widgetContainer" spacing="5" style="-fx-padding: 10; -fx-border-color: gray; -fx-border-width: 1;" />
 </VBox>
