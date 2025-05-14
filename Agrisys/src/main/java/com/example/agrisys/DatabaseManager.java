@@ -25,7 +25,6 @@ public class DatabaseManager {
         }
     }
 
-    // Close the database connection
     public void disconnect() throws SQLException {
         if (connection != null && !connection.isClosed()) {
             connection.close();
