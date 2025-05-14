@@ -4,7 +4,6 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.fxml.FXML;
@@ -58,7 +57,6 @@ public class SMenuController {
     public void initialize() {
         graphPlaceholder = new GraphPlaceholder(Anchor);
 
-
         AlarmButton.setOnAction(e -> loadScene("Alarm.fxml", AlarmButton));
         WidgetsButton.setOnAction(e -> toggleMenuVisibility());
         LogoutButton.setOnAction(e -> loadScene("Login.fxml", LogoutButton));
@@ -82,7 +80,6 @@ public class SMenuController {
                 Anchor.getChildren().removeIf(node -> node instanceof ScatterChart);
             }
         });
-
     }
 
     private void loadScene(String fxmlFile, Button button) {
