@@ -8,19 +8,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="Anchor" prefHeight="1000.0" prefWidth="1886.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.agrisys.SMenuController">
+<AnchorPane fx:id="Anchor" prefHeight="830.0" prefWidth="1682.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.agrisys.SMenuController">
    <children>
-      <Button fx:id="ExportCSVButton" layoutX="1775.0" layoutY="50.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Export CSV" />
-      <Separator layoutX="1762.0" orientation="VERTICAL" prefHeight="1028.0" prefWidth="13.0" />
-      <Button fx:id="AlarmButton" layoutX="1775.0" layoutY="122.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Alarm" />
-      <Button fx:id="KPIButton" layoutX="1775.0" layoutY="85.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="KPI" />
-      <Button fx:id="ImportCSVButton" layoutX="1775.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Import CSV" />
-      <Button fx:id="WidgetsButton" layoutX="1775.0" layoutY="190.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Widgets" />
-      <Button fx:id="DashboardsButton" layoutX="1775.0" layoutY="156.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Dashboards" />
-      <Button fx:id="LogoutButton" layoutX="1775.0" layoutY="988.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Logout" />
-      <VBox fx:id="VBoxSMenu" layoutX="14.0" layoutY="10.0" prefHeight="1017.0" prefWidth="1748.0">
+      <Button fx:id="ExportCSVButton" layoutX="1555.0" layoutY="59.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Export CSV" />
+      <Separator layoutX="1550.0" layoutY="4.0" orientation="VERTICAL" prefHeight="826.0" prefWidth="9.0" />
+      <Button fx:id="AlarmButton" layoutX="1555.0" layoutY="126.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Alarm" />
+      <Button fx:id="KPIButton" layoutX="1555.0" layoutY="94.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="KPI" />
+      <Button fx:id="ImportCSVButton" layoutX="1555.0" layoutY="25.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Import CSV" />
+      <Button fx:id="WidgetsButton" layoutX="1555.0" layoutY="190.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Widgets" />
+      <Button fx:id="DashboardsButton" layoutX="1555.0" layoutY="158.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Dashboards" />
+      <Button fx:id="LogoutButton" layoutX="1559.0" layoutY="797.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Logout" />
+      <VBox fx:id="VBoxSMenu" layoutX="14.0" layoutY="10.0" prefHeight="813.0" prefWidth="1536.0">
          <children>
-            <ScrollPane prefHeight="1016.0" prefWidth="1857.0">
+            <ScrollPane prefHeight="813.0" prefWidth="1528.0">
                <content>
                   <AnchorPane fx:id="InnerAnchor" minHeight="0.0" minWidth="0.0" prefHeight="926.0" prefWidth="1205.0">
                      <children>

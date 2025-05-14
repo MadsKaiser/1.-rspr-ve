@@ -46,18 +46,6 @@ public class SMenuController {
     @FXML
     private CheckBox Widget6;
     @FXML
-    private Label Label1;
-    @FXML
-    private Label Label2;
-    @FXML
-    private Label Label3;
-    @FXML
-    private Label Label4;
-    @FXML
-    private Label Label5;
-    @FXML
-    private Label Label6;
-    @FXML
     private AnchorPane Anchor;
     @FXML
     private TextField ResponderIDField;
@@ -71,14 +59,6 @@ public class SMenuController {
 
     public void initialize() {
         graphPlaceholder = new GraphPlaceholder(Anchor);
-
-        hiddenMenu.setVisible(false);
-        Label1.setVisible(false);
-        Label2.setVisible(false);
-        Label3.setVisible(false);
-        Label4.setVisible(false);
-        Label5.setVisible(false);
-        Label6.setVisible(false);
 
         AlarmButton.setOnAction(e -> loadScene("Alarm.fxml", AlarmButton));
         WidgetsButton.setOnAction(e -> toggleMenuVisibility());
@@ -102,11 +82,6 @@ public class SMenuController {
                 Anchor.getChildren().removeIf(node -> node instanceof ScatterChart);
             }
         });
-
-        Widget3.setOnAction(event -> Label3.setVisible(Widget3.isSelected()));
-        Widget4.setOnAction(event -> Label4.setVisible(Widget4.isSelected()));
-        Widget5.setOnAction(event -> Label5.setVisible(Widget5.isSelected()));
-        Widget6.setOnAction(event -> Label6.setVisible(Widget6.isSelected()));
     }
 
     @FXML
