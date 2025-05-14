@@ -61,10 +61,6 @@ public class ExportController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("SMenu.fxml"));
             Parent root = loader.load();
-
-            SMenuController controller = loader.getController();
-            controller.setData("Data from Dashboard");
-
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
