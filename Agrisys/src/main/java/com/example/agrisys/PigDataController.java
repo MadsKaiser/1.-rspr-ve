@@ -2,9 +2,8 @@ package com.example.agrisys;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,51 +12,52 @@ import java.sql.ResultSet;
 public class PigDataController {
 
     @FXML
-    private TextField responderIdField;
+    private TextField pigNumberField;
 
     @FXML
-    private VBox widgetContainer;
+    private TextArea pigDataArea;
 
     // Method to handle the button click
     @FXML
-    private void handleFetchResponderData() {
-        String responderId = responderIdField.getText();
+    private void handleFetchPigData() {
+        String pigNumber = pigNumberField.getText();
 
-        if (responderId == null || responderId.isEmpty()) {
-            showAlert("Error", "Please enter a responder ID.");
+        if (pigNumber == null || pigNumber.isEmpty()) {
+            showAlert("Error", "Please enter a pig number.");
             return;
         }
 
-        // Fetch responder data from the database
-        fetchResponderData(responderId);
+        // Fetch pig data from the database
+        String pigData = getPigData(pigNumber);
+
+        // Display the data in the TextArea
+        pigDataArea.setText(pigData);
     }
 
-    // Method to fetch responder data and create widgets
-    private void fetchResponderData(String responderId) {
+    // Method to fetch pig data from the database
+    private String getPigData(String pigNumber) {
+        StringBuilder pigData = new StringBuilder();
+
         try (Connection connection = DatabaseManager.getConnection()) {
-            String query = "SELECT Responder, [Start_weight_kg], [End_weight_kg] FROM madserkaiser_dk_db_agrisys.dbo.[PPT data] WHERE Responder = ?";
+            String query = "SELECT * FROM madserkaiser_dk_db_agrisys[PPT Data] WHERE pig_number = ?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, responderId);
+            statement.setString(1, pigNumber);
 
             ResultSet resultSet = statement.executeQuery();
-            widgetContainer.getChildren().clear(); // Clear previous widgets
-
             if (resultSet.next()) {
-                // Create widgets dynamically based on the data
-                String responder = resultSet.getString("Responder");
-                double startWeight = resultSet.getDouble("Start_weight_kg");
-                double endWeight = resultSet.getDouble("End_weight_kg");
-
-                widgetContainer.getChildren().add(new Text("Responder ID: " + responder));
-                widgetContainer.getChildren().add(new Text("Start Weight: " + startWeight));
-                widgetContainer.getChildren().add(new Text("End Weight: " + endWeight));
+                pigData.append("Pig Number: ").append(resultSet.getString("pig_number")).append("\n");
+                pigData.append("Weight: ").append(resultSet.getString("weight")).append("\n");
+                pigData.append("Age: ").append(resultSet.getString("age")).append("\n");
+                // Add more fields as needed
             } else {
-                widgetContainer.getChildren().add(new Text("No data found for Responder: " + responderId));
+                pigData.append("No data found for Pig Number: ").append(pigNumber);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert("Error", "Failed to fetch responder data: " + e.getMessage());
+            showAlert("Error", "Failed to fetch pig data: " + e.getMessage());
         }
+
+        return pigData.toString();
     }
 
     // Method to show an alert
