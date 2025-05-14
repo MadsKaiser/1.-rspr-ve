@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="Anchor" prefHeight="1000.0" prefWidth="1886.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.agrisys.SMenuController">
    <children>
-      <Button fx:id="ExportCSVButton" layoutX="50.0" layoutY="50.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Export CSV" />
+      <Button fx:id="ExportCSVButton" layoutX="1775.0" layoutY="50.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Export CSV" />
       <Separator layoutX="1762.0" orientation="VERTICAL" prefHeight="1028.0" prefWidth="13.0" />
       <Button fx:id="AlarmButton" layoutX="1775.0" layoutY="122.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Alarm" />
       <Button fx:id="KPIButton" layoutX="1775.0" layoutY="85.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="KPI" />

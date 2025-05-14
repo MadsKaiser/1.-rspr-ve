@@ -6,22 +6,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="862.0" prefWidth="1233.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.agrisys.DashboardController">
+<AnchorPane prefHeight="968.0" prefWidth="1425.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.agrisys.DashboardController">
     <children>
-        <Button fx:id="BackToMenuButton" text="Back" layoutX="1152.0" layoutY="808.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="67.0" />
-        <VBox fx:id="PresetDashboard" layoutX="1.0" prefHeight="862.0" prefWidth="1114.0">
-            <children>
-                <Label fx:id="widget1" layoutX="50.0" layoutY="150.0" text="Widget 1" />
-                <Label fx:id="widget2" layoutX="150.0" layoutY="150.0" text="Widget 2" />
-                <Label fx:id="widget3" layoutX="250.0" layoutY="150.0" text="Widget 3" />
-                <Label fx:id="widget4" layoutX="350.0" layoutY="150.0" text="Widget 4" />
-                <Label fx:id="widget5" layoutX="450.0" layoutY="150.0" text="Widget 5" />
-                <Label fx:id="widget6" layoutX="550.0" layoutY="150.0" text="Widget 6" />
-            </children>
+        <Button fx:id="BackToMenuButton" layoutX="1343.0" layoutY="902.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="67.0" text="Back" />
+        <VBox fx:id="PresetDashboard" layoutX="1.0" prefHeight="968.0" prefWidth="1264.0">
+         <children>
+            <Label prefHeight="67.0" prefWidth="103.0" text="Label" />
+         </children>
         </VBox>
-        <VBox layoutX="1126.0" layoutY="7.0" prefHeight="328.0" prefWidth="100.0">
+        <VBox layoutX="1269.0" layoutY="7.0" prefHeight="328.0" prefWidth="148.0">
             <children>
-                <CheckBox fx:id="PresetDashboard1" mnemonicParsing="false" text="Preset Dashboard 1" onAction="#handleDashboardCheckBox" />
+                <CheckBox fx:id="PresetDashboard1" mnemonicParsing="false" onAction="#handleDashboardCheckBox" text="Preset Dashboard 1" />
                 <CheckBox mnemonicParsing="false" text="CheckBox" />
                 <CheckBox mnemonicParsing="false" text="CheckBox" />
                 <CheckBox mnemonicParsing="false" text="CheckBox" />
