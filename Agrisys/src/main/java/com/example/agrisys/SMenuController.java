@@ -3,6 +3,7 @@ package com.example.agrisys;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.fxml.FXML;
@@ -16,7 +17,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class SMenuController {
+public class SMenuController implements javafx.fxml.Initializable {
     @FXML
     private Button AlarmButton;
     @FXML
@@ -57,8 +58,12 @@ public class SMenuController {
         hiddenMenu.setVisible(!hiddenMenu.isVisible());
     }
 
-    public void initialize() {
+    @Override
+    public void initialize(java.net.URL url, java.util.ResourceBundle resources) {
         graphPlaceholder = new GraphPlaceholder(Anchor);
+
+        // Load selected KPIs from KPIStorage
+        displaySelectedKPIs();
 
         AlarmButton.setOnAction(e -> loadScene("Alarm.fxml", AlarmButton));
         WidgetsButton.setOnAction(e -> toggleMenuVisibility());
@@ -66,6 +71,7 @@ public class SMenuController {
         ExportCSVButton.setOnAction(e -> loadScene("Export.fxml", ExportCSVButton));
         ImportCSVButton.setOnAction(e -> loadScene("ImportCSV.fxml", ImportCSVButton));
         DashboardsButton.setOnAction(e -> loadScene("Dashboard.fxml", DashboardsButton));
+        KPIButton.setOnAction(e -> loadScene("KPI.fxml", KPIButton));
 
         Widget1.setOnAction(event -> {
             if (Widget1.isSelected()) {
@@ -82,6 +88,35 @@ public class SMenuController {
                 Anchor.getChildren().removeIf(node -> node instanceof ScatterChart);
             }
         });
+    }
+
+    private void displaySelectedKPIs() {
+        double yPosition = 10.0; // Initial Y position for displaying KPIs
+        for (String kpi : KPIStorage.getSavedKPIs()) {
+            // Create and configure the pig head image
+            try {
+                ImageView pigHead = new ImageView(new javafx.scene.image.Image(
+                        new java.io.File("C:\\Users\\MadsRinggaardKaiser\\OneDrive - Erhvervsakademi MidtVest\\Skrivebord\\Grisehoved.png").toURI().toString()
+                ));
+                pigHead.setFitWidth(30.0); // Set image width
+                pigHead.setFitHeight(30.0); // Set image height
+                pigHead.setLayoutX(10.0); // X position for the image
+                pigHead.setLayoutY(yPosition - 5.0); // Align with the label
+
+                // Create and configure the KPI label
+                Label kpiLabel = new Label(kpi);
+                kpiLabel.setLayoutX(50.0); // X position after the image
+                kpiLabel.setLayoutY(yPosition); // Y position
+                kpiLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
+
+                // Add the image and label to the AnchorPane
+                Anchor.getChildren().addAll(pigHead, kpiLabel);
+            } catch (Exception e) {
+                System.err.println("Failed to load pig head image: " + e.getMessage());
+            }
+
+            yPosition += 40.0; // Increment Y position for the next KPI
+        }
     }
 
     @FXML
