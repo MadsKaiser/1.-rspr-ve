@@ -39,7 +39,7 @@ public class PigDataController {
         StringBuilder pigData = new StringBuilder();
 
         try (Connection connection = DatabaseManager.getConnection()) {
-            String query = "SELECT * FROM PPT WHERE pig_number = ?";
+            String query = "SELECT * FROM madserkaiser_dk_db_agrisys[PPT Data] WHERE pig_number = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, pigNumber);
 

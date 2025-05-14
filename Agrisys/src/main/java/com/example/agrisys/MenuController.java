@@ -5,54 +5,51 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class MenuController {
     @FXML
-    private Button AlarmButton;
-    @FXML
-    private Button ExportCSVButton;
+    private AnchorPane AnchorPane;
+
     @FXML
     private Button LogoutButton;
 
     public void initialize() {
-        AlarmButton.setOnAction(e -> {
-            try {
-                // Load the FXML file
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Alarm.fxml"));
-                Parent root = loader.load();
+        displaySavedKPIs();
 
-                // Get the current window (stage) from the button
-                Stage stage = (Stage) AlarmButton.getScene().getWindow();
+        LogoutButton.setOnAction(e -> loadScene("Login.fxml", LogoutButton));
+    }
 
-                // Set the new scene
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
+    private void displaySavedKPIs() {
+        double yPosition = 10.0;
+        for (String kpi : KPIStorage.getSavedKPIs()) {
+            Label kpiLabel = new Label(kpi);
+            kpiLabel.setLayoutX(10.0);
+            kpiLabel.setLayoutY(yPosition);
+            kpiLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+            AnchorPane.getChildren().add(kpiLabel);
+            yPosition += 30.0;
+        }
+    }
 
-        LogoutButton.setOnAction(e -> {
-            try {
-                // Load the Login.fxml file
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
-                Parent root = loader.load();
+    private void goBack() {
+        // Logic to navigate back to the previous scene
+    }
 
-                // Get the current window (stage) from the button
-                Stage stage = (Stage) LogoutButton.getScene().getWindow();
-
-                // Set the new scene
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
+    private void loadScene(String fxmlFile, Button button) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Parent root = loader.load();
+            Stage stage = (Stage) button.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException ex) {
+            System.err.println("Failed to load the scene: " + fxmlFile);
+            ex.printStackTrace();
+        }
     }
 }
-
