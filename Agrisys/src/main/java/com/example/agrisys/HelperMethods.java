@@ -1,23 +1,25 @@
-//package com.example.agrisys;
-//
-//import javafx.event.Event;
-//import javafx.fxml.FXMLLoader;
-//import javafx.scene.Node;
-//import javafx.scene.Parent;
-//import javafx.scene.Scene;
-//import javafx.stage.Stage;
-//
-//import java.io.IOException;
-//
-//public class HelperMethods {
-//    public static void switchWindow(String fxmlFile, Event event) throws IOException {
-//        Parent root = FXMLLoader.load(HelperMethods.class.getResource("/com/example/agrisys/" + fxmlFile));
-//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        Scene scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
-//    }
-//    public static void SMenu( Event event) throws IOException {
-//        switchWindow("SMenu.fxml", event);
-//    }
-//}
+package com.example.agrisys;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+public class HelperMethods {
+
+    public static void loadScene(String fxmlFile, Button button) {
+        try {
+            FXMLLoader loader = new FXMLLoader(HelperMethods.class.getResource(fxmlFile));
+            Parent root = loader.load();
+            Stage stage = (Stage) button.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException ex) {
+            System.err.println("Failed to load the scene: " + fxmlFile);
+            ex.printStackTrace();
+        }
+    }
+}
