@@ -18,41 +18,10 @@ public class MenuController {
     private Button LogoutButton;
 
     public void initialize() {
-        AlarmButton.setOnAction(e -> {
-            try {
-                // Load the FXML file
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Alarm.fxml"));
-                Parent root = loader.load();
+        AlarmButton.setOnAction(e -> HelperMethods.loadScene("Alarm.fxml", AlarmButton));
 
-                // Get the current window (stage) from the button
-                Stage stage = (Stage) AlarmButton.getScene().getWindow();
-
-                // Set the new scene
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
-
-        LogoutButton.setOnAction(e -> {
-            try {
-                // Load the Login.fxml file
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
-                Parent root = loader.load();
-
-                // Get the current window (stage) from the button
-                Stage stage = (Stage) LogoutButton.getScene().getWindow();
-
-                // Set the new scene
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
+        LogoutButton.setOnAction(e -> HelperMethods.loadScene("Login.fxml", LogoutButton));
+        };
     }
-}
+
 
