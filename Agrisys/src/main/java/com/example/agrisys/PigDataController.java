@@ -43,15 +43,17 @@ public class PigDataController {
             widgetContainer.getChildren().clear(); // Clear previous widgets
 
             if (resultSet.next()) {
-                // Create widgets dynamically based on the data
                 String responder = resultSet.getString("Responder");
                 double startWeight = resultSet.getDouble("Start_weight_kg");
                 double endWeight = resultSet.getDouble("End_weight_kg");
+
+                System.out.println("Responder: " + responder + ", Start Weight: " + startWeight + ", End Weight: " + endWeight);
 
                 widgetContainer.getChildren().add(new Text("Responder ID: " + responder));
                 widgetContainer.getChildren().add(new Text("Start Weight: " + startWeight));
                 widgetContainer.getChildren().add(new Text("End Weight: " + endWeight));
             } else {
+                System.out.println("No data found for Responder: " + responderId);
                 widgetContainer.getChildren().add(new Text("No data found for Responder: " + responderId));
             }
         } catch (Exception e) {
