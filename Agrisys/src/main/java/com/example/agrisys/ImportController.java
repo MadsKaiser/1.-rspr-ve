@@ -85,17 +85,7 @@ public class ImportController {
 
     @FXML
     public void initialize() {
-        BackToMenuButton.setOnAction(e -> {
-            try {
-                FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("SMenu.fxml"));
-                Parent menuRoot = menuLoader.load();
-                Stage stage = (Stage) BackToMenuButton.getScene().getWindow();
-                stage.setTitle("SMenu");
-                stage.setScene(new Scene(menuRoot));
-                stage.show();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
+        BackToMenuButton.setOnAction(e -> HelperMethods.loadScene("SMenu.fxml", BackToMenuButton));
+
     }
 }

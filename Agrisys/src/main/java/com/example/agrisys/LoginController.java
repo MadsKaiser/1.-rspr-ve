@@ -30,7 +30,7 @@ public class LoginController {
     @FXML
     public void initialize() {
         loginButton.setOnAction(event -> handleLogin());
-        forgotLoginButton.setOnAction(event -> handleForgotLogin());
+        forgotLoginButton.setOnAction(event -> HelperMethods.loadScene("ForgotLogin.fxml", forgotLoginButton));
 
         // Add Enter key functionality to passwordField
         passwordField.setOnKeyPressed(event -> {
@@ -55,41 +55,14 @@ public class LoginController {
             showAlert("Success", "Login successful! Role: " + role);
             UserManager.getInstance().setCurrentUser(username);
             if ("SUPERUSER".equals(role)) {
-                switchToScene("SMenu.fxml");
+                HelperMethods.loadScene("SMenu.fxml", loginButton);
             } else {
-                switchToScene("Menu.fxml");
+                HelperMethods.loadScene("Menu.fxml", loginButton);
             }
         } else {
             showAlert("Error", "Invalid username or password.");
 
 
-        }
-    }
-
-    private void handleForgotLogin() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ForgotLogin.fxml"));
-            Parent root = loader.load();
-            Stage forgotLoginStage = new Stage();
-            forgotLoginStage.setTitle("Forgot Login");
-            forgotLoginStage.setScene(new Scene(root));
-            forgotLoginStage.initOwner(loginButton.getScene().getWindow());
-            forgotLoginStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Error", "Failed to load the Forgot Login window.");
-        }
-    }
-
-    private void switchToScene(String fxmlFile) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent root = loader.load();
-            Stage stage = (Stage) loginButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Error", "Failed to load the scene: " + fxmlFile);
         }
     }
 

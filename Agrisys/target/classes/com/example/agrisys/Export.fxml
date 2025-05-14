@@ -6,6 +6,6 @@
 <AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.agrisys.ExportController">
    <children>
       <Button fx:id="ExportButton" layoutX="150.0" layoutY="100.0" mnemonicParsing="false" onAction="#onExportButton" text="Export CSV" />
-      <Button fx:id="BackButton" layoutY="99.0" mnemonicParsing="false" onAction="#onBackButton" text="Back" />
+      <Button fx:id="BackButton" layoutY="99.0" mnemonicParsing="false" text="Back" />
    </children>
 </AnchorPane>
