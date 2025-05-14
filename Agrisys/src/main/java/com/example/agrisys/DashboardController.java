@@ -1,18 +1,12 @@
 package com.example.agrisys;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class DashboardController {
 
@@ -50,17 +44,7 @@ public class DashboardController {
         makeDraggable(widget6);
         setupDashboardDrop();
 
-        BackToMenuButton.setOnAction(e -> {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("SMenu.fxml"));
-                Parent root = loader.load();
-                Stage stage = (Stage) BackToMenuButton.getScene().getWindow();
-                stage.setScene(new Scene(root));
-                stage.show();
-            } catch (IOException ex) {
-                showError("Error", "Failed to load the menu scene.");
-            }
-        });
+        BackToMenuButton.setOnAction(e -> HelperMethods.loadScene("Menu.fxml", BackToMenuButton));
     }
 
     private void makeDraggable(Label widget) {
@@ -95,9 +79,5 @@ public class DashboardController {
             event.setDropCompleted(success);
             event.consume();
         });
-    }
-
-    private void showError(String title, String message) {
-        System.err.println(title + ": " + message);
     }
 }

@@ -49,13 +49,13 @@ public class AlarmController {
         fcrColumn.setCellValueFactory(data -> data.getValue().fcrProperty());
         ResponderTable.setItems(responderData);
 
-        // Load data from the database
         loadDataFromDatabase();
 
         DeleteAlarmButton.setOnAction(e -> {
             ResponderData selectedItem = ResponderTable.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
                 responderData.remove(selectedItem);
+               // String deleteQuery = "DELETE FROM madserkaiser_dk_db_agrisys.dbo.[PPT data] WHERE Responder = ? AND FCR = ?";
             }
         });
 
