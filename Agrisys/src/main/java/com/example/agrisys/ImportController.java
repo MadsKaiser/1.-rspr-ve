@@ -74,7 +74,7 @@ public class ImportController {
             showError("Ingen fil valgt", "Vælg venligst en CSV-fil.");
         }
     }
-
+    // Samme kommentar som i ExportController - Skriver her hvis jeg skulle glemme det
     private void showError(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Fejl");
@@ -82,7 +82,7 @@ public class ImportController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
+    // :)
     @FXML
     public void initialize() {
         BackToMenuButton.setOnAction(e -> HelperMethods.loadScene("SMenu.fxml", BackToMenuButton));

@@ -20,10 +20,10 @@ public class MenuController {
 
     public void initialize() {
         displaySelectedKPIs();
-
-        LogoutButton.setOnAction(e -> loadScene("Login.fxml", LogoutButton));
-        AlarmButton.setOnAction(e -> loadScene("Alarm.fxml", AlarmButton));
-        ExportCSVButton.setOnAction(e -> loadScene("Export.fxml", ExportCSVButton));
+        // Ændret til at den laver et metode kald i HelperMethods klassen
+        LogoutButton.setOnAction(e -> HelperMethods.loadScene("Login.fxml", LogoutButton));
+        AlarmButton.setOnAction(e -> HelperMethods.loadScene("Alarm.fxml", AlarmButton));
+        ExportCSVButton.setOnAction(e -> HelperMethods.loadScene("Export.fxml", ExportCSVButton));
     }
 
     private void displaySelectedKPIs() {

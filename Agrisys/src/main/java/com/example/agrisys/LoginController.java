@@ -1,16 +1,11 @@
 package com.example.agrisys;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 public class LoginController {
@@ -26,11 +21,11 @@ public class LoginController {
 
     @FXML
     private Button forgotLoginButton;
-
+    // Måske kig på det her? Ved ikke om der er en nemmere løsning
     @FXML
     public void initialize() {
         loginButton.setOnAction(event -> handleLogin());
-        forgotLoginButton.setOnAction(event -> handleForgotLogin());
+        forgotLoginButton.setOnAction(event -> HelperMethods.loadScene("ForgotLogin.fxml", forgotLoginButton));
 
         // Add Enter key functionality to passwordField
         passwordField.setOnKeyPressed(event -> {
@@ -53,54 +48,16 @@ public class LoginController {
             String role = roles.get(username);
             UserManager.getInstance().setCurrentUser(username);
             showAlert("Success", "Login successful! Role: " + role);
-            UserManager.getInstance().setCurrentUser(username);
+
             if ("SUPERUSER".equals(role)) {
-                switchToScene("SMenu.fxml");
+                HelperMethods.loadScene("SMenu.fxml", loginButton);
             } else {
-                switchToScene("Menu.fxml");
+                HelperMethods.loadScene("Menu.fxml", loginButton);
             }
         } else {
             showAlert("Error", "Invalid username or password.");
-
-
         }
     }
-
-    private void handleForgotLogin() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ForgotLogin.fxml"));
-            Parent root = loader.load();
-            Stage forgotLoginStage = new Stage();
-            forgotLoginStage.setTitle("Forgot Login");
-            forgotLoginStage.setScene(new Scene(root));
-            forgotLoginStage.initOwner(loginButton.getScene().getWindow());
-            forgotLoginStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Error", "Failed to load the Forgot Login window.");
-        }
-    }
-
-    private void switchToScene(String fxmlFile) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent root = loader.load();
-            Stage stage = (Stage) loginButton.getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-
-            // Hvis det er SMenu.fxml, gør vinduet maksimeret
-            if (fxmlFile.equals("SMenu.fxml")) {
-                stage.setMaximized(true); // eller stage.setFullScreen(true);
-            }
-
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            showAlert("Error", "Failed to load the scene: " + fxmlFile);
-        }
-    }
-
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -110,3 +67,16 @@ public class LoginController {
         alert.showAndWait();
     }
 }
+//       Dette skal nok fikses på en eller andet måde, ved ikke hvordan det skal være sat op
+//       Håber Morten fikser det :)
+
+//       if (fxmlFile.equals("SMenu.fxml")) {
+//        stage.setMaximized(true); // eller stage.setFullScreen(true);
+//            }
+//
+//                    stage.show();
+//        } catch (IOException e) {
+//        e.printStackTrace();
+//showAlert("Error", "Failed to load the scene: " + fxmlFile);
+//        }
+//                }

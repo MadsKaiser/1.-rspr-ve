@@ -20,11 +20,11 @@ public class ExportController {
     @FXML
     private Button BackButton;
 
+    // Fixet
     @FXML
-    public void initialize() {
+    private void initialize() {
         BackButton.setOnAction(event -> HelperMethods.loadScene("SMenu.fxml", BackButton));
     }
-
     @FXML
     void onExportButton(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -47,12 +47,13 @@ public class ExportController {
             }
         }
     }
-
+    // Måske lave en metode til at vise alerts i HelperMethods klassen? Vi bruger den samme flere steder så ville være nemmere bare at lave en metode og kalde den
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+
     }
 }

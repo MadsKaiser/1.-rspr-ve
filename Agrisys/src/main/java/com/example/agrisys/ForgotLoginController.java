@@ -18,7 +18,7 @@ public class ForgotLoginController {
             showAlert("Info", "Recovery instructions sent to: " + email);
         }
     }
-
+    // Samme komment som i ExportController - Skriver her hvis jeg skulle glemme det
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);

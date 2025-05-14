@@ -6,7 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="alt er lidt for småt men kan åbne">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/ExportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/ExportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/ForgotLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/ForgotLoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/ImportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/ImportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/KPIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/KPIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/SMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/SMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/WidgetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/WidgetController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,14 +77,6 @@
     ]
   }
 }</component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.25410.129" />
-        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-IU-251.25410.129" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -103,6 +103,7 @@
       <workItem from="1747041483139" duration="18475000" />
       <workItem from="1747137227590" duration="826000" />
       <workItem from="1747245808465" duration="2266000" />
+      <workItem from="1747259068975" duration="2912000" />
     </task>
     <task id="LOCAL-00001" summary="Widget hide menu">
       <option name="closed" value="true" />

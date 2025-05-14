@@ -108,11 +108,11 @@ public class KPIController {
                 removeKpiFromAnchorPane(KPI4);
             }
         });
-
-        KPIBack.setOnAction(event -> goToSmenu());
+        // Skal måske ses på og testet
+        KPIBack.setOnAction(event -> HelperMethods.loadScene("SMenu.fxml", KPIBack)); // Mangler test
         SaveButton.setOnAction(event -> {
             saveKPIs(); // Gemmer KPI'erne
-            goToSmenu(); // Navigerer tilbage til SMenuController
+            HelperMethods.loadScene("SMenu.fxml", SaveButton); // Virker måske ikke :)
         });
     }
 
@@ -159,15 +159,4 @@ public class KPIController {
         kpiLabels.values().forEach(label -> KPIStorage.saveKPI(label.getText()));
     }
 
-    private void goToSmenu() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/agrisys/Smenu.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) KPIBack.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

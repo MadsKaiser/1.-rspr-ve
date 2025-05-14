@@ -64,15 +64,18 @@ public class SMenuController implements javafx.fxml.Initializable {
 
         // Load selected KPIs from KPIStorage
         displaySelectedKPIs();
-
-        AlarmButton.setOnAction(e -> loadScene("Alarm.fxml", AlarmButton));
+        // Ændret til at den laver et metode kald i HelperMethods klassen
+        // Har også fjernet den gamle load metode herfra
+        AlarmButton.setOnAction(e -> HelperMethods.loadScene("Alarm.fxml", AlarmButton));
         WidgetsButton.setOnAction(e -> toggleMenuVisibility());
-        LogoutButton.setOnAction(e -> loadScene("Login.fxml", LogoutButton));
-        ExportCSVButton.setOnAction(e -> loadScene("Export.fxml", ExportCSVButton));
-        ImportCSVButton.setOnAction(e -> loadScene("ImportCSV.fxml", ImportCSVButton));
-        DashboardsButton.setOnAction(e -> loadScene("Dashboard.fxml", DashboardsButton));
-        KPIButton.setOnAction(e -> loadScene("KPI.fxml", KPIButton));
+        LogoutButton.setOnAction(e -> HelperMethods.loadScene("Login.fxml", LogoutButton));
+        ExportCSVButton.setOnAction(e -> HelperMethods.loadScene("Export.fxml", ExportCSVButton));
+        ImportCSVButton.setOnAction(e -> HelperMethods.loadScene("ImportCSV.fxml", ImportCSVButton));
+        DashboardsButton.setOnAction(e -> HelperMethods.loadScene("Dashboard.fxml", DashboardsButton));
+        KPIButton.setOnAction(e -> HelperMethods.loadScene("KPI.fxml", KPIButton));
 
+
+        // Widget menuen ser mærkeligt ud pt. Morten fikser det nok (Noget med størelsen på Smenuen)
         Widget1.setOnAction(event -> {
             if (Widget1.isSelected()) {
                 graphPlaceholder.addLineChart();
@@ -156,7 +159,7 @@ public class SMenuController implements javafx.fxml.Initializable {
             showAlert("Error", "Failed to fetch responder data: " + e.getMessage());
         }
     }
-
+    // Samme kommentar som i ExportController - Skriver her hvis jeg skulle glemme det
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -164,16 +167,4 @@ public class SMenuController implements javafx.fxml.Initializable {
         alert.showAndWait();
     }
 
-    private void loadScene(String fxmlFile, Button button) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent root = loader.load();
-            Stage stage = (Stage) button.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException ex) {
-            System.err.println("Failed to load the scene: " + fxmlFile);
-            ex.printStackTrace();
-        }
-    }
 }
