@@ -10,6 +10,7 @@
        <TableView fx:id="ResponderTable" layoutX="20" layoutY="20" prefHeight="200" prefWidth="250">
            <columns>
                <TableColumn fx:id="responderColumn" prefWidth="240" text="Responder" />
+                <TableColumn fx:id="fcrColumn" prefWidth="240" text="fcr" />
            </columns>
        </TableView>
        <Button fx:id="DeleteAlarmButton" layoutX="290" layoutY="20" text="Delete Alarm" />
