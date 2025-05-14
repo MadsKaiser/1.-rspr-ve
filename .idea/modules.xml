@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/1.-rspr-ve.iml" filepath="$PROJECT_DIR$/.idea/1.-rspr-ve.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Agrisys/Agrisys.iml" filepath="$PROJECT_DIR$/Agrisys/Agrisys.iml" />
     </modules>
   </component>
 </project>

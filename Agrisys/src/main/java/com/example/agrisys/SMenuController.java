@@ -65,12 +65,6 @@ public class SMenuController {
         graphPlaceholder = new GraphPlaceholder(Anchor);
 
         hiddenMenu.setVisible(false);
-        Label1.setVisible(false);
-        Label2.setVisible(false);
-        Label3.setVisible(false);
-        Label4.setVisible(false);
-        Label5.setVisible(false);
-        Label6.setVisible(false);
 
         AlarmButton.setOnAction(e -> HelperMethods.loadScene("Alarm.fxml", AlarmButton));
         WidgetsButton.setOnAction(e -> toggleMenuVisibility());
