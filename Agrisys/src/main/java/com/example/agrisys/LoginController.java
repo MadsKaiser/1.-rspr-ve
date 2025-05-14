@@ -86,12 +86,21 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent root = loader.load();
             Stage stage = (Stage) loginButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+
+            // Hvis det er SMenu.fxml, gør vinduet maksimeret
+            if (fxmlFile.equals("SMenu.fxml")) {
+                stage.setMaximized(true); // eller stage.setFullScreen(true);
+            }
+
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
             showAlert("Error", "Failed to load the scene: " + fxmlFile);
         }
     }
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
