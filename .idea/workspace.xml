@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="Widget 1 og 2 og ny bruger og adganskode">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/ExportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/ExportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/SMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/SMenuController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Agrisys/src/main/resources/com/example/agrisys/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/resources/com/example/agrisys/Dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/Dashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/DashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/DashboardController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenuController.class" afterDir="false" />
     </list>
@@ -34,12 +31,12 @@
     &quot;assignee&quot;: &quot;MadsKaiser&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/MadsKaiser/1.-rspr-ve.git",
-    "accountId": "e2544118-fe37-4496-8e85-9c1ee7643738"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/MadsKaiser/1.-rspr-ve.git&quot;,
+    &quot;accountId&quot;: &quot;e2544118-fe37-4496-8e85-9c1ee7643738&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -117,6 +114,7 @@
       <workItem from="1747207267190" duration="2129000" />
       <workItem from="1747209559274" duration="661000" />
       <workItem from="1747215356233" duration="4790000" />
+      <workItem from="1747227266351" duration="300000" />
     </task>
     <task id="LOCAL-00001" summary="Widget hide menu">
       <option name="closed" value="true" />
