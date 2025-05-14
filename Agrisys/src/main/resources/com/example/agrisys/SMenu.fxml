@@ -47,8 +47,8 @@
             <CheckBox fx:id="Widget2" mnemonicParsing="false" text="CheckBox" />
             <CheckBox fx:id="Widget3" mnemonicParsing="false" text="CheckBox" />
             <CheckBox fx:id="Widget4" mnemonicParsing="false" text="CheckBox" />
-            <TextField fx:id="PigDataArea" promptText="Enter Pig Number" />
-            <Button fx:id="GetPigDataButton" mnemonicParsing="false" text="Get Pig Data" />
+            <TextField fx:id="ResponderIDField" promptText="Enter Responder ID" />
+            <Button fx:id="GetPigDataButton" mnemonicParsing="false" onAction="#handleFetchResponderData" text="Get Responder Data" />
             <CheckBox fx:id="Widget5" mnemonicParsing="false" text="CheckBox" />
             <CheckBox fx:id="Widget6" mnemonicParsing="false" text="CheckBox" />
          </children>

@@ -2,9 +2,7 @@ package com.example.agrisys;
 
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.ScatterChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.fxml.FXML;
@@ -14,6 +12,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class SMenuController {
     @FXML
@@ -58,6 +59,8 @@ public class SMenuController {
     private Label Label6;
     @FXML
     private AnchorPane Anchor;
+    @FXML
+    private TextField ResponderIDField;
 
     private GraphPlaceholder graphPlaceholder;
 
@@ -83,7 +86,6 @@ public class SMenuController {
         ExportCSVButton.setOnAction(e -> loadScene("Export.fxml", ExportCSVButton));
         ImportCSVButton.setOnAction(e -> loadScene("ImportCSV.fxml", ImportCSVButton));
         DashboardsButton.setOnAction(e -> loadScene("Dashboard.fxml", DashboardsButton));
-        ExportCSVButton.setOnAction(e -> loadScene("Export.fxml", ExportCSVButton));
 
         Widget1.setOnAction(event -> {
             if (Widget1.isSelected()) {
@@ -105,6 +107,51 @@ public class SMenuController {
         Widget4.setOnAction(event -> Label4.setVisible(Widget4.isSelected()));
         Widget5.setOnAction(event -> Label5.setVisible(Widget5.isSelected()));
         Widget6.setOnAction(event -> Label6.setVisible(Widget6.isSelected()));
+    }
+
+    @FXML
+    private void handleFetchResponderData() {
+        String responderId = ResponderIDField.getText();
+
+        if (responderId == null || responderId.isEmpty()) {
+            showAlert("Error", "Please enter a responder ID.");
+            return;
+        }
+
+        fetchResponderData(responderId);
+    }
+
+    private void fetchResponderData(String responderId) {
+        try (Connection connection = DatabaseManager.getConnection()) {
+            String query = "SELECT Responder, [Start_weight_kg], [End_weight_kg] FROM madserkaiser_dk_db_agrisys.dbo.[PPT data] WHERE Responder = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, responderId);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                String responder = resultSet.getString("Responder");
+                double startWeight = resultSet.getDouble("Start_weight_kg");
+                double endWeight = resultSet.getDouble("End_weight_kg");
+
+                // Example: Display data in the console or update UI elements
+                System.out.println("Responder: " + responder);
+                System.out.println("Start Weight: " + startWeight);
+                System.out.println("End Weight: " + endWeight);
+            } else {
+                showAlert("Info", "No data found for Responder: " + responderId);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to fetch responder data: " + e.getMessage());
+        }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     private void loadScene(String fxmlFile, Button button) {
