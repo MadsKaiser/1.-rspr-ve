@@ -3,6 +3,7 @@ package com.example.agrisys;
 import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.AnchorPane;
@@ -89,6 +90,39 @@ public class GraphPlaceholder {
         addWidgetToAnchorPane(scatterChart);
     }
 
+    public void addPieChart() {
+        PieChart pieChart = new PieChart();
+        pieChart.setTitle("Weight Distribution of Pigs");
+
+        try (Connection connection = DatabaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(
+                     "SELECT CASE " +
+                             "WHEN [Weight_kg] BETWEEN 0 AND 50 THEN '0-50 kg' " +
+                             "WHEN [Weight_kg] BETWEEN 51 AND 100 THEN '51-100 kg' " +
+                             "WHEN [Weight_kg] BETWEEN 101 AND 150 THEN '101-150 kg' " +
+                             "ELSE '151+ kg' END AS WeightRange, " +
+                             "COUNT(*) AS Count " +
+                             "FROM madserkaiser_dk_db_agrisys.dbo.[PigData] " +
+                             "GROUP BY CASE " +
+                             "WHEN [Weight_kg] BETWEEN 0 AND 50 THEN '0-50 kg' " +
+                             "WHEN [Weight_kg] BETWEEN 51 AND 100 THEN '51-100 kg' " +
+                             "WHEN [Weight_kg] BETWEEN 101 AND 150 THEN '101-150 kg' " +
+                             "ELSE '151+ kg' END")) {
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                String weightRange = resultSet.getString("WeightRange");
+                int count = resultSet.getInt("Count");
+                pieChart.getData().add(new PieChart.Data(weightRange, count));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        addWidgetToAnchorPane(pieChart);
+    }
+
     private void addWidgetToAnchorPane(Node widget) {
         double nextYPosition = calculateNextAvailableYPosition();
 
@@ -111,22 +145,3 @@ public class GraphPlaceholder {
         return maxY + 40.0; // Add spacing for the next widget
     }
 }
-//public void addPieChart() {
-//    PieChart pieChart = new PieChart();
-//    pieChart.setTitle("test og test");
-//
-//    try (Connection connection = DatabaseManager.getConnection();
-//         PreparedStatement statement = connection.prepareStatement(
-//                 "SELECT Responder, FCR FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]");
-//         ResultSet resultSet = statement.executeQuery()) {
-//
-//        while (resultSet.next()) {
-//            String category = resultSet.getString("Category");
-//            double value = resultSet.getDouble("Value");
-//            pieChart.getData().add(new PieChart.Data(category, value));
-//        }
-//    } catch (Exception e) {
-//        e.printStackTrace();
-//    }
-//
-//    addWidgetToAnchorPane(pieChart);

@@ -2,22 +2,21 @@ package com.example.agrisys;
 
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.ScatterChart;
+import javafx.scene.chart.PieChart; // Added missing import
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.fxml.Initializable;
 
-import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ResourceBundle;
 
-public class SMenuController implements javafx.fxml.Initializable {
+public class SMenuController implements Initializable {
     @FXML
     private Button AlarmButton;
     @FXML
@@ -41,12 +40,6 @@ public class SMenuController implements javafx.fxml.Initializable {
     @FXML
     private CheckBox Widget3;
     @FXML
-    private CheckBox Widget4;
-    @FXML
-    private CheckBox Widget5;
-    @FXML
-    private CheckBox Widget6;
-    @FXML
     private AnchorPane InnerAnchor;
     @FXML
     private TextField ResponderIDField;
@@ -59,7 +52,7 @@ public class SMenuController implements javafx.fxml.Initializable {
     }
 
     @Override
-    public void initialize(java.net.URL url, java.util.ResourceBundle resources) {
+    public void initialize(URL url, ResourceBundle resources) {
         DashboardState instance = DashboardState.getInstance();
 
         graphPlaceholder = new GraphPlaceholder(InnerAnchor);
@@ -68,11 +61,14 @@ public class SMenuController implements javafx.fxml.Initializable {
             graphPlaceholder.addLineChart();
             Widget2.setSelected(true);
             graphPlaceholder.addScatterChart();
+            Widget3.setSelected(true);
+            graphPlaceholder.addPieChart();
         }
+
         // Load selected KPIs from KPIStorage
         displaySelectedKPIs();
-        // Ændret til at den laver et metode kald i HelperMethods klassen
-        // Har også fjernet den gamle load metode herfra
+
+        // Button actions
         AlarmButton.setOnAction(e -> HelperMethods.loadScene("Alarm.fxml", AlarmButton));
         WidgetsButton.setOnAction(e -> toggleMenuVisibility());
         LogoutButton.setOnAction(e -> HelperMethods.loadScene("Login.fxml", LogoutButton));
@@ -81,8 +77,7 @@ public class SMenuController implements javafx.fxml.Initializable {
         DashboardsButton.setOnAction(e -> HelperMethods.loadScene("Dashboard.fxml", DashboardsButton));
         KPIButton.setOnAction(e -> HelperMethods.loadScene("KPI.fxml", KPIButton));
 
-
-        // Widget menuen ser mærkeligt ud pt. Morten fikser det nok (Noget med størelsen på Smenuen)
+        // Widget1 action
         Widget1.setOnAction(event -> {
             if (Widget1.isSelected()) {
                 graphPlaceholder.addLineChart();
@@ -99,34 +94,40 @@ public class SMenuController implements javafx.fxml.Initializable {
                 InnerAnchor.getChildren().removeIf(node -> node instanceof ScatterChart);
             }
         });
+
+        // Widget3 action
+        Widget3.setOnAction(event -> {
+            if (Widget3.isSelected()) {
+                graphPlaceholder.addPieChart();
+            } else {
+                InnerAnchor.getChildren().removeIf(node -> node instanceof PieChart);
+            }
+        });
     }
 
     private void displaySelectedKPIs() {
         double yPosition = 10.0; // Initial Y position for displaying KPIs
         for (String kpi : KPIStorage.getSavedKPIs()) {
-            // Create and configure the pig head image
             try {
                 ImageView pigHead = new ImageView(new javafx.scene.image.Image(
                         new java.io.File("C:\\Users\\MadsRinggaardKaiser\\OneDrive - Erhvervsakademi MidtVest\\Skrivebord\\Grisehoved.png").toURI().toString()
                 ));
-                pigHead.setFitWidth(30.0); // Set image width
-                pigHead.setFitHeight(30.0); // Set image height
-                pigHead.setLayoutX(10.0); // X position for the image
-                pigHead.setLayoutY(yPosition - 5.0); // Align with the label
+                pigHead.setFitWidth(30.0);
+                pigHead.setFitHeight(30.0);
+                pigHead.setLayoutX(10.0);
+                pigHead.setLayoutY(yPosition - 5.0);
 
-                // Create and configure the KPI label
                 Label kpiLabel = new Label(kpi);
-                kpiLabel.setLayoutX(50.0); // X position after the image
-                kpiLabel.setLayoutY(yPosition); // Y position
+                kpiLabel.setLayoutX(50.0);
+                kpiLabel.setLayoutY(yPosition);
                 kpiLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
 
-                // Add the image and label to the AnchorPane
                 InnerAnchor.getChildren().addAll(pigHead, kpiLabel);
             } catch (Exception e) {
                 System.err.println("Failed to load pig head image: " + e.getMessage());
             }
 
-            yPosition += 40.0; // Increment Y position for the next KPI
+            yPosition += 40.0;
         }
     }
 
@@ -155,7 +156,6 @@ public class SMenuController implements javafx.fxml.Initializable {
                 double startWeight = resultSet.getDouble("Start_weight_kg");
                 double endWeight = resultSet.getDouble("End_weight_kg");
 
-                // Example: Display data in the console or update UI elements
                 System.out.println("Responder: " + responder);
                 System.out.println("Start Weight: " + startWeight);
                 System.out.println("End Weight: " + endWeight);
@@ -167,5 +167,4 @@ public class SMenuController implements javafx.fxml.Initializable {
             HelperMethods.Alert2("Error", "Failed to fetch responder data: " + e.getMessage());
         }
     }
-
 }
