@@ -62,25 +62,19 @@ public class ImportController {
                 while ((line = reader.readLine()) != null) {
                     System.out.println(line);
                 }
+                // Ved ikke om det kan ændres til HelperMethods.showAlert / showAlert2
+                // Vi må lige se på det på et tidspunkt
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("CSV import");
                 alert.setHeaderText(null);
                 alert.setContentText("CSV filen er importeret.");
                 alert.showAndWait();
             } catch (IOException e) {
-                showError("Fejl ved import af CSV-fil", e.getMessage());
+                HelperMethods.Alert2("Fejl ved import af CSV-fil", e.getMessage());
             }
         } else {
-            showError("Ingen fil valgt", "Vælg venligst en CSV-fil.");
+            HelperMethods.Alert2("Ingen fil valgt", "Vælg venligst en CSV-fil.");
         }
-    }
-    // Samme kommentar som i ExportController - Skriver her hvis jeg skulle glemme det
-    private void showError(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Fejl");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
     // :)
     @FXML
