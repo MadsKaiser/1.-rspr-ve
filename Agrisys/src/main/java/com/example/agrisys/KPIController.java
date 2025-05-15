@@ -39,6 +39,7 @@ public class KPIController {
     @FXML
     private Button SaveButton;
 
+    private Map<Double, Boolean> occupiedPositions = new HashMap<>();
     private double nextKpiYPosition = 10.0; // Startposition for første KPI
     private Map<CheckBox, Label> kpiLabels = new HashMap<>(); // Holder styr på labels
     private KPIHelper kpiHelper = new KPIHelper(); // Instans af KPIHelper
@@ -117,41 +118,54 @@ public class KPIController {
     }
 
     private void addKpiToAnchorPane(CheckBox checkBox, String kpiText) {
+        // Find den første ledige plads
+        double yPosition = 10.0; // Startposition
+        while (isPositionOccupied(yPosition)) {
+            yPosition += 60.0; // Flyt til næste position
+        }
+
         // Opret ImageView til grisehovedet
         Image pigImage = new Image(new File("C:\\Users\\MadsRinggaardKaiser\\OneDrive - Erhvervsakademi MidtVest\\Skrivebord\\Grisehoved.png").toURI().toString());
         ImageView pigImageView = new ImageView(pigImage);
-        pigImageView.setFitWidth(50); // Sæt bredde
-        pigImageView.setFitHeight(50); // Sæt højde
-        pigImageView.setLayoutX(10.0); // Fast X-position
-        pigImageView.setLayoutY(nextKpiYPosition); // Dynamisk Y-position
+        pigImageView.setFitWidth(50);
+        pigImageView.setFitHeight(50);
+        pigImageView.setLayoutX(10.0);
+        pigImageView.setLayoutY(yPosition);
 
         // Opret Label til KPI-teksten
         Label kpiLabel = new Label(kpiText);
-        kpiLabel.setLayoutX(70.0); // Placer teksten ved siden af billedet
-        kpiLabel.setLayoutY(nextKpiYPosition + 15); // Juster Y-position
+        kpiLabel.setLayoutX(70.0);
+        kpiLabel.setLayoutY(yPosition + 15);
         kpiLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 
         // Tilføj billede og tekst til AnchorPane
         anchorPane.getChildren().addAll(pigImageView, kpiLabel);
 
-        // Gem label i kpiLabels og opdater Y-position
+        // Gem label og position
         kpiLabels.put(checkBox, kpiLabel);
-        nextKpiYPosition += 60.0; // Flyt næste element længere ned
+        occupiedPositions.put(yPosition, true); // Marker position som optaget
     }
 
     private void removeKpiFromAnchorPane(CheckBox checkBox) {
         Label kpiLabel = kpiLabels.remove(checkBox);
         if (kpiLabel != null) {
-            // Find og fjern det tilhørende ImageView
+            double yPosition = kpiLabel.getLayoutY() - 15;
+
+            // Fjern det tilhørende ImageView
             anchorPane.getChildren().removeIf(node ->
-                    node instanceof ImageView &&
-                            node.getLayoutY() == kpiLabel.getLayoutY() - 15
+                    node instanceof ImageView && node.getLayoutY() == yPosition
             );
 
             // Fjern label fra AnchorPane
             anchorPane.getChildren().remove(kpiLabel);
-            nextKpiYPosition -= 60.0; // Juster positionen, hvis nødvendigt
+
+            // Marker position som ledig
+            occupiedPositions.remove(yPosition);
         }
+    }
+
+    private boolean isPositionOccupied(double yPosition) {
+        return occupiedPositions.getOrDefault(yPosition, false);
     }
 
     private void saveKPIs() {

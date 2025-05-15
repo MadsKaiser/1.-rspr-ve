@@ -11,6 +11,15 @@ public class KPIStorage {
 
     public static void setKPIState(String kpiName, boolean state) {
         kpiStates.put(kpiName, state);
+        if (state) {
+            // Add KPI to savedKPIs if it's not already there
+            if (!savedKPIs.contains(kpiName)) {
+                savedKPIs.add(kpiName);
+            }
+        } else {
+            // Remove KPI from savedKPIs if it exists
+            savedKPIs.removeIf(kpi -> kpi.equals(kpiName));
+        }
     }
 
     public static boolean getKPIState(String kpiName) {

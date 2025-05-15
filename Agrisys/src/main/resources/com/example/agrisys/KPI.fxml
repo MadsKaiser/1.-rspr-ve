@@ -7,15 +7,15 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="794.0" prefWidth="951.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.agrisys.KPIController">
     <children>
-        <VBox layoutX="824.0" layoutY="1.0" prefHeight="794.0" prefWidth="114.0">
+        <VBox layoutX="788.0" layoutY="1.0" prefHeight="794.0" prefWidth="150.0">
             <children>
-                <CheckBox fx:id="KPI1" mnemonicParsing="false" prefHeight="41.0" prefWidth="118.0" text="KPI 1" />
-                <CheckBox fx:id="KPI2" mnemonicParsing="false" prefHeight="41.0" prefWidth="118.0" text="KPI 2" />
-                <CheckBox fx:id="KPI3" mnemonicParsing="false" prefHeight="41.0" prefWidth="118.0" text="KPI 3" />
-                <CheckBox fx:id="KPI4" mnemonicParsing="false" prefHeight="41.0" prefWidth="118.0" text="KPI 4" />
+                <CheckBox fx:id="KPI1" mnemonicParsing="false" prefHeight="41.0" prefWidth="118.0" text="FCR KPI" />
+                <CheckBox fx:id="KPI2" mnemonicParsing="false" prefHeight="41.0" prefWidth="118.0" text="End Weight" />
+                <CheckBox fx:id="KPI3" mnemonicParsing="false" prefHeight="41.0" prefWidth="118.0" text="Daily Gain" />
+                <CheckBox fx:id="KPI4" mnemonicParsing="false" prefHeight="42.0" prefWidth="145.0" text="Feed Consumption" />
             </children>
         </VBox>
         <Button fx:id="KPIBack" layoutX="14.0" layoutY="751.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="119.0" text="Back" />
-      <Button fx:id="SaveButton" layoutX="696.0" layoutY="749.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="119.0" text="Save" />
+      <Button fx:id="SaveButton" layoutX="668.0" layoutY="750.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="119.0" text="Save" />
     </children>
 </AnchorPane>

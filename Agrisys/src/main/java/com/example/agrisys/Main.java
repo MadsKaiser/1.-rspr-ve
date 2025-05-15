@@ -13,7 +13,7 @@ public class Main extends Application {
         FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
         Parent menuRoot = menuLoader.load();
         primaryStage.setTitle("Menu");
-        primaryStage.setScene(new Scene(menuRoot));
+        primaryStage.setScene(new Scene(menuRoot,800,600));
         primaryStage.show();
     }
 
