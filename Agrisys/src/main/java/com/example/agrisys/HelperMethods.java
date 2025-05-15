@@ -33,7 +33,7 @@ public class HelperMethods {
     public static void Alert2(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
-        alert.setContentText(message);
+        alert.setHeaderText(message);
         alert.showAndWait();
     }
     // 2 forskellige Alerts metoder fordi de bruger forskellige parametre
