@@ -63,7 +63,7 @@ public class PigDataController {
                 // Add the widget to the widgetContainer
                 widgetContainer.getChildren().add(responderWidget);
             } else {
-                showAlert("Info", "No data found for Responder: " + responderId);
+                HelperMethods.Alert2("Info", "No data found for Responder: " + responderId);
             }
         } catch (Exception e) {
             e.printStackTrace();
