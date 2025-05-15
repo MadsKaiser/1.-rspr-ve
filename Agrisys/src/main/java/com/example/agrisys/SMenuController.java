@@ -60,8 +60,15 @@ public class SMenuController implements javafx.fxml.Initializable {
 
     @Override
     public void initialize(java.net.URL url, java.util.ResourceBundle resources) {
-        graphPlaceholder = new GraphPlaceholder(InnerAnchor);
+        DashboardState instance = DashboardState.getInstance();
 
+        graphPlaceholder = new GraphPlaceholder(InnerAnchor);
+        if (instance.isPreset()) {
+            Widget1.setSelected(true);
+            graphPlaceholder.addLineChart();
+            Widget2.setSelected(true);
+            graphPlaceholder.addScatterChart();
+        }
         // Load selected KPIs from KPIStorage
         displaySelectedKPIs();
         // Ændret til at den laver et metode kald i HelperMethods klassen
