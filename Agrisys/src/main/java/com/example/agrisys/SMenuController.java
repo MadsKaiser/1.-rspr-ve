@@ -128,7 +128,7 @@ public class SMenuController implements javafx.fxml.Initializable {
         String responderId = ResponderIDField.getText();
 
         if (responderId == null || responderId.isEmpty()) {
-            showAlert("Error", "Please enter a responder ID.");
+            HelperMethods.Alert2("Error", "Please enter a responder ID.");
             return;
         }
 
@@ -153,19 +153,12 @@ public class SMenuController implements javafx.fxml.Initializable {
                 System.out.println("Start Weight: " + startWeight);
                 System.out.println("End Weight: " + endWeight);
             } else {
-                showAlert("Info", "No data found for Responder: " + responderId);
+                HelperMethods.Alert2("Info", "No data found for Responder: " + responderId);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert("Error", "Failed to fetch responder data: " + e.getMessage());
+            HelperMethods.Alert2("Error", "Failed to fetch responder data: " + e.getMessage());
         }
-    }
-    // Samme kommentar som i ExportController - Skriver her hvis jeg skulle glemme det
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
 }
