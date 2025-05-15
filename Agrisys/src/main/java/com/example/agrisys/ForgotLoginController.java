@@ -9,21 +9,14 @@ public class ForgotLoginController {
     @FXML
     private TextField emailField;
 
+    // Ændret til at bruge methods fra HelperMethods klassen = Mindre redundans
     @FXML
     private void handleSubmit() {
         String email = emailField.getText();
         if (email.isEmpty()) {
-            showAlert("Error", "Please enter your email.");
+            HelperMethods.Alert2("Error", "Please enter your email.");
         } else {
-            showAlert("Info", "Recovery instructions sent to: " + email);
+            HelperMethods.Alert2("Info", "Recovery instructions sent to: " + email);
         }
-    }
-    // Samme komment som i ExportController - Skriver her hvis jeg skulle glemme det
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }

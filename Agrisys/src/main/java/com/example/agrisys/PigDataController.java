@@ -19,12 +19,13 @@ public class PigDataController {
     private VBox widgetContainer;
 
     // Method to handle the button click
+    // Ændret til at bruge methods fra HelperMethods klassen = Mindre redundans
     @FXML
     private void handleFetchResponderData() {
         String responderId = responderIdField.getText();
 
         if (responderId == null || responderId.isEmpty()) {
-            showAlert("Error", "Please enter a responder ID.");
+            HelperMethods.Alert2("Error", "Please enter a responder ID.");
             return;
         }
 
@@ -58,15 +59,8 @@ public class PigDataController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert("Error", "Failed to fetch responder data: " + e.getMessage());
+            HelperMethods.Alert2("Error", "Failed to fetch responder data: " + e.getMessage());
         }
     }
 
-    // Method to show an alert
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }
