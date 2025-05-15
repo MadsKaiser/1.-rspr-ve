@@ -111,3 +111,22 @@ public class GraphPlaceholder {
         return maxY + 40.0; // Add spacing for the next widget
     }
 }
+//public void addPieChart() {
+//    PieChart pieChart = new PieChart();
+//    pieChart.setTitle("test og test");
+//
+//    try (Connection connection = DatabaseManager.getConnection();
+//         PreparedStatement statement = connection.prepareStatement(
+//                 "SELECT Responder, FCR FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]");
+//         ResultSet resultSet = statement.executeQuery()) {
+//
+//        while (resultSet.next()) {
+//            String category = resultSet.getString("Category");
+//            double value = resultSet.getDouble("Value");
+//            pieChart.getData().add(new PieChart.Data(category, value));
+//        }
+//    } catch (Exception e) {
+//        e.printStackTrace();
+//    }
+//
+//    addWidgetToAnchorPane(pieChart);
