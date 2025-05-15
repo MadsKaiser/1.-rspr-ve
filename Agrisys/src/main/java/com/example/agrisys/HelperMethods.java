@@ -23,19 +23,11 @@ public class HelperMethods {
             ex.printStackTrace();
         }
     }
-    public static void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-}
     public static void Alert2(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(message);
         alert.showAndWait();
     }
-    // 2 forskellige Alerts metoder fordi de bruger forskellige parametre
-    // Måske ændre navnene til noget mere sigende ellers så skal i bare have styr på forskellen :)
+    // Fixet - Måske ændre navnet på metoden når det engang passer?
 }

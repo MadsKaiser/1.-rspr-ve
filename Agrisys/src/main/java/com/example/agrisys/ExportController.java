@@ -43,9 +43,9 @@ public class ExportController {
                 writer.append("Data4,Data5,Data6\n");
 
                 // Ændret til at bruge methods fra HelperMethods klassen = Mindre redundans
-                HelperMethods.showAlert(Alert.AlertType.INFORMATION, "Export Successful", "The file has been exported successfully.");
+                HelperMethods.Alert2("Export Successful", "The file has been exported successfully.");
             } catch (IOException e) {
-                HelperMethods.showAlert(Alert.AlertType.ERROR, "Export Failed", "An error occurred while exporting the file.");
+               HelperMethods.Alert2("Export Failed", "An error occurred while exporting the file."); ;
             }
         }
     }
