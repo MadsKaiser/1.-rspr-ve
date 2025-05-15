@@ -47,7 +47,7 @@ public class SMenuController implements javafx.fxml.Initializable {
     @FXML
     private CheckBox Widget6;
     @FXML
-    private AnchorPane Anchor;
+    private AnchorPane InnerAnchor;
     @FXML
     private TextField ResponderIDField;
 
@@ -60,7 +60,7 @@ public class SMenuController implements javafx.fxml.Initializable {
 
     @Override
     public void initialize(java.net.URL url, java.util.ResourceBundle resources) {
-        graphPlaceholder = new GraphPlaceholder(Anchor);
+        graphPlaceholder = new GraphPlaceholder(InnerAnchor);
 
         // Load selected KPIs from KPIStorage
         displaySelectedKPIs();
@@ -80,15 +80,16 @@ public class SMenuController implements javafx.fxml.Initializable {
             if (Widget1.isSelected()) {
                 graphPlaceholder.addLineChart();
             } else {
-                Anchor.getChildren().removeIf(node -> node instanceof LineChart);
+                InnerAnchor.getChildren().removeIf(node -> node instanceof LineChart);
             }
         });
 
+        // Widget2 action
         Widget2.setOnAction(event -> {
             if (Widget2.isSelected()) {
                 graphPlaceholder.addScatterChart();
             } else {
-                Anchor.getChildren().removeIf(node -> node instanceof ScatterChart);
+                InnerAnchor.getChildren().removeIf(node -> node instanceof ScatterChart);
             }
         });
     }
@@ -113,7 +114,7 @@ public class SMenuController implements javafx.fxml.Initializable {
                 kpiLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
 
                 // Add the image and label to the AnchorPane
-                Anchor.getChildren().addAll(pigHead, kpiLabel);
+                InnerAnchor.getChildren().addAll(pigHead, kpiLabel);
             } catch (Exception e) {
                 System.err.println("Failed to load pig head image: " + e.getMessage());
             }
