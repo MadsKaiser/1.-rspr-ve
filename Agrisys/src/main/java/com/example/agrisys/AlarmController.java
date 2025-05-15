@@ -56,7 +56,8 @@ public class AlarmController {
             if (selectedItem != null) {
                 responderData.remove(selectedItem);
                // String deleteQuery = "DELETE FROM madserkaiser_dk_db_agrisys.dbo.[PPT data] WHERE Responder = ? AND FCR = ?";
-            }
+            } // Tør ikke at køre det overstående kode D:
+              // Det sletter fra databasen så pas på hvis i kører det
         });
 
         BackToMenuButton.setOnAction(e -> {

@@ -24,6 +24,7 @@ public class ExportController {
     @FXML
     private void initialize() {
         BackButton.setOnAction(event -> HelperMethods.loadScene("SMenu.fxml", BackButton));
+
     }
     @FXML
     void onExportButton(ActionEvent event) {
@@ -41,19 +42,11 @@ public class ExportController {
                 writer.append("Data1,Data2,Data3\n");
                 writer.append("Data4,Data5,Data6\n");
 
-                showAlert(Alert.AlertType.INFORMATION, "Export Successful", "The file has been exported successfully.");
+                // Ændret til at bruge methods fra HelperMethods klassen = Mindre redundans
+                HelperMethods.showAlert(Alert.AlertType.INFORMATION, "Export Successful", "The file has been exported successfully.");
             } catch (IOException e) {
-                showAlert(Alert.AlertType.ERROR, "Export Failed", "An error occurred while exporting the file.");
+                HelperMethods.showAlert(Alert.AlertType.ERROR, "Export Failed", "An error occurred while exporting the file.");
             }
         }
-    }
-    // Måske lave en metode til at vise alerts i HelperMethods klassen? Vi bruger den samme flere steder så ville være nemmere bare at lave en metode og kalde den
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-
     }
 }

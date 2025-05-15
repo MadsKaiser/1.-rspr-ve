@@ -34,7 +34,7 @@ public class LoginController {
             }
         });
     }
-
+    // Ændret til at bruge methods fra HelperMethods klassen = Mindre redundans
     private void handleLogin() {
         String username = usernameField.getText();
         String password = passwordField.getText();
@@ -43,11 +43,11 @@ public class LoginController {
         HashMap<String, String> roles = UserManager.getInstance().getRoles();
 
         if (username.isEmpty() || password.isEmpty()) {
-            showAlert("Error", "Please fill in both fields.");
+            HelperMethods.Alert2("Error", "Please fill in both fields.");
         } else if (users.containsKey(username) && users.get(username).equals(password)) {
             String role = roles.get(username);
             UserManager.getInstance().setCurrentUser(username);
-            showAlert("Success", "Login successful! Role: " + role);
+            HelperMethods.Alert2("Success", "Login successful! Role: " + role);
 
             if ("SUPERUSER".equals(role)) {
                 HelperMethods.loadScene("SMenu.fxml", loginButton);
@@ -55,16 +55,8 @@ public class LoginController {
                 HelperMethods.loadScene("Menu.fxml", loginButton);
             }
         } else {
-            showAlert("Error", "Invalid username or password.");
+            HelperMethods.Alert2("Error", "Invalid username or password.");
         }
-    }
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }
 //       Dette skal nok fikses på en eller andet måde, ved ikke hvordan det skal være sat op

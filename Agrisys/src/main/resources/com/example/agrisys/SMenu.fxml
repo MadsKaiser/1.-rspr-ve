@@ -8,34 +8,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="Anchor" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.agrisys.SMenuController">
+<AnchorPane fx:id="Anchor" prefHeight="750.0" prefWidth="1314.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.agrisys.SMenuController">
    <children>
-      <VBox layoutX="700.0" layoutY="10.0" spacing="10.0" prefWidth="90.0">
+      <VBox layoutX="1201.0" layoutY="10.0" prefHeight="242.0" prefWidth="106.0" spacing="10.0">
          <children>
-            <Button fx:id="ImportCSVButton" mnemonicParsing="false" text="Import CSV" />
-            <Button fx:id="ExportCSVButton" mnemonicParsing="false" text="Export CSV" />
-            <Button fx:id="KPIButton" mnemonicParsing="false" text="KPI" />
-            <Button fx:id="AlarmButton" mnemonicParsing="false" text="Alarm" />
-            <Button fx:id="DashboardsButton" mnemonicParsing="false" text="Dashboards" />
-            <Button fx:id="WidgetsButton" mnemonicParsing="false" text="Widgets" />
-            <Button fx:id="LogoutButton" mnemonicParsing="false" text="Logout" />
+            <Button fx:id="ImportCSVButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Import CSV" />
+            <Button fx:id="ExportCSVButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="81.0" text="Export CSV" />
+            <Button fx:id="KPIButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="81.0" text="KPI" />
+            <Button fx:id="AlarmButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Alarm" />
+            <Button fx:id="DashboardsButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="81.0" text="Dashboards" />
+            <Button fx:id="WidgetsButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="81.0" text="Widgets" />
+            <Button fx:id="LogoutButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Logout" />
          </children>
       </VBox>
-      <Separator layoutX="690.0" layoutY="0.0" orientation="VERTICAL" prefHeight="400.0" />
-      <VBox fx:id="VBoxSMenu" layoutX="10.0" layoutY="10.0" spacing="10.0" prefWidth="670.0">
+      <Separator layoutX="1188.0" orientation="VERTICAL" prefHeight="750.0" prefWidth="9.0" />
+      <VBox fx:id="VBoxSMenu" layoutX="10.0" layoutY="10.0" prefHeight="738.0" prefWidth="1180.0" spacing="10.0">
          <children>
-            <ScrollPane prefHeight="380.0" prefWidth="670.0">
+            <ScrollPane prefHeight="739.0" prefWidth="1180.0">
                <content>
-                  <AnchorPane fx:id="InnerAnchor" minHeight="0.0" minWidth="0.0" prefHeight="380.0" prefWidth="670.0">
+                  <AnchorPane fx:id="InnerAnchor" minHeight="0.0" minWidth="0.0" prefHeight="738.0" prefWidth="1178.0">
                      <children>
-                        <VBox layoutY="10.0" spacing="10.0" prefWidth="650.0" />
+                        <VBox layoutY="10.0" prefWidth="650.0" spacing="10.0" />
                      </children>
                   </AnchorPane>
                </content>
             </ScrollPane>
          </children>
       </VBox>
-      <VBox fx:id="hiddenMenu" layoutX="700.0" layoutY="200.0" spacing="5.0" visible="false">
+      <VBox fx:id="hiddenMenu" layoutX="1196.0" layoutY="258.0" prefHeight="281.0" prefWidth="114.0" spacing="5.0" visible="false">
          <children>
             <CheckBox fx:id="Widget1" mnemonicParsing="false" text="Widget 1" />
             <CheckBox fx:id="Widget2" mnemonicParsing="false" text="Widget 2" />
