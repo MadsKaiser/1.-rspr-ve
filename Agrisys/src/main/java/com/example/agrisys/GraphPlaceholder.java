@@ -1,11 +1,11 @@
 package com.example.agrisys;
 
-import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -51,7 +51,7 @@ public class GraphPlaceholder {
             e.printStackTrace();
         }
 
-        addWidgetToAnchorPane(lineChart);
+        addChartToPane(lineChart);
     }
 
     public void addScatterChart() {
@@ -86,28 +86,25 @@ public class GraphPlaceholder {
             e.printStackTrace();
         }
 
-        addWidgetToAnchorPane(scatterChart);
+        addChartToPane(scatterChart);
     }
 
-    private void addWidgetToAnchorPane(Node widget) {
-        double nextYPosition = calculateNextAvailableYPosition();
 
-        widget.setLayoutX(10.0); // Fixed X position
-        widget.setLayoutY(nextYPosition);
+    private void addChartToPane(XYChart<Number, Number> chart) {
+        double yOffset = 10;
+        double spacing = 20;
 
-        anchorPane.getChildren().add(widget);
-    }
-
-    private double calculateNextAvailableYPosition() {
-        double maxY = 0.0;
-
-        for (Node node : anchorPane.getChildren()) {
-            double nodeBottom = node.getLayoutY() + node.prefHeight(-1);
-            if (nodeBottom > maxY) {
-                maxY = nodeBottom;
+        for (javafx.scene.Node node : anchorPane.getChildren()) {
+            if (node instanceof XYChart) {
+                yOffset += ((XYChart<?, ?>) node).getPrefHeight() + spacing;
             }
         }
 
-        return maxY + 40.0; // Add spacing for the next widget
+        AnchorPane.setTopAnchor(chart, yOffset);
+        AnchorPane.setLeftAnchor(chart, 10.0);
+        chart.setPrefHeight(200);
+        chart.setPrefWidth(400);
+
+        anchorPane.getChildren().add(chart);
     }
 }
