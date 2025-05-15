@@ -34,6 +34,8 @@ public class SMenuController implements javafx.fxml.Initializable {
     @FXML
     private VBox hiddenMenu;
     @FXML
+    private VBox widgetContainer;
+    @FXML
     private Button KPIButton;
     @FXML
     private CheckBox Widget1;
@@ -115,7 +117,6 @@ public class SMenuController implements javafx.fxml.Initializable {
             yPosition += 40.0;
         }
     }
-
     @FXML
     private void handleFetchResponderData() {
         String responderId = ResponderIDField.getText();
@@ -150,7 +151,8 @@ public class SMenuController implements javafx.fxml.Initializable {
                     responderWidget.getChildren().add(new Label(columnName + ": " + columnValue));
                 }
 
-                Anchor.getChildren().add(responderWidget);
+                widgetContainer.setSpacing(10.0);
+                widgetContainer.getChildren().add(responderWidget);
             } else {
                 showAlert("Info", "No data found for Responder: " + responderId);
             }
@@ -167,3 +169,6 @@ public class SMenuController implements javafx.fxml.Initializable {
         alert.showAndWait();
     }
 }
+
+
+

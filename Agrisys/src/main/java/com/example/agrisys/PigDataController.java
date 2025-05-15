@@ -61,6 +61,7 @@ public class PigDataController {
                 }
 
                 // Add the widget to the widgetContainer
+                widgetContainer.setSpacing(10.0); // Ensure spacing between widgets
                 widgetContainer.getChildren().add(responderWidget);
             } else {
                 HelperMethods.Alert2("Info", "No data found for Responder: " + responderId);

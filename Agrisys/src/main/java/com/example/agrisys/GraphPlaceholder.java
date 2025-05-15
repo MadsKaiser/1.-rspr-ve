@@ -5,6 +5,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -87,6 +88,7 @@ public class GraphPlaceholder {
 
         addChartToPane(scatterChart);
     }
+
 
     private void addChartToPane(XYChart<Number, Number> chart) {
         double yOffset = 10;
