@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="Merge branch 'Før-det-gik-i-stykker' of https://github.com/MadsKaiser/1.-rspr-ve into Før-det-gik-i-stykker&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;Agrisys/src/main/java/com/example/agrisys/SMenuController.java&#10;#&#9;Agrisys/target/classes/com/example/agrisys/SMenuController.class" />
+    <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="Merge branch 'Før-det-gik-i-stykker' of https://github.com/MadsKaiser/1.-rspr-ve into Før-det-gik-i-stykker&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;Agrisys/src/main/java/com/example/agrisys/SMenuController.java&#10;#&#9;Agrisys/target/classes/com/example/agrisys/SMenuController.class">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/KPIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/KPIController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,7 +49,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Før-det-gik-i-stykker",
+    "git-widget-placeholder": "Mads",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/MN-EM/OneDrive/Skrivebord/JDBC driver/sqljdbc_12.10.0.0_enu.zip",
     "node.js.detected.package.eslint": "true",
@@ -103,6 +106,7 @@
       <workItem from="1747259068975" duration="2912000" />
       <workItem from="1747292105526" duration="2401000" />
       <workItem from="1747294921561" duration="2277000" />
+      <workItem from="1747297928697" duration="886000" />
     </task>
     <task id="LOCAL-00001" summary="Widget hide menu">
       <option name="closed" value="true" />
