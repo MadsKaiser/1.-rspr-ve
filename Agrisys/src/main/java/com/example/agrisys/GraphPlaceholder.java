@@ -1,11 +1,6 @@
 package com.example.agrisys;
 
-import javafx.scene.Node;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.PieChart;
-import javafx.scene.chart.ScatterChart;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.layout.AnchorPane;
 
 import java.sql.Connection;
@@ -16,11 +11,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GraphPlaceholder {
-
-    private final AnchorPane anchorPane;
+    private AnchorPane anchorPane;
 
     public GraphPlaceholder(AnchorPane anchorPane) {
         this.anchorPane = anchorPane;
+    }
+
+    public void addWidgetToAnchor(Chart chart) {
+        AnchorPane.setTopAnchor(chart, 0.0);
+        AnchorPane.setBottomAnchor(chart, 0.0);
+        AnchorPane.setLeftAnchor(chart, 0.0);
+        AnchorPane.setRightAnchor(chart, 0.0);
+        anchorPane.getChildren().add(chart);
     }
 
     public void addLineChart() {
@@ -55,7 +57,7 @@ public class GraphPlaceholder {
             e.printStackTrace();
         }
 
-        addWidgetToAnchorPane(lineChart);
+        addWidgetToAnchor(lineChart);
     }
 
     public void addScatterChart() {
@@ -90,7 +92,7 @@ public class GraphPlaceholder {
             e.printStackTrace();
         }
 
-        addWidgetToAnchorPane(scatterChart);
+        addWidgetToAnchor(scatterChart);
     }
 
     public void addPieChart() {
@@ -98,19 +100,19 @@ public class GraphPlaceholder {
         pieChart.setTitle("Weight Distribution of Pigs");
 
         String query = """
-    SELECT CASE
-        WHEN [Weight_gain_kg] BETWEEN 0 AND 50 THEN '0-50 kg'
-        WHEN [Weight_gain_kg] BETWEEN 51 AND 100 THEN '51-100 kg'
-        WHEN [Weight_gain_kg] BETWEEN 101 AND 150 THEN '101-150 kg'
-        ELSE '151+ kg' END AS WeightRange,
-        COUNT(*) AS Count
-    FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]
-    GROUP BY CASE
-        WHEN [Weight_gain_kg] BETWEEN 0 AND 50 THEN '0-50 kg'
-        WHEN [Weight_gain_kg] BETWEEN 51 AND 100 THEN '51-100 kg'
-        WHEN [Weight_gain_kg] BETWEEN 101 AND 150 THEN '101-150 kg'
-        ELSE '151+ kg' END
-    """;
+                SELECT CASE
+                    WHEN [Weight_gain_kg] BETWEEN 0 AND 50 THEN '0-50 kg'
+                    WHEN [Weight_gain_kg] BETWEEN 51 AND 100 THEN '51-100 kg'
+                    WHEN [Weight_gain_kg] BETWEEN 101 AND 150 THEN '101-150 kg'
+                    ELSE '151+ kg' END AS WeightRange,
+                    COUNT(*) AS Count
+                FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]
+                GROUP BY CASE
+                    WHEN [Weight_gain_kg] BETWEEN 0 AND 50 THEN '0-50 kg'
+                    WHEN [Weight_gain_kg] BETWEEN 51 AND 100 THEN '51-100 kg'
+                    WHEN [Weight_gain_kg] BETWEEN 101 AND 150 THEN '101-150 kg'
+                    ELSE '151+ kg' END
+                """;
 
         try (Connection connection = DatabaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
@@ -125,28 +127,6 @@ public class GraphPlaceholder {
             Logger.getLogger(GraphPlaceholder.class.getName()).log(Level.SEVERE, "Error loading pie chart data", e);
         }
 
-        addWidgetToAnchorPane(pieChart);
-    }
-
-    private void addWidgetToAnchorPane(Node widget) {
-        double nextYPosition = calculateNextAvailableYPosition();
-
-        widget.setLayoutX(10.0); // Fixed X position
-        widget.setLayoutY(nextYPosition);
-
-        anchorPane.getChildren().add(widget);
-    }
-
-    private double calculateNextAvailableYPosition() {
-        double maxY = 0.0;
-
-        for (Node node : anchorPane.getChildren()) {
-            double nodeBottom = node.getLayoutY() + node.prefHeight(-1);
-            if (nodeBottom > maxY) {
-                maxY = nodeBottom;
-            }
-        }
-
-        return maxY + 40.0; // Add spacing for the next widget
+        addWidgetToAnchor(pieChart);
     }
 }

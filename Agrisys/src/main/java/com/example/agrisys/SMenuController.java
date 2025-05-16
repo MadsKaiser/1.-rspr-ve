@@ -1,6 +1,7 @@
 package com.example.agrisys;
 
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -88,6 +89,13 @@ public class SMenuController implements javafx.fxml.Initializable {
                 graphPlaceholder.addScatterChart();
             } else {
                 Anchor.getChildren().removeIf(node -> node instanceof ScatterChart);
+            }
+        });
+        Widget3.setOnAction(event -> {
+            if (Widget3.isSelected()) {
+                graphPlaceholder.addPieChart();
+            } else {
+                Anchor.getChildren().removeIf(node -> node instanceof PieChart);
             }
         });
     }
