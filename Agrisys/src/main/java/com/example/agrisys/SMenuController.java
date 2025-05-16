@@ -1,5 +1,9 @@
 package com.example.agrisys;
 
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.ScatterChart;
@@ -7,10 +11,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,6 +18,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.util.Map;
 
 public class SMenuController implements javafx.fxml.Initializable {
     @FXML
@@ -56,6 +57,8 @@ public class SMenuController implements javafx.fxml.Initializable {
     private TextField ResponderIDField;
     @FXML
     private ScrollPane ScrollPane;
+    @FXML
+    private VBox kpiDisplayBox;
 
     private GraphPlaceholder graphPlaceholder;
 
@@ -101,6 +104,15 @@ public class SMenuController implements javafx.fxml.Initializable {
                 widgetContainer.getChildren().removeIf(node -> node instanceof PieChart);
             }
         });
+    }
+
+    public void loadKPIs(Map<String, String> kpisWithValues) {
+        widgetContainer.getChildren().clear(); // Clear existing content
+        for (Map.Entry<String, String> entry : kpisWithValues.entrySet()) {
+            Label kpiLabel = new Label(entry.getKey() + ": " + entry.getValue());
+            kpiLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
+            widgetContainer.getChildren().add(kpiLabel);
+        }
     }
 
     private void displaySelectedKPIs() {
