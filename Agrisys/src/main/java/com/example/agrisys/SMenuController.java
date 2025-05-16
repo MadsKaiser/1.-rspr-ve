@@ -54,6 +54,8 @@ public class SMenuController implements javafx.fxml.Initializable {
     private AnchorPane Anchor;
     @FXML
     private TextField ResponderIDField;
+    @FXML
+    private ScrollPane ScrollPane;
 
     private GraphPlaceholder graphPlaceholder;
 
@@ -64,7 +66,7 @@ public class SMenuController implements javafx.fxml.Initializable {
 
     @Override
     public void initialize(java.net.URL url, java.util.ResourceBundle resources) {
-        graphPlaceholder = new GraphPlaceholder(Anchor);
+        graphPlaceholder = new GraphPlaceholder(widgetContainer);
 
         // Load selected KPIs from KPIStorage
         displaySelectedKPIs();
@@ -80,7 +82,7 @@ public class SMenuController implements javafx.fxml.Initializable {
             if (Widget1.isSelected()) {
                 graphPlaceholder.addLineChart();
             } else {
-                Anchor.getChildren().removeIf(node -> node instanceof LineChart);
+                widgetContainer.getChildren().removeIf(node -> node instanceof LineChart);
             }
         });
 
@@ -88,29 +90,25 @@ public class SMenuController implements javafx.fxml.Initializable {
             if (Widget2.isSelected()) {
                 graphPlaceholder.addScatterChart();
             } else {
-                Anchor.getChildren().removeIf(node -> node instanceof ScatterChart);
+                widgetContainer.getChildren().removeIf(node -> node instanceof ScatterChart);
             }
         });
+
         Widget3.setOnAction(event -> {
             if (Widget3.isSelected()) {
                 graphPlaceholder.addPieChart();
             } else {
-                Anchor.getChildren().removeIf(node -> node instanceof PieChart);
+                widgetContainer.getChildren().removeIf(node -> node instanceof PieChart);
             }
         });
     }
 
     private void displaySelectedKPIs() {
-        double yPosition = 10.0; // Initial Y position for displaying KPIs
         for (String kpi : KPIStorage.getSavedKPIs()) {
             try {
                 Label kpiLabel = new Label(kpi);
-                kpiLabel.setLayoutX(50.0);
-                kpiLabel.setLayoutY(yPosition);
                 kpiLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
-
-                Anchor.getChildren().addAll(kpiLabel);
-                yPosition += 40.0;
+                widgetContainer.getChildren().add(kpiLabel);
             } catch (Exception e) {
                 System.err.println("Failed to load KPI: " + e.getMessage());
             }

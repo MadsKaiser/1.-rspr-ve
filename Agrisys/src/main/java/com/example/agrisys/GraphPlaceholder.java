@@ -1,7 +1,10 @@
 package com.example.agrisys;
 
-import javafx.scene.chart.*;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.ScatterChart;
+import javafx.scene.layout.VBox;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,36 +14,28 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GraphPlaceholder {
-    private AnchorPane anchorPane;
+    private final VBox widgetContainer;
 
-    public GraphPlaceholder(AnchorPane anchorPane) {
-        this.anchorPane = anchorPane;
-    }
-
-    public void addWidgetToAnchor(Chart chart) {
-        AnchorPane.setTopAnchor(chart, 0.0);
-        AnchorPane.setBottomAnchor(chart, 0.0);
-        AnchorPane.setLeftAnchor(chart, 0.0);
-        AnchorPane.setRightAnchor(chart, 0.0);
-        anchorPane.getChildren().add(chart);
+    public GraphPlaceholder(VBox widgetContainer) {
+        this.widgetContainer = widgetContainer;
     }
 
     public void addLineChart() {
         NumberAxis xAxis = new NumberAxis();
-        xAxis.setLabel("Responder Index");
+        xAxis.setLabel("Index");
 
         NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel("FCR");
 
         LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
-        lineChart.setTitle("Responder Index vs FCR");
+        lineChart.setTitle("FCR Over Time");
 
         try (Connection connection = DatabaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(
                      "SELECT Responder, FCR FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]");
              ResultSet resultSet = statement.executeQuery()) {
 
-            XYChart.Series<Number, Number> series = new XYChart.Series<>();
+            LineChart.Series<Number, Number> series = new LineChart.Series<>();
             series.setName("Foderudnyttelse");
 
             int index = 1;
@@ -49,15 +44,15 @@ public class GraphPlaceholder {
                 if (fcr < -500 || fcr > 1000) {
                     continue;
                 }
-                series.getData().add(new XYChart.Data<>(index++, fcr));
+                series.getData().add(new LineChart.Data<>(index++, fcr));
             }
 
             lineChart.getData().add(series);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            Logger.getLogger(GraphPlaceholder.class.getName()).log(Level.SEVERE, "Error loading line chart data", e);
         }
 
-        addWidgetToAnchor(lineChart);
+        widgetContainer.getChildren().add(lineChart);
     }
 
     public void addScatterChart() {
@@ -75,7 +70,7 @@ public class GraphPlaceholder {
                      "SELECT [Weight_gain_kg], FCR FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]");
              ResultSet resultSet = statement.executeQuery()) {
 
-            XYChart.Series<Number, Number> series = new XYChart.Series<>();
+            ScatterChart.Series<Number, Number> series = new ScatterChart.Series<>();
             series.setName("Foderudnyttelse vs Weight gain");
 
             while (resultSet.next()) {
@@ -84,15 +79,15 @@ public class GraphPlaceholder {
                 if (fcr < -500 || fcr > 1000 || weightGain < 0) {
                     continue;
                 }
-                series.getData().add(new XYChart.Data<>(weightGain, fcr));
+                series.getData().add(new ScatterChart.Data<>(weightGain, fcr));
             }
 
             scatterChart.getData().add(series);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            Logger.getLogger(GraphPlaceholder.class.getName()).log(Level.SEVERE, "Error loading scatter chart data", e);
         }
 
-        addWidgetToAnchor(scatterChart);
+        widgetContainer.getChildren().add(scatterChart);
     }
 
     public void addPieChart() {
@@ -127,6 +122,6 @@ public class GraphPlaceholder {
             Logger.getLogger(GraphPlaceholder.class.getName()).log(Level.SEVERE, "Error loading pie chart data", e);
         }
 
-        addWidgetToAnchor(pieChart);
+        widgetContainer.getChildren().add(pieChart);
     }
 }
