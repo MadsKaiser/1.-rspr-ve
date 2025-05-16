@@ -33,5 +33,16 @@ public class DashboardController {
         // Back to menu button
         BackToMenuButton.setOnAction(e -> HelperMethods.loadScene("SMenu.fxml", BackToMenuButton));
 
+        // Save dashboard button
+        SaveDashboard.setOnAction(e -> {
+            try (FileWriter writer = new FileWriter("dashboard_config.txt")) {
+                Map<String, Boolean> widgetStates = singleton.getWidgetStates();
+                for (Map.Entry<String, Boolean> entry : widgetStates.entrySet()) {
+                    writer.write(entry.getKey() + "=" + entry.getValue() + "\n");
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 }

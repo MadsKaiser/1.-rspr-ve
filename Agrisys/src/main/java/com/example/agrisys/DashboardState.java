@@ -20,12 +20,15 @@ public class DashboardState {
         }
         return instance;
     }
+
     public void setIsPreset(boolean isPreset) {
         this.isPreset = isPreset;
     }
+
     public boolean isPreset() {
         return isPreset;
     }
+
     public void addCheckBox(String name, CheckBox checkBox) {
         checkBoxes.put(name, checkBox);
     }
@@ -36,5 +39,14 @@ public class DashboardState {
 
     public Map<String, CheckBox> getAllCheckBoxes() {
         return checkBoxes;
+    }
+
+    // New method to get widget states
+    public Map<String, Boolean> getWidgetStates() {
+        Map<String, Boolean> widgetStates = new HashMap<>();
+        for (Map.Entry<String, CheckBox> entry : checkBoxes.entrySet()) {
+            widgetStates.put(entry.getKey(), entry.getValue().isSelected());
+        }
+        return widgetStates;
     }
 }
