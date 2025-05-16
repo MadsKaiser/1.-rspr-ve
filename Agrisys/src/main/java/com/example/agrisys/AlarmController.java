@@ -27,7 +27,9 @@ public class AlarmController {
 
     private void loadDataFromDatabase() {
         String query = "SELECT * FROM madserkaiser_dk_db_agrisys.dbo.[PPT data] WHERE FCR IS NOT NULL AND FCR <0;"
-              //  + "SELECT * FROM madserkaiser_dk_db_agrisys.dbo.[Visit Data] "
+              //  + "SELECT r.Responder FROM madserkaiser_dk_db_agrisys.dbo.[Visit Data]
+                //  GROUP BY r.Responder HAVING MAX (r.Date) < NOW() - INTERVAL 3 DAY;"
+                // Fiks Datasæt ellers virker det ikke :/
                 ;
         try (Connection connection = DatabaseManager.getConnection();
              Statement statement = connection.createStatement();
