@@ -33,6 +33,29 @@ public class KPIController {
 
     @FXML
     public void initialize() {
+        // Reload saved KPIs
+        for (String savedKPI : KPIStorage.getSavedKPIs()) {
+            switch (savedKPI) {
+                case "Average FCR":
+                    KPI1.setSelected(true);
+                    addKpiToAnchorPane(savedKPI);
+                    break;
+                case "Average End Weight":
+                    KPI2.setSelected(true);
+                    addKpiToAnchorPane(savedKPI);
+                    break;
+                case "Average Daily Gain":
+                    KPI3.setSelected(true);
+                    addKpiToAnchorPane(savedKPI);
+                    break;
+                case "Feed Consumption":
+                    KPI4.setSelected(true);
+                    addKpiToAnchorPane(savedKPI);
+                    break;
+            }
+        }
+
+        // Add event handlers
         KPI1.setOnAction(event -> toggleKPI(KPI1, "Average FCR"));
         KPI2.setOnAction(event -> toggleKPI(KPI2, "Average End Weight"));
         KPI3.setOnAction(event -> toggleKPI(KPI3, "Average Daily Gain"));
