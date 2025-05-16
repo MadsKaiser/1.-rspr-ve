@@ -11,6 +11,9 @@ import javafx.scene.layout.AnchorPane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GraphPlaceholder {
 
@@ -94,30 +97,32 @@ public class GraphPlaceholder {
         PieChart pieChart = new PieChart();
         pieChart.setTitle("Weight Distribution of Pigs");
 
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     "SELECT CASE " +
-                             "WHEN [Weight_kg] BETWEEN 0 AND 50 THEN '0-50 kg' " +
-                             "WHEN [Weight_kg] BETWEEN 51 AND 100 THEN '51-100 kg' " +
-                             "WHEN [Weight_kg] BETWEEN 101 AND 150 THEN '101-150 kg' " +
-                             "ELSE '151+ kg' END AS WeightRange, " +
-                             "COUNT(*) AS Count " +
-                             "FROM madserkaiser_dk_db_agrisys.dbo.[PigData] " +
-                             "GROUP BY CASE " +
-                             "WHEN [Weight_kg] BETWEEN 0 AND 50 THEN '0-50 kg' " +
-                             "WHEN [Weight_kg] BETWEEN 51 AND 100 THEN '51-100 kg' " +
-                             "WHEN [Weight_kg] BETWEEN 101 AND 150 THEN '101-150 kg' " +
-                             "ELSE '151+ kg' END")) {
+        String query = """
+    SELECT CASE
+        WHEN [Weight_gain_kg] BETWEEN 0 AND 50 THEN '0-50 kg'
+        WHEN [Weight_gain_kg] BETWEEN 51 AND 100 THEN '51-100 kg'
+        WHEN [Weight_gain_kg] BETWEEN 101 AND 150 THEN '101-150 kg'
+        ELSE '151+ kg' END AS WeightRange,
+        COUNT(*) AS Count
+    FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]
+    GROUP BY CASE
+        WHEN [Weight_gain_kg] BETWEEN 0 AND 50 THEN '0-50 kg'
+        WHEN [Weight_gain_kg] BETWEEN 51 AND 100 THEN '51-100 kg'
+        WHEN [Weight_gain_kg] BETWEEN 101 AND 150 THEN '101-150 kg'
+        ELSE '151+ kg' END
+    """;
 
-            ResultSet resultSet = statement.executeQuery();
+        try (Connection connection = DatabaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
                 String weightRange = resultSet.getString("WeightRange");
                 int count = resultSet.getInt("Count");
                 pieChart.getData().add(new PieChart.Data(weightRange, count));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            Logger.getLogger(GraphPlaceholder.class.getName()).log(Level.SEVERE, "Error loading pie chart data", e);
         }
 
         addWidgetToAnchorPane(pieChart);
