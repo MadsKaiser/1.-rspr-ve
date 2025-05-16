@@ -1,9 +1,12 @@
 package com.example.agrisys;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Map;
 
 public class DashboardController {
 
@@ -11,21 +14,24 @@ public class DashboardController {
     private Button BackToMenuButton;
 
     @FXML
-    private CheckBox PresetDashboard1;
+    private Button SaveDashboard;
+
+    @FXML
+    private CheckBox Widget1, Widget2, PresetDashboard1;
 
     @FXML
     public void initialize() {
-        BackToMenuButton.setOnAction(e -> HelperMethods.loadScene("SMenu.fxml", BackToMenuButton));
-    }
+        // Add checkboxes to the singleton
+        DashboardState singleton = DashboardState.getInstance();
 
-    @FXML
-    private void handleDashboardCheckBox() {
-        if (PresetDashboard1.isSelected()) {
-            System.out.println("Preset Dashboard 1 selected!");
-            // Add logic for activating widgets here
-        } else {
-            System.out.println("Preset Dashboard 1 deselected!");
-            // Add logic for deactivating widgets here
-        }
+        // Event handler for PresetDashboard1
+        PresetDashboard1.setOnAction(event -> {
+            boolean isSelected = PresetDashboard1.isSelected();
+            singleton.setIsPreset(isSelected);
+        });
+
+        // Back to menu button
+        BackToMenuButton.setOnAction(e -> HelperMethods.loadScene("SMenu.fxml", BackToMenuButton));
+
     }
 }

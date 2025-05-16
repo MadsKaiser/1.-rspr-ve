@@ -1,11 +1,12 @@
 package com.example.agrisys;
 
+import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -51,7 +52,7 @@ public class GraphPlaceholder {
             e.printStackTrace();
         }
 
-        addChartToPane(lineChart);
+        addWidgetToAnchorPane(lineChart);
     }
 
     public void addScatterChart() {
@@ -86,25 +87,61 @@ public class GraphPlaceholder {
             e.printStackTrace();
         }
 
-        addChartToPane(scatterChart);
+        addWidgetToAnchorPane(scatterChart);
     }
 
+    public void addPieChart() {
+        PieChart pieChart = new PieChart();
+        pieChart.setTitle("Weight Distribution of Pigs");
 
-    private void addChartToPane(XYChart<Number, Number> chart) {
-        double yOffset = 10;
-        double spacing = 20;
+        try (Connection connection = DatabaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(
+                     "SELECT CASE " +
+                             "WHEN [Weight_kg] BETWEEN 0 AND 50 THEN '0-50 kg' " +
+                             "WHEN [Weight_kg] BETWEEN 51 AND 100 THEN '51-100 kg' " +
+                             "WHEN [Weight_kg] BETWEEN 101 AND 150 THEN '101-150 kg' " +
+                             "ELSE '151+ kg' END AS WeightRange, " +
+                             "COUNT(*) AS Count " +
+                             "FROM madserkaiser_dk_db_agrisys.dbo.[PigData] " +
+                             "GROUP BY CASE " +
+                             "WHEN [Weight_kg] BETWEEN 0 AND 50 THEN '0-50 kg' " +
+                             "WHEN [Weight_kg] BETWEEN 51 AND 100 THEN '51-100 kg' " +
+                             "WHEN [Weight_kg] BETWEEN 101 AND 150 THEN '101-150 kg' " +
+                             "ELSE '151+ kg' END")) {
 
-        for (javafx.scene.Node node : anchorPane.getChildren()) {
-            if (node instanceof XYChart) {
-                yOffset += ((XYChart<?, ?>) node).getPrefHeight() + spacing;
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                String weightRange = resultSet.getString("WeightRange");
+                int count = resultSet.getInt("Count");
+                pieChart.getData().add(new PieChart.Data(weightRange, count));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        addWidgetToAnchorPane(pieChart);
+    }
+
+    private void addWidgetToAnchorPane(Node widget) {
+        double nextYPosition = calculateNextAvailableYPosition();
+
+        widget.setLayoutX(10.0); // Fixed X position
+        widget.setLayoutY(nextYPosition);
+
+        anchorPane.getChildren().add(widget);
+    }
+
+    private double calculateNextAvailableYPosition() {
+        double maxY = 0.0;
+
+        for (Node node : anchorPane.getChildren()) {
+            double nodeBottom = node.getLayoutY() + node.prefHeight(-1);
+            if (nodeBottom > maxY) {
+                maxY = nodeBottom;
             }
         }
 
-        AnchorPane.setTopAnchor(chart, yOffset);
-        AnchorPane.setLeftAnchor(chart, 10.0);
-        chart.setPrefHeight(200);
-        chart.setPrefWidth(400);
-
-        anchorPane.getChildren().add(chart);
+        return maxY + 40.0; // Add spacing for the next widget
     }
 }

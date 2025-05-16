@@ -2,23 +2,21 @@ package com.example.agrisys;
 
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.ScatterChart;
+import javafx.scene.chart.PieChart; // Added missing import
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.fxml.Initializable;
 
-import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
+import java.util.ResourceBundle;
 
-public class SMenuController implements javafx.fxml.Initializable {
+public class SMenuController implements Initializable {
     @FXML
     private Button AlarmButton;
     @FXML
@@ -34,8 +32,6 @@ public class SMenuController implements javafx.fxml.Initializable {
     @FXML
     private VBox hiddenMenu;
     @FXML
-    private VBox widgetContainer;
-    @FXML
     private Button KPIButton;
     @FXML
     private CheckBox Widget1;
@@ -44,13 +40,7 @@ public class SMenuController implements javafx.fxml.Initializable {
     @FXML
     private CheckBox Widget3;
     @FXML
-    private CheckBox Widget4;
-    @FXML
-    private CheckBox Widget5;
-    @FXML
-    private CheckBox Widget6;
-    @FXML
-    private AnchorPane Anchor;
+    private AnchorPane InnerAnchor;
     @FXML
     private TextField ResponderIDField;
 
@@ -62,11 +52,23 @@ public class SMenuController implements javafx.fxml.Initializable {
     }
 
     @Override
-    public void initialize(java.net.URL url, java.util.ResourceBundle resources) {
-        graphPlaceholder = new GraphPlaceholder(Anchor);
+    public void initialize(URL url, ResourceBundle resources) {
+        DashboardState instance = DashboardState.getInstance();
+
+        graphPlaceholder = new GraphPlaceholder(InnerAnchor);
+        if (instance.isPreset()) {
+            Widget1.setSelected(true);
+            graphPlaceholder.addLineChart();
+            Widget2.setSelected(true);
+            graphPlaceholder.addScatterChart();
+            Widget3.setSelected(true);
+            graphPlaceholder.addPieChart();
+        }
 
         // Load selected KPIs from KPIStorage
         displaySelectedKPIs();
+
+        // Button actions
         AlarmButton.setOnAction(e -> HelperMethods.loadScene("Alarm.fxml", AlarmButton));
         WidgetsButton.setOnAction(e -> toggleMenuVisibility());
         LogoutButton.setOnAction(e -> HelperMethods.loadScene("Login.fxml", LogoutButton));
@@ -75,19 +77,30 @@ public class SMenuController implements javafx.fxml.Initializable {
         DashboardsButton.setOnAction(e -> HelperMethods.loadScene("Dashboard.fxml", DashboardsButton));
         KPIButton.setOnAction(e -> HelperMethods.loadScene("KPI.fxml", KPIButton));
 
+        // Widget1 action
         Widget1.setOnAction(event -> {
             if (Widget1.isSelected()) {
                 graphPlaceholder.addLineChart();
             } else {
-                Anchor.getChildren().removeIf(node -> node instanceof LineChart);
+                InnerAnchor.getChildren().removeIf(node -> node instanceof LineChart);
             }
         });
 
+        // Widget2 action
         Widget2.setOnAction(event -> {
             if (Widget2.isSelected()) {
                 graphPlaceholder.addScatterChart();
             } else {
-                Anchor.getChildren().removeIf(node -> node instanceof ScatterChart);
+                InnerAnchor.getChildren().removeIf(node -> node instanceof ScatterChart);
+            }
+        });
+
+        // Widget3 action
+        Widget3.setOnAction(event -> {
+            if (Widget3.isSelected()) {
+                graphPlaceholder.addPieChart();
+            } else {
+                InnerAnchor.getChildren().removeIf(node -> node instanceof PieChart);
             }
         });
     }
@@ -109,7 +122,7 @@ public class SMenuController implements javafx.fxml.Initializable {
                 kpiLabel.setLayoutY(yPosition);
                 kpiLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
 
-                Anchor.getChildren().addAll(pigHead, kpiLabel);
+                InnerAnchor.getChildren().addAll(pigHead, kpiLabel);
             } catch (Exception e) {
                 System.err.println("Failed to load pig head image: " + e.getMessage());
             }
@@ -117,12 +130,13 @@ public class SMenuController implements javafx.fxml.Initializable {
             yPosition += 40.0;
         }
     }
+
     @FXML
     private void handleFetchResponderData() {
         String responderId = ResponderIDField.getText();
 
         if (responderId == null || responderId.isEmpty()) {
-            showAlert("Error", "Please enter a responder ID.");
+            HelperMethods.Alert2("Error", "Please enter a responder ID.");
             return;
         }
 
@@ -131,44 +145,26 @@ public class SMenuController implements javafx.fxml.Initializable {
 
     private void fetchResponderData(String responderId) {
         try (Connection connection = DatabaseManager.getConnection()) {
-            String query = "SELECT * FROM madserkaiser_dk_db_agrisys.dbo.[PPT data] WHERE Responder = ?";
+            String query = "SELECT Responder, [Start_weight_kg], [End_weight_kg] FROM madserkaiser_dk_db_agrisys.dbo.[PPT data] WHERE Responder = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, responderId);
 
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                ResultSetMetaData metaData = resultSet.getMetaData();
-                int columnCount = metaData.getColumnCount();
+                String responder = resultSet.getString("Responder");
+                double startWeight = resultSet.getDouble("Start_weight_kg");
+                double endWeight = resultSet.getDouble("End_weight_kg");
 
-                VBox responderWidget = new VBox();
-                responderWidget.setStyle("-fx-padding: 10; -fx-border-color: gray; -fx-border-width: 1; -fx-spacing: 5;");
-                responderWidget.getChildren().add(new Label("Responder Data:"));
-
-                for (int i = 1; i <= columnCount; i++) {
-                    String columnName = metaData.getColumnName(i);
-                    String columnValue = resultSet.getString(i);
-                    responderWidget.getChildren().add(new Label(columnName + ": " + columnValue));
-                }
-
-                widgetContainer.setSpacing(10.0);
-                widgetContainer.getChildren().add(responderWidget);
+                System.out.println("Responder: " + responder);
+                System.out.println("Start Weight: " + startWeight);
+                System.out.println("End Weight: " + endWeight);
             } else {
-                showAlert("Info", "No data found for Responder: " + responderId);
+                HelperMethods.Alert2("Info", "No data found for Responder: " + responderId);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert("Error", "Failed to fetch responder data: " + e.getMessage());
+            HelperMethods.Alert2("Error", "Failed to fetch responder data: " + e.getMessage());
         }
     }
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }
-
-
-
