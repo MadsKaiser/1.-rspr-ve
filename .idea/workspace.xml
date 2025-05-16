@@ -4,10 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="Preset Widget">
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/GraphPlaceholder.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/GraphPlaceholder.class" afterDir="false" />
+    <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="pie Chart">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/SMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/SMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/AlarmController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/AlarmController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/ForgotLoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/ForgotLoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/ImportController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/ImportController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/KPIHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/KPIHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/MenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/MenuController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/PigDataController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/PigDataController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/ResponderData.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/ResponderData.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenuController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/WidgetController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/WidgetController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +63,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Morten&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Før-det-gik-i-stykker&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/MN-EM/OneDrive/Skrivebord/JDBC driver/sqljdbc_12.10.0.0_enu.zip&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -114,6 +124,7 @@
       <workItem from="1747310709465" duration="97000" />
       <workItem from="1747310817234" duration="1103000" />
       <workItem from="1747382004000" duration="641000" />
+      <workItem from="1747383137843" duration="1460000" />
     </task>
     <task id="LOCAL-00001" summary="Widget hide menu">
       <option name="closed" value="true" />
