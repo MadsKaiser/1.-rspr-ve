@@ -7,8 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,10 +17,7 @@ import java.util.List;
 public class KPIController {
 
     @FXML
-    private ScrollPane ScrollPane;
-
-    @FXML
-    private VBox contentBox;
+    private AnchorPane anchorPane;
 
     @FXML
     private CheckBox KPI1, KPI2, KPI3, KPI4;
@@ -33,10 +29,6 @@ public class KPIController {
 
     @FXML
     public void initialize() {
-        contentBox = new VBox();
-        contentBox.setSpacing(10);
-        ScrollPane.setContent(contentBox);
-
         // Set up event handlers for each KPI
         KPI1.setOnAction(event -> handleKPISelection(KPI1, "Average FCR"));
         KPI2.setOnAction(event -> handleKPISelection(KPI2, "Average End Weight"));
@@ -49,27 +41,30 @@ public class KPIController {
 
     private void handleKPISelection(CheckBox checkBox, String kpiText) {
         if (checkBox.isSelected()) {
-            addKpiToContentBox(kpiText);
+            addKpiToAnchorPane(kpiText);
             selectedKPIs.add(kpiText);
         } else {
-            removeKpiFromContentBox(kpiText);
+            removeKpiFromAnchorPane(kpiText);
             selectedKPIs.remove(kpiText);
         }
     }
 
-    private void addKpiToContentBox(String kpiText) {
+    private void addKpiToAnchorPane(String kpiText) {
         Label kpiLabel = new Label(kpiText);
         kpiLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
-        contentBox.getChildren().add(kpiLabel);
+        kpiLabel.setLayoutX(20); // Adjust X position as needed
+        kpiLabel.setLayoutY(50 + (selectedKPIs.size() * 30)); // Adjust Y position dynamically
+        kpiLabel.setId("label-" + kpiText); // Set an ID for easy removal
+        anchorPane.getChildren().add(kpiLabel);
     }
 
-    private void removeKpiFromContentBox(String kpiText) {
-        contentBox.getChildren().removeIf(node -> node instanceof Label && ((Label) node).getText().equals(kpiText));
+    private void removeKpiFromAnchorPane(String kpiText) {
+        anchorPane.getChildren().removeIf(node -> node instanceof Label && node.getId() != null && node.getId().equals("label-" + kpiText));
     }
 
     private void displaySavedKPIs() {
         for (String savedKPI : KPIStorage.getSavedKPIs()) {
-            addKpiToContentBox(savedKPI);
+            addKpiToAnchorPane(savedKPI);
         }
     }
 
@@ -77,7 +72,7 @@ public class KPIController {
     private void handleKPIBack() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/com/example/agrisys/SMenu.fxml"));
-            Stage stage = (Stage) ScrollPane.getScene().getWindow();
+            Stage stage = (Stage) anchorPane.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();
