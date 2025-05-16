@@ -124,22 +124,14 @@ public class KPIController {
             yPosition += 60.0;
         }
 
-        // Load the pig head image from resources
-        Image pigImage = new Image(getClass().getResource("/com/example/agrisys/Grisehoved.png").toExternalForm());
-        ImageView pigImageView = new ImageView(pigImage);
-        pigImageView.setFitWidth(50);
-        pigImageView.setFitHeight(50);
-        pigImageView.setLayoutX(10.0);
-        pigImageView.setLayoutY(yPosition);
-
         // Create a label for the KPI text
         Label kpiLabel = new Label(kpiText);
         kpiLabel.setLayoutX(70.0);
         kpiLabel.setLayoutY(yPosition + 15);
         kpiLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 
-        // Add the image and text to the AnchorPane
-        anchorPane.getChildren().addAll(pigImageView, kpiLabel);
+        // Add the label to the AnchorPane
+        anchorPane.getChildren().add(kpiLabel);
 
         // Save label and position
         kpiLabels.put(checkBox, kpiLabel);

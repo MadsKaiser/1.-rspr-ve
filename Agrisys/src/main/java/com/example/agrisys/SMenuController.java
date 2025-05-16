@@ -96,33 +96,25 @@ public class SMenuController implements javafx.fxml.Initializable {
         double yPosition = 10.0; // Initial Y position for displaying KPIs
         for (String kpi : KPIStorage.getSavedKPIs()) {
             try {
-                ImageView pigHead = new ImageView(new javafx.scene.image.Image(
-                        new java.io.File("C:\\Users\\MadsRinggaardKaiser\\OneDrive - Erhvervsakademi MidtVest\\Skrivebord\\Grisehoved.png").toURI().toString()
-                ));
-                pigHead.setFitWidth(30.0);
-                pigHead.setFitHeight(30.0);
-                pigHead.setLayoutX(10.0);
-                pigHead.setLayoutY(yPosition - 5.0);
-
                 Label kpiLabel = new Label(kpi);
                 kpiLabel.setLayoutX(50.0);
                 kpiLabel.setLayoutY(yPosition);
                 kpiLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
 
-                Anchor.getChildren().addAll(pigHead, kpiLabel);
+                Anchor.getChildren().addAll(kpiLabel);
+                yPosition += 40.0;
             } catch (Exception e) {
-                System.err.println("Failed to load pig head image: " + e.getMessage());
+                System.err.println("Failed to load KPI: " + e.getMessage());
             }
-
-            yPosition += 40.0;
         }
     }
+
     @FXML
     private void handleFetchResponderData() {
         String responderId = ResponderIDField.getText();
 
         if (responderId == null || responderId.isEmpty()) {
-            showAlert("Error", "Please enter a responder ID.");
+            HelperMethods.Alert2("Error", "Please enter a responder ID.");
             return;
         }
 
@@ -160,12 +152,5 @@ public class SMenuController implements javafx.fxml.Initializable {
             e.printStackTrace();
             HelperMethods.Alert2("Error", "Failed to fetch responder data: " + e.getMessage());
         }
-    }
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }
