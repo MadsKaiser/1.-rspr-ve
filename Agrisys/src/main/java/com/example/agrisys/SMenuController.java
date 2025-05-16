@@ -154,11 +154,11 @@ public class SMenuController implements javafx.fxml.Initializable {
                 widgetContainer.setSpacing(10.0);
                 widgetContainer.getChildren().add(responderWidget);
             } else {
-                showAlert("Info", "No data found for Responder: " + responderId);
+                HelperMethods.Alert2("Info", "No data found for Responder: " + responderId);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert("Error", "Failed to fetch responder data: " + e.getMessage());
+            HelperMethods.Alert2("Error", "Failed to fetch responder data: " + e.getMessage());
         }
     }
 
