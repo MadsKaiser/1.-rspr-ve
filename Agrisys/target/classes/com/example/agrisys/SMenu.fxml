@@ -23,6 +23,7 @@
       </VBox>
       <Separator layoutX="1188.0" orientation="VERTICAL" prefHeight="750.0" prefWidth="9.0" />
       <VBox fx:id="VBoxSMenu" layoutX="10.0" layoutY="10.0" prefHeight="738.0" prefWidth="1180.0" spacing="10.0">
+         <VBox fx:id="widgetContainer" spacing="10.0" layoutX="10.0" layoutY="10.0" prefWidth="650.0" />
          <children>
             <ScrollPane prefHeight="739.0" prefWidth="1180.0">
                <content>
