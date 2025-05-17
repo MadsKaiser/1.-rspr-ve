@@ -1,12 +1,11 @@
 package com.example.agrisys;
 
-import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,10 +16,10 @@ import java.util.logging.Logger;
 
 public class GraphPlaceholder {
 
-    private final AnchorPane anchorPane;
+    private final VBox container;
 
-    public GraphPlaceholder(AnchorPane anchorPane) {
-        this.anchorPane = anchorPane;
+    public GraphPlaceholder(VBox container) {
+        this.container = container;
     }
 
     public void addLineChart() {
@@ -55,7 +54,7 @@ public class GraphPlaceholder {
             e.printStackTrace();
         }
 
-        addWidgetToAnchorPane(lineChart);
+        container.getChildren().add(lineChart);
     }
 
     public void addScatterChart() {
@@ -90,7 +89,7 @@ public class GraphPlaceholder {
             e.printStackTrace();
         }
 
-        addWidgetToAnchorPane(scatterChart);
+        container.getChildren().add(scatterChart);
     }
 
     public void addPieChart() {
@@ -125,28 +124,6 @@ public class GraphPlaceholder {
             Logger.getLogger(GraphPlaceholder.class.getName()).log(Level.SEVERE, "Error loading pie chart data", e);
         }
 
-        addWidgetToAnchorPane(pieChart);
-    }
-
-    private void addWidgetToAnchorPane(Node widget) {
-        double nextYPosition = calculateNextAvailableYPosition();
-
-        widget.setLayoutX(10.0); // Fixed X position
-        widget.setLayoutY(nextYPosition);
-
-        anchorPane.getChildren().add(widget);
-    }
-
-    private double calculateNextAvailableYPosition() {
-        double maxY = 0.0;
-
-        for (Node node : anchorPane.getChildren()) {
-            double nodeBottom = node.getLayoutY() + node.prefHeight(-1);
-            if (nodeBottom > maxY) {
-                maxY = nodeBottom;
-            }
-        }
-
-        return maxY + 40.0; // Add spacing for the next widget
+        container.getChildren().add(pieChart);
     }
 }

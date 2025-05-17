@@ -2,10 +2,9 @@ package com.example.agrisys;
 
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.ScatterChart;
-import javafx.scene.chart.PieChart; // Added missing import
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,7 +39,7 @@ public class SMenuController implements Initializable {
     @FXML
     private CheckBox Widget3;
     @FXML
-    private AnchorPane InnerAnchor;
+    private VBox InnerAnchor; // Changed to VBox
     @FXML
     private TextField ResponderIDField;
 
@@ -55,7 +54,7 @@ public class SMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle resources) {
         DashboardState instance = DashboardState.getInstance();
 
-        graphPlaceholder = new GraphPlaceholder(InnerAnchor);
+        graphPlaceholder = new GraphPlaceholder(InnerAnchor); // Pass VBox to GraphPlaceholder
         if (instance.isPreset()) {
             Widget1.setSelected(true);
             graphPlaceholder.addLineChart();
@@ -106,7 +105,6 @@ public class SMenuController implements Initializable {
     }
 
     private void displaySelectedKPIs() {
-        double yPosition = 10.0; // Initial Y position for displaying KPIs
         for (String kpi : KPIStorage.getSavedKPIs()) {
             try {
                 ImageView pigHead = new ImageView(new javafx.scene.image.Image(
@@ -114,20 +112,15 @@ public class SMenuController implements Initializable {
                 ));
                 pigHead.setFitWidth(30.0);
                 pigHead.setFitHeight(30.0);
-                pigHead.setLayoutX(10.0);
-                pigHead.setLayoutY(yPosition - 5.0);
 
                 Label kpiLabel = new Label(kpi);
-                kpiLabel.setLayoutX(50.0);
-                kpiLabel.setLayoutY(yPosition);
                 kpiLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
 
-                InnerAnchor.getChildren().addAll(pigHead, kpiLabel);
+                VBox kpiContainer = new VBox(5, pigHead, kpiLabel); // Group image and label
+                InnerAnchor.getChildren().add(kpiContainer);
             } catch (Exception e) {
                 System.err.println("Failed to load pig head image: " + e.getMessage());
             }
-
-            yPosition += 40.0;
         }
     }
 
