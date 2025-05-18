@@ -10,9 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class SMenuController implements Initializable {
@@ -39,9 +37,10 @@ public class SMenuController implements Initializable {
     @FXML
     private CheckBox Widget3;
     @FXML
-    private VBox InnerAnchor; // Changed to VBox
+    private VBox InnerAnchor;
     @FXML
     private TextField ResponderIDField;
+
 
     private GraphPlaceholder graphPlaceholder;
 
@@ -54,7 +53,7 @@ public class SMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle resources) {
         DashboardState instance = DashboardState.getInstance();
 
-        graphPlaceholder = new GraphPlaceholder(InnerAnchor); // Pass VBox to GraphPlaceholder
+        graphPlaceholder = new GraphPlaceholder(InnerAnchor);
         if (instance.isPreset()) {
             Widget1.setSelected(true);
             graphPlaceholder.addLineChart();
@@ -64,10 +63,8 @@ public class SMenuController implements Initializable {
             graphPlaceholder.addPieChart();
         }
 
-        // Load selected KPIs from KPIStorage
         displaySelectedKPIs();
 
-        // Button actions
         AlarmButton.setOnAction(e -> HelperMethods.loadScene("Alarm.fxml", AlarmButton));
         WidgetsButton.setOnAction(e -> toggleMenuVisibility());
         LogoutButton.setOnAction(e -> HelperMethods.loadScene("Login.fxml", LogoutButton));
@@ -76,7 +73,6 @@ public class SMenuController implements Initializable {
         DashboardsButton.setOnAction(e -> HelperMethods.loadScene("Dashboard.fxml", DashboardsButton));
         KPIButton.setOnAction(e -> HelperMethods.loadScene("KPI.fxml", KPIButton));
 
-        // Widget1 action
         Widget1.setOnAction(event -> {
             if (Widget1.isSelected()) {
                 graphPlaceholder.addLineChart();
@@ -85,7 +81,6 @@ public class SMenuController implements Initializable {
             }
         });
 
-        // Widget2 action
         Widget2.setOnAction(event -> {
             if (Widget2.isSelected()) {
                 graphPlaceholder.addScatterChart();
@@ -94,7 +89,6 @@ public class SMenuController implements Initializable {
             }
         });
 
-        // Widget3 action
         Widget3.setOnAction(event -> {
             if (Widget3.isSelected()) {
                 graphPlaceholder.addPieChart();
@@ -116,7 +110,7 @@ public class SMenuController implements Initializable {
                 Label kpiLabel = new Label(kpi);
                 kpiLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
 
-                VBox kpiContainer = new VBox(5, pigHead, kpiLabel); // Group image and label
+                VBox kpiContainer = new VBox(5, pigHead, kpiLabel);
                 InnerAnchor.getChildren().add(kpiContainer);
             } catch (Exception e) {
                 System.err.println("Failed to load pig head image: " + e.getMessage());
@@ -137,23 +131,41 @@ public class SMenuController implements Initializable {
     }
 
     private void fetchResponderData(String responderId) {
-        try (Connection connection = DatabaseManager.getConnection()) {
-            String query = "SELECT Responder, [Start_weight_kg], [End_weight_kg] FROM madserkaiser_dk_db_agrisys.dbo.[PPT data] WHERE Responder = ?";
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, responderId);
+        try {
+            long responderIdLong;
+            try {
+                responderIdLong = Long.parseLong(responderId);
+            } catch (NumberFormatException e) {
+                HelperMethods.Alert2("Error", "Responder ID must be a numeric value.");
+                return;
+            }
 
-            ResultSet resultSet = statement.executeQuery();
+            try (Connection connection = DatabaseManager.getConnection()) {
+                String query = "SELECT * FROM madserkaiser_dk_db_agrisys.dbo.[PPT data] WHERE Responder = ?";
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setLong(1, responderIdLong);
 
-            if (resultSet.next()) {
-                String responder = resultSet.getString("Responder");
-                double startWeight = resultSet.getDouble("Start_weight_kg");
-                double endWeight = resultSet.getDouble("End_weight_kg");
+                ResultSet resultSet = statement.executeQuery();
 
-                System.out.println("Responder: " + responder);
-                System.out.println("Start Weight: " + startWeight);
-                System.out.println("End Weight: " + endWeight);
-            } else {
-                HelperMethods.Alert2("Info", "No data found for Responder: " + responderId);
+                if (resultSet.next()) {
+                    ResultSetMetaData metaData = resultSet.getMetaData();
+                    int columnCount = metaData.getColumnCount();
+
+                    VBox responderWidget = new VBox();
+                    responderWidget.setStyle("-fx-padding: 10; -fx-border-color: gray; -fx-border-width: 1; -fx-spacing: 5;");
+                    responderWidget.getChildren().add(new Label("Responder Data:"));
+
+                    for (int i = 1; i <= columnCount; i++) {
+                        String columnName = metaData.getColumnName(i);
+                        String columnValue = resultSet.getString(i);
+                        responderWidget.getChildren().add(new Label(columnName + ": " + columnValue));
+                    }
+
+                    InnerAnchor.setSpacing(10.0);
+                    InnerAnchor.getChildren().add(responderWidget);
+                } else {
+                    HelperMethods.Alert2("Info", "No data found for Responder: " + responderId);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
