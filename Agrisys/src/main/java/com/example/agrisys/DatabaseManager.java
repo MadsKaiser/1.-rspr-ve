@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DatabaseManager {
-    private static final String DB_URL = "jdbc:sqlserver://mssql17.unoeuro.com";
+    private static final String DB_URL = "jdbc:sqlserver://mssql17.unoeuro.com;databaseName=madserkaiser_dk_db_agrisys";
     private static final String DB_USER = "madserkaiser_dk";
     private static final String DB_PASSWORD = "9dwGEek3ByAbz5FghH6R";
 
