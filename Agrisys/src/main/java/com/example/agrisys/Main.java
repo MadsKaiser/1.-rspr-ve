@@ -16,7 +16,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(menuRoot,800,600));
         primaryStage.show();
     }
-
+    // test
     public static void main(String[] args) {
         try {
             // Opretter databaseforbindelse
