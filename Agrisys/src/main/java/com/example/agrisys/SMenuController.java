@@ -3,6 +3,7 @@ package com.example.agrisys;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.BarChart;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -37,10 +38,11 @@ public class SMenuController implements Initializable {
     @FXML
     private CheckBox Widget3;
     @FXML
+    private CheckBox Widget4; // Added Widget4
+    @FXML
     private VBox InnerAnchor;
     @FXML
     private TextField ResponderIDField;
-
 
     private GraphPlaceholder graphPlaceholder;
 
@@ -94,6 +96,15 @@ public class SMenuController implements Initializable {
                 graphPlaceholder.addPieChart();
             } else {
                 InnerAnchor.getChildren().removeIf(node -> node instanceof PieChart);
+            }
+        });
+
+        // Added Widget4 handling
+        Widget4.setOnAction(event -> {
+            if (Widget4.isSelected()) {
+                graphPlaceholder.addBarChart();
+            } else {
+                InnerAnchor.getChildren().removeIf(node -> node instanceof BarChart);
             }
         });
     }

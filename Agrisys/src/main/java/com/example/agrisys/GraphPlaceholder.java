@@ -1,11 +1,13 @@
 package com.example.agrisys;
 
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.VBox;
+import javafx.scene.chart.CategoryAxis;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -125,5 +127,40 @@ public class GraphPlaceholder {
         }
 
         container.getChildren().add(pieChart);
+    }
+
+    public void addBarChart() {
+        CategoryAxis xAxis = new CategoryAxis(); // Changed to CategoryAxis
+        xAxis.setLabel("Responder Index");
+
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("FCR");
+
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis); // Updated type
+        barChart.setTitle("Responder Index vs FCR");
+
+        try (Connection connection = DatabaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(
+                     "SELECT Responder, FCR FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]");
+             ResultSet resultSet = statement.executeQuery()) {
+
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName("Foderudnyttelse");
+
+            while (resultSet.next()) {
+                String responder = resultSet.getString("Responder");
+                double fcr = resultSet.getDouble("FCR");
+                if (fcr < -500 || fcr > 1000) {
+                    continue;
+                }
+                series.getData().add(new XYChart.Data<>(responder, fcr));
+            }
+
+            barChart.getData().add(series);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        container.getChildren().add(barChart);
     }
 }
