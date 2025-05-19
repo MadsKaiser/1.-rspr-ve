@@ -11,6 +11,7 @@
            <columns>
                <TableColumn fx:id="responderColumn" prefWidth="240" text="Responder" />
                 <TableColumn fx:id="fcrColumn" prefWidth="240" text="fcr" />
+                <TableColumn fx:id="lastVisitColumn" prefWidth="240" text="Days Since Last Visit" />
            </columns>
        </TableView>
        <Button fx:id="DeleteAlarmButton" layoutX="290" layoutY="20" text="Delete Alarm" />
