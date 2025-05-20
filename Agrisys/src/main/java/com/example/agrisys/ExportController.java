@@ -3,14 +3,15 @@ package com.example.agrisys;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class ExportController {
 
@@ -20,12 +21,11 @@ public class ExportController {
     @FXML
     private Button BackButton;
 
-    // Fixet
     @FXML
     private void initialize() {
         BackButton.setOnAction(event -> HelperMethods.loadScene("SMenu.fxml", BackButton));
-
     }
+
     @FXML
     void onExportButton(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -37,15 +37,48 @@ public class ExportController {
         File file = fileChooser.showSaveDialog(stage);
 
         if (file != null) {
-            try (FileWriter writer = new FileWriter(file)) {
-                writer.append("Column1,Column2,Column3\n");
-                writer.append("Data1,Data2,Data3\n");
-                writer.append("Data4,Data5,Data6\n");
+            try (FileWriter writer = new FileWriter(file);
+                 Connection connection = DatabaseManager.getConnection()) {
 
-                // Ændret til at bruge methods fra HelperMethods klassen = Mindre redundans
-                HelperMethods.Alert2("Export Successful", "The file has been exported successfully.");
-            } catch (IOException e) {
-               HelperMethods.Alert2("Export Failed", "An error occurred while exporting the file."); ;
+                // Fetch all tables from the database
+                ResultSet tables = connection.getMetaData().getTables(null, null, "%", new String[]{"TABLE"});
+
+                while (tables.next()) {
+                    String tableName = tables.getString("TABLE_NAME");
+                    writer.append("Table: ").append(tableName).append("\n");
+
+                    // Fetch data from the table
+                    String query = "SELECT * FROM \"" + tableName + "\"";
+                    try (PreparedStatement statement = connection.prepareStatement(query);
+                         ResultSet resultSet = statement.executeQuery()) {
+
+                        // Write column names
+                        int columnCount = resultSet.getMetaData().getColumnCount();
+                        for (int i = 1; i <= columnCount; i++) {
+                            writer.append(resultSet.getMetaData().getColumnName(i));
+                            if (i < columnCount) writer.append(";"); // <- semikolon separator
+                        }
+                        writer.append("\n");
+
+                        // Write rows
+                        while (resultSet.next()) {
+                            for (int i = 1; i <= columnCount; i++) {
+                                String value = resultSet.getString(i);
+                                writer.append(value != null ? value.replace("\"", "\"\"") : "");
+                                if (i < columnCount) writer.append(";"); // <- semikolon separator
+                            }
+                            writer.append("\n");
+                        }
+                    } catch (Exception ex) {
+                        HelperMethods.Alert2("Error", "Error querying table " + tableName + ": " + ex.getMessage());
+                    }
+
+                    writer.append("\n");
+                }
+
+                HelperMethods.Alert2("Export Successful", "All tables have been exported successfully.");
+            } catch (Exception e) {
+                HelperMethods.Alert2("Export Failed", "An error occurred while exporting the tables: " + e.getMessage());
             }
         }
     }
