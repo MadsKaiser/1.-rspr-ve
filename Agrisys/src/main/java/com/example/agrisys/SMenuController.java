@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 
 import java.net.URL;
 import java.sql.*;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class SMenuController implements Initializable {
@@ -182,5 +183,12 @@ public class SMenuController implements Initializable {
             e.printStackTrace();
             HelperMethods.Alert2("Error", "Failed to fetch responder data: " + e.getMessage());
         }
+    }
+    public void loadKPIs(Map<String, String> kpiValues) {
+        // Logic to handle the loaded KPIs
+        kpiValues.forEach((kpi, value) -> {
+            System.out.println("KPI: " + kpi + ", Value: " + value);
+            // Add UI update logic here if needed
+        });
     }
 }
