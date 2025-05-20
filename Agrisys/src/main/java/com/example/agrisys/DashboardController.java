@@ -20,6 +20,9 @@ public class DashboardController {
     private CheckBox Widget1, Widget2, PresetDashboard1;
 
     @FXML
+    private CheckBox Widget3, Widget4, PresetDashboard2;
+
+    @FXML
     public void initialize() {
         // Add checkboxes to the singleton
         DashboardState singleton = DashboardState.getInstance();
@@ -30,19 +33,13 @@ public class DashboardController {
             singleton.setIsPreset(isSelected);
         });
 
+        // Event handler for PresetDashboard2
+        PresetDashboard2.setOnAction(event -> {
+            boolean isSelected = PresetDashboard2.isSelected();
+            singleton.setIsPreset(isSelected);
+        });
+
         // Back to menu button
         BackToMenuButton.setOnAction(e -> HelperMethods.loadScene("SMenu.fxml", BackToMenuButton));
-
-        // Save dashboard button
-        SaveDashboard.setOnAction(e -> {
-            try (FileWriter writer = new FileWriter("dashboard_config.txt")) {
-                Map<String, Boolean> widgetStates = singleton.getWidgetStates();
-                for (Map.Entry<String, Boolean> entry : widgetStates.entrySet()) {
-                    writer.write(entry.getKey() + "=" + entry.getValue() + "\n");
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
     }
 }

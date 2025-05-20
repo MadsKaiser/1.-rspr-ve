@@ -13,7 +13,7 @@ public class HelperMethods {
 
     public static void loadScene(String fxmlFile, Button button) {
         try {
-            FXMLLoader loader = new FXMLLoader(HelperMethods.class.getResource(fxmlFile));
+            FXMLLoader loader = new FXMLLoader(HelperMethods.class.getResource("/com/example/agrisys/" + fxmlFile));
             Parent root = loader.load();
             Stage stage = (Stage) button.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -21,13 +21,14 @@ public class HelperMethods {
         } catch (IOException ex) {
             System.err.println("Failed to load the scene: " + fxmlFile);
             ex.printStackTrace();
+            Alert2("Error", "Failed to load the scene: " + fxmlFile);
         }
     }
+
     public static void Alert2(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(message);
         alert.showAndWait();
     }
-    // Fixet - Måske ændre navnet på metoden når det engang passer?
 }

@@ -1,21 +1,25 @@
 package com.example.agrisys;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class KPIStorage {
-    private static final List<String> savedKPIs = new ArrayList<>();
+    private static final Map<String, String> savedKPIsWithValues = new HashMap<>();
 
-    public static void saveKPIs(List<String> kpis) {
-        savedKPIs.clear();
-        savedKPIs.addAll(kpis);
+    public static void saveKPIWithValue(String kpi, String value) {
+        savedKPIsWithValues.put(kpi, value);
     }
 
-    public static List<String> getSavedKPIs() {
-        return new ArrayList<>(savedKPIs);
+    public static Map<String, String> getSavedKPIsWithValues() {
+        return new HashMap<>(savedKPIsWithValues);
     }
 
     public static void clearKPIs() {
-        savedKPIs.clear();
+        savedKPIsWithValues.clear();
+    }
+    public static Set<String> getSavedKPIs() {
+        return new HashSet<>(savedKPIsWithValues.keySet());
     }
 }

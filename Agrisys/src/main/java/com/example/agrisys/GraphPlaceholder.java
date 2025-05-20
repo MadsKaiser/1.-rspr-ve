@@ -1,10 +1,13 @@
 package com.example.agrisys;
 
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.ScatterChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.layout.VBox;
+import javafx.scene.chart.CategoryAxis;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,28 +17,29 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GraphPlaceholder {
-    private final VBox widgetContainer;
 
-    public GraphPlaceholder(VBox widgetContainer) {
-        this.widgetContainer = widgetContainer;
+    private final VBox container;
+
+    public GraphPlaceholder(VBox container) {
+        this.container = container;
     }
 
     public void addLineChart() {
         NumberAxis xAxis = new NumberAxis();
-        xAxis.setLabel("Index");
+        xAxis.setLabel("Responder Index");
 
         NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel("FCR");
 
         LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
-        lineChart.setTitle("FCR Over Time");
+        lineChart.setTitle("Responder Index vs FCR");
 
         try (Connection connection = DatabaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(
                      "SELECT Responder, FCR FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]");
              ResultSet resultSet = statement.executeQuery()) {
 
-            LineChart.Series<Number, Number> series = new LineChart.Series<>();
+            XYChart.Series<Number, Number> series = new XYChart.Series<>();
             series.setName("Foderudnyttelse");
 
             int index = 1;
@@ -44,15 +48,15 @@ public class GraphPlaceholder {
                 if (fcr < -500 || fcr > 1000) {
                     continue;
                 }
-                series.getData().add(new LineChart.Data<>(index++, fcr));
+                series.getData().add(new XYChart.Data<>(index++, fcr));
             }
 
             lineChart.getData().add(series);
-        } catch (SQLException e) {
-            Logger.getLogger(GraphPlaceholder.class.getName()).log(Level.SEVERE, "Error loading line chart data", e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        widgetContainer.getChildren().add(lineChart);
+        container.getChildren().add(lineChart);
     }
 
     public void addScatterChart() {
@@ -70,7 +74,7 @@ public class GraphPlaceholder {
                      "SELECT [Weight_gain_kg], FCR FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]");
              ResultSet resultSet = statement.executeQuery()) {
 
-            ScatterChart.Series<Number, Number> series = new ScatterChart.Series<>();
+            XYChart.Series<Number, Number> series = new XYChart.Series<>();
             series.setName("Foderudnyttelse vs Weight gain");
 
             while (resultSet.next()) {
@@ -79,15 +83,15 @@ public class GraphPlaceholder {
                 if (fcr < -500 || fcr > 1000 || weightGain < 0) {
                     continue;
                 }
-                series.getData().add(new ScatterChart.Data<>(weightGain, fcr));
+                series.getData().add(new XYChart.Data<>(weightGain, fcr));
             }
 
             scatterChart.getData().add(series);
-        } catch (SQLException e) {
-            Logger.getLogger(GraphPlaceholder.class.getName()).log(Level.SEVERE, "Error loading scatter chart data", e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        widgetContainer.getChildren().add(scatterChart);
+        container.getChildren().add(scatterChart);
     }
 
     public void addPieChart() {
@@ -95,19 +99,19 @@ public class GraphPlaceholder {
         pieChart.setTitle("Weight Distribution of Pigs");
 
         String query = """
-                SELECT CASE
-                    WHEN [Weight_gain_kg] BETWEEN 0 AND 50 THEN '0-50 kg'
-                    WHEN [Weight_gain_kg] BETWEEN 51 AND 100 THEN '51-100 kg'
-                    WHEN [Weight_gain_kg] BETWEEN 101 AND 150 THEN '101-150 kg'
-                    ELSE '151+ kg' END AS WeightRange,
-                    COUNT(*) AS Count
-                FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]
-                GROUP BY CASE
-                    WHEN [Weight_gain_kg] BETWEEN 0 AND 50 THEN '0-50 kg'
-                    WHEN [Weight_gain_kg] BETWEEN 51 AND 100 THEN '51-100 kg'
-                    WHEN [Weight_gain_kg] BETWEEN 101 AND 150 THEN '101-150 kg'
-                    ELSE '151+ kg' END
-                """;
+    SELECT CASE
+        WHEN [Weight_gain_kg] BETWEEN 0 AND 50 THEN '0-50 kg'
+        WHEN [Weight_gain_kg] BETWEEN 51 AND 100 THEN '51-100 kg'
+        WHEN [Weight_gain_kg] BETWEEN 101 AND 150 THEN '101-150 kg'
+        ELSE '151+ kg' END AS WeightRange,
+        COUNT(*) AS Count
+    FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]
+    GROUP BY CASE
+        WHEN [Weight_gain_kg] BETWEEN 0 AND 50 THEN '0-50 kg'
+        WHEN [Weight_gain_kg] BETWEEN 51 AND 100 THEN '51-100 kg'
+        WHEN [Weight_gain_kg] BETWEEN 101 AND 150 THEN '101-150 kg'
+        ELSE '151+ kg' END
+    """;
 
         try (Connection connection = DatabaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
@@ -122,6 +126,41 @@ public class GraphPlaceholder {
             Logger.getLogger(GraphPlaceholder.class.getName()).log(Level.SEVERE, "Error loading pie chart data", e);
         }
 
-        widgetContainer.getChildren().add(pieChart);
+        container.getChildren().add(pieChart);
+    }
+
+    public void addBarChart() {
+        CategoryAxis xAxis = new CategoryAxis(); // Changed to CategoryAxis
+        xAxis.setLabel("Responder Index");
+
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("FCR");
+
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis); // Updated type
+        barChart.setTitle("Responder Index vs FCR");
+
+        try (Connection connection = DatabaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(
+                     "SELECT Responder, FCR FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]");
+             ResultSet resultSet = statement.executeQuery()) {
+
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName("Foderudnyttelse");
+
+            while (resultSet.next()) {
+                String responder = resultSet.getString("Responder");
+                double fcr = resultSet.getDouble("FCR");
+                if (fcr < -500 || fcr > 1000) {
+                    continue;
+                }
+                series.getData().add(new XYChart.Data<>(responder, fcr));
+            }
+
+            barChart.getData().add(series);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        container.getChildren().add(barChart);
     }
 }

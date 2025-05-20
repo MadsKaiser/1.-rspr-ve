@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="alt er lidt for småt men kan åbne">
+    <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="Preset Widget">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/DashboardState.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/DashboardState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/KPIController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/KPIController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/KPIStorage.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/KPIStorage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/PigDataController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/PigDataController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/SMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/SMenuController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,12 +29,15 @@
     &quot;assignee&quot;: &quot;MadsKaiser&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/MadsKaiser/1.-rspr-ve.git",
-    "accountId": "48f021c1-5732-4c46-ad60-539d2020b501"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/MadsKaiser/1.-rspr-ve.git&quot;,
+    &quot;accountId&quot;: &quot;48f021c1-5732-4c46-ad60-539d2020b501&quot;
   }
-}]]></component>
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -54,7 +52,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Morten---Main",
+    "git-widget-placeholder": "Før-det-gik-i-stykker",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/MN-EM/OneDrive/Skrivebord/JDBC driver/sqljdbc_12.10.0.0_enu.zip",
     "node.js.detected.package.eslint": "true",
@@ -110,12 +108,12 @@
       <workItem from="1747245808465" duration="2266000" />
       <workItem from="1747259068975" duration="2912000" />
       <workItem from="1747292105526" duration="2401000" />
-      <workItem from="1747294961773" duration="1838000" />
-      <workItem from="1747297888801" duration="2123000" />
-      <workItem from="1747379122164" duration="3124000" />
-      <workItem from="1747389758674" duration="1050000" />
-      <workItem from="1747391166825" duration="1032000" />
-      <workItem from="1747393001020" duration="900000" />
+      <workItem from="1747294921561" duration="2277000" />
+      <workItem from="1747297928697" duration="886000" />
+      <workItem from="1747310709465" duration="97000" />
+      <workItem from="1747310817234" duration="1103000" />
+      <workItem from="1747382004000" duration="641000" />
+      <workItem from="1747576741742" duration="412000" />
     </task>
     <task id="LOCAL-00001" summary="Widget hide menu">
       <option name="closed" value="true" />
@@ -173,7 +171,23 @@
       <option name="project" value="LOCAL" />
       <updated>1747246694977</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Preset Widget">
+      <option name="closed" value="true" />
+      <created>1747308349952</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1747308349952</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Preset Widget">
+      <option name="closed" value="true" />
+      <created>1747308984490</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1747308984490</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -184,7 +198,8 @@
     <MESSAGE value="Widget plus SQL" />
     <MESSAGE value="Widget 1 og 2 og ny bruger og adganskode" />
     <MESSAGE value="alt er lidt for småt men kan åbne" />
-    <option name="LAST_COMMIT_MESSAGE" value="alt er lidt for småt men kan åbne" />
+    <MESSAGE value="Preset Widget" />
+    <option name="LAST_COMMIT_MESSAGE" value="Preset Widget" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

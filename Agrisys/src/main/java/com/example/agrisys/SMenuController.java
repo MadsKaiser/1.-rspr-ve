@@ -1,25 +1,21 @@
 package com.example.agrisys;
 
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.PieChart;
 import javafx.scene.chart.ScatterChart;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.BarChart;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.fxml.Initializable;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
+import java.net.URL;
+import java.sql.*;
+import java.util.Map;
+import java.util.ResourceBundle;
 
-public class SMenuController implements javafx.fxml.Initializable {
+public class SMenuController implements Initializable {
     @FXML
     private Button AlarmButton;
     @FXML
@@ -35,8 +31,6 @@ public class SMenuController implements javafx.fxml.Initializable {
     @FXML
     private VBox hiddenMenu;
     @FXML
-    private VBox widgetContainer;
-    @FXML
     private Button KPIButton;
     @FXML
     private CheckBox Widget1;
@@ -45,17 +39,11 @@ public class SMenuController implements javafx.fxml.Initializable {
     @FXML
     private CheckBox Widget3;
     @FXML
-    private CheckBox Widget4;
+    private CheckBox Widget4; // Added Widget4
     @FXML
-    private CheckBox Widget5;
-    @FXML
-    private CheckBox Widget6;
-    @FXML
-    private AnchorPane Anchor;
+    private VBox InnerAnchor;
     @FXML
     private TextField ResponderIDField;
-    @FXML
-    private ScrollPane ScrollPane;
 
     private GraphPlaceholder graphPlaceholder;
 
@@ -65,11 +53,21 @@ public class SMenuController implements javafx.fxml.Initializable {
     }
 
     @Override
-    public void initialize(java.net.URL url, java.util.ResourceBundle resources) {
-        graphPlaceholder = new GraphPlaceholder(widgetContainer);
+    public void initialize(URL url, ResourceBundle resources) {
+        DashboardState instance = DashboardState.getInstance();
 
-        // Load selected KPIs from KPIStorage
+        graphPlaceholder = new GraphPlaceholder(InnerAnchor);
+        if (instance.isPreset()) {
+            Widget1.setSelected(true);
+            graphPlaceholder.addLineChart();
+            Widget2.setSelected(true);
+            graphPlaceholder.addScatterChart();
+            Widget3.setSelected(true);
+            graphPlaceholder.addPieChart();
+        }
+
         displaySelectedKPIs();
+
         AlarmButton.setOnAction(e -> HelperMethods.loadScene("Alarm.fxml", AlarmButton));
         WidgetsButton.setOnAction(e -> toggleMenuVisibility());
         LogoutButton.setOnAction(e -> HelperMethods.loadScene("Login.fxml", LogoutButton));
@@ -82,7 +80,7 @@ public class SMenuController implements javafx.fxml.Initializable {
             if (Widget1.isSelected()) {
                 graphPlaceholder.addLineChart();
             } else {
-                widgetContainer.getChildren().removeIf(node -> node instanceof LineChart);
+                InnerAnchor.getChildren().removeIf(node -> node instanceof LineChart);
             }
         });
 
@@ -90,7 +88,7 @@ public class SMenuController implements javafx.fxml.Initializable {
             if (Widget2.isSelected()) {
                 graphPlaceholder.addScatterChart();
             } else {
-                widgetContainer.getChildren().removeIf(node -> node instanceof ScatterChart);
+                InnerAnchor.getChildren().removeIf(node -> node instanceof ScatterChart);
             }
         });
 
@@ -98,7 +96,16 @@ public class SMenuController implements javafx.fxml.Initializable {
             if (Widget3.isSelected()) {
                 graphPlaceholder.addPieChart();
             } else {
-                widgetContainer.getChildren().removeIf(node -> node instanceof PieChart);
+                InnerAnchor.getChildren().removeIf(node -> node instanceof PieChart);
+            }
+        });
+
+        // Added Widget4 handling
+        Widget4.setOnAction(event -> {
+            if (Widget4.isSelected()) {
+                graphPlaceholder.addBarChart();
+            } else {
+                InnerAnchor.getChildren().removeIf(node -> node instanceof BarChart);
             }
         });
     }
@@ -106,11 +113,19 @@ public class SMenuController implements javafx.fxml.Initializable {
     private void displaySelectedKPIs() {
         for (String kpi : KPIStorage.getSavedKPIs()) {
             try {
+                ImageView pigHead = new ImageView(new javafx.scene.image.Image(
+                        new java.io.File("C:\\Users\\MadsRinggaardKaiser\\OneDrive - Erhvervsakademi MidtVest\\Skrivebord\\Grisehoved.png").toURI().toString()
+                ));
+                pigHead.setFitWidth(30.0);
+                pigHead.setFitHeight(30.0);
+
                 Label kpiLabel = new Label(kpi);
                 kpiLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
-                widgetContainer.getChildren().add(kpiLabel);
+
+                VBox kpiContainer = new VBox(5, pigHead, kpiLabel);
+                InnerAnchor.getChildren().add(kpiContainer);
             } catch (Exception e) {
-                System.err.println("Failed to load KPI: " + e.getMessage());
+                System.err.println("Failed to load pig head image: " + e.getMessage());
             }
         }
     }
@@ -128,35 +143,52 @@ public class SMenuController implements javafx.fxml.Initializable {
     }
 
     private void fetchResponderData(String responderId) {
-        try (Connection connection = DatabaseManager.getConnection()) {
-            String query = "SELECT * FROM madserkaiser_dk_db_agrisys.dbo.[PPT data] WHERE Responder = ?";
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, responderId);
+        try {
+            long responderIdLong;
+            try {
+                responderIdLong = Long.parseLong(responderId);
+            } catch (NumberFormatException e) {
+                HelperMethods.Alert2("Error", "Responder ID must be a numeric value.");
+                return;
+            }
 
-            ResultSet resultSet = statement.executeQuery();
+            try (Connection connection = DatabaseManager.getConnection()) {
+                String query = "SELECT * FROM madserkaiser_dk_db_agrisys.dbo.[PPT data] WHERE Responder = ?";
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setLong(1, responderIdLong);
 
-            if (resultSet.next()) {
-                ResultSetMetaData metaData = resultSet.getMetaData();
-                int columnCount = metaData.getColumnCount();
+                ResultSet resultSet = statement.executeQuery();
 
-                VBox responderWidget = new VBox();
-                responderWidget.setStyle("-fx-padding: 10; -fx-border-color: gray; -fx-border-width: 1; -fx-spacing: 5;");
-                responderWidget.getChildren().add(new Label("Responder Data:"));
+                if (resultSet.next()) {
+                    ResultSetMetaData metaData = resultSet.getMetaData();
+                    int columnCount = metaData.getColumnCount();
 
-                for (int i = 1; i <= columnCount; i++) {
-                    String columnName = metaData.getColumnName(i);
-                    String columnValue = resultSet.getString(i);
-                    responderWidget.getChildren().add(new Label(columnName + ": " + columnValue));
+                    VBox responderWidget = new VBox();
+                    responderWidget.setStyle("-fx-padding: 10; -fx-border-color: gray; -fx-border-width: 1; -fx-spacing: 5;");
+                    responderWidget.getChildren().add(new Label("Responder Data:"));
+
+                    for (int i = 1; i <= columnCount; i++) {
+                        String columnName = metaData.getColumnName(i);
+                        String columnValue = resultSet.getString(i);
+                        responderWidget.getChildren().add(new Label(columnName + ": " + columnValue));
+                    }
+
+                    InnerAnchor.setSpacing(10.0);
+                    InnerAnchor.getChildren().add(responderWidget);
+                } else {
+                    HelperMethods.Alert2("Info", "No data found for Responder: " + responderId);
                 }
-
-                widgetContainer.setSpacing(10.0);
-                widgetContainer.getChildren().add(responderWidget);
-            } else {
-                HelperMethods.Alert2("Info", "No data found for Responder: " + responderId);
             }
         } catch (Exception e) {
             e.printStackTrace();
             HelperMethods.Alert2("Error", "Failed to fetch responder data: " + e.getMessage());
         }
+    }
+    public void loadKPIs(Map<String, String> kpiValues) {
+        // Logic to handle the loaded KPIs
+        kpiValues.forEach((kpi, value) -> {
+            System.out.println("KPI: " + kpi + ", Value: " + value);
+            // Add UI update logic here if needed
+        });
     }
 }
