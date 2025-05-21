@@ -128,13 +128,14 @@ public class SMenuController implements Initializable {
     @FXML
     private void handleFetchResponderData() {
         String responderId = ResponderIDField.getText();
-
-        if (responderId == null || responderId.isEmpty()) {
-            HelperMethods.Alert2("Error", "Please enter a responder ID.");
+        long responderIdLong = Long.parseLong(responderId);
+        GraphPlaceholderSingle.addBarChart (InnerAnchor, responderIdLong);
+        GraphPlaceholderSingle.addScatterChart(InnerAnchor, responderIdLong);
+        if (responderId.isEmpty()) {
+            HelperMethods.Alert2("Error", "Please enter a Responder ID.");
             return;
         }
 
-        fetchResponderData(responderId);
     }
 
     private void fetchResponderData(String responderId) {
