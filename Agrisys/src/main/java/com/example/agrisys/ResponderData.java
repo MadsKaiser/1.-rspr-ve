@@ -5,28 +5,26 @@ import javafx.beans.property.StringProperty;
 
 public class ResponderData {
     private final StringProperty responder;
-    private final StringProperty fcr;
+    private final StringProperty daysSinceLastVisit;
 
-    public ResponderData(String responder, Double fcr) {
+    public ResponderData(String responder, int daysSinceLastVisit) {
         this.responder = new SimpleStringProperty(responder);
-        this.fcr = new SimpleStringProperty(fcr.toString());
-
-
+        this.daysSinceLastVisit = new SimpleStringProperty(String.valueOf(daysSinceLastVisit));
     }
 
     public StringProperty responderProperty() {
         return responder;
     }
 
-    public StringProperty fcrProperty() {
-        return fcr;
+    public StringProperty daysSinceLastVisitProperty() {
+        return daysSinceLastVisit;
     }
 
     public String getResponder() {
         return responder.get();
     }
 
-    public String getFcr() {
-        return fcr.get();
+    public String getDaysSinceLastVisit() {
+        return daysSinceLastVisit.get();
     }
 }
