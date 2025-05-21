@@ -113,16 +113,11 @@ public class SMenuController implements Initializable {
     private void displaySelectedKPIs() {
         for (String kpi : KPIStorage.getSavedKPIs()) {
             try {
-                ImageView pigHead = new ImageView(new javafx.scene.image.Image(
-                        new java.io.File("C:\\Users\\MadsRinggaardKaiser\\OneDrive - Erhvervsakademi MidtVest\\Skrivebord\\Grisehoved.png").toURI().toString()
-                ));
-                pigHead.setFitWidth(30.0);
-                pigHead.setFitHeight(30.0);
 
                 Label kpiLabel = new Label(kpi);
                 kpiLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
 
-                VBox kpiContainer = new VBox(5, pigHead, kpiLabel);
+                VBox kpiContainer = new VBox(5, kpiLabel);
                 InnerAnchor.getChildren().add(kpiContainer);
             } catch (Exception e) {
                 System.err.println("Failed to load pig head image: " + e.getMessage());
