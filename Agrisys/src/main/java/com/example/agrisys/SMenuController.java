@@ -1,190 +1,172 @@
 package com.example.agrisys;
 
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.ScatterChart;
-import javafx.scene.chart.PieChart;
-import javafx.scene.chart.BarChart;
-import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+        import javafx.fxml.FXML;
+        import javafx.fxml.Initializable;
+        import javafx.scene.chart.*;
+        import javafx.scene.control.*;
+        import javafx.scene.layout.VBox;
 
-import java.net.URL;
-import java.sql.*;
-import java.util.Map;
-import java.util.ResourceBundle;
+        import java.net.URL;
+        import java.sql.Connection;
+        import java.sql.PreparedStatement;
+        import java.sql.ResultSet;
+        import java.sql.ResultSetMetaData;
+        import java.util.Map;
+        import java.util.ResourceBundle;
 
-public class SMenuController implements Initializable {
-    @FXML
-    private Button AlarmButton;
-    @FXML
-    private Button ImportCSVButton;
-    @FXML
-    private Button ExportCSVButton;
-    @FXML
-    private Button LogoutButton;
-    @FXML
-    private Button WidgetsButton;
-    @FXML
-    private Button DashboardsButton;
-    @FXML
-    private VBox hiddenMenu;
-    @FXML
-    private Button KPIButton;
-    @FXML
-    private CheckBox Widget1;
-    @FXML
-    private CheckBox Widget2;
-    @FXML
-    private CheckBox Widget3;
-    @FXML
-    private CheckBox Widget4; // Added Widget4
-    @FXML
-    private VBox InnerAnchor;
-    @FXML
-    private TextField ResponderIDField;
+        public class SMenuController implements Initializable {
+            @FXML
+            private Button AlarmButton;
+            @FXML
+            private Button ImportCSVButton;
+            @FXML
+            private Button ExportCSVButton;
+            @FXML
+            private Button LogoutButton;
+            @FXML
+            private Button WidgetsButton;
+            @FXML
+            private Button DashboardsButton;
+            @FXML
+            private VBox hiddenMenu;
+            @FXML
+            private Button KPIButton;
+            @FXML
+            private CheckBox Widget1;
+            @FXML
+            private CheckBox Widget2;
+            @FXML
+            private CheckBox Widget3;
+            @FXML
+            private CheckBox Widget4;
+            @FXML
+            private VBox InnerAnchor;
+            @FXML
+            private TextField ResponderIDField;
 
-    private GraphPlaceholder graphPlaceholder;
+            @Override
+            public void initialize(URL url, ResourceBundle resources) {
+                DashboardState instance = DashboardState.getInstance();
 
-    @FXML
-    private void toggleMenuVisibility() {
-        hiddenMenu.setVisible(!hiddenMenu.isVisible());
-    }
+                if (instance.isPreset()) {
+                    Widget1.setSelected(true);
+                    GraphPlaceholderSingle.addLineChart(InnerAnchor, 0); // Example default ID
+                    Widget2.setSelected(true);
+                    GraphPlaceholderSingle.addScatterChart(InnerAnchor, 0);
+                    Widget3.setSelected(true);
+                    GraphPlaceholderSingle.addPieChart(InnerAnchor, 0);
+                }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resources) {
-        DashboardState instance = DashboardState.getInstance();
-
-        graphPlaceholder = new GraphPlaceholder(InnerAnchor);
-        if (instance.isPreset()) {
-            Widget1.setSelected(true);
-            graphPlaceholder.addLineChart();
-            Widget2.setSelected(true);
-            graphPlaceholder.addScatterChart();
-            Widget3.setSelected(true);
-            graphPlaceholder.addPieChart();
-        }
-
-        displaySelectedKPIs();
-
-        AlarmButton.setOnAction(e -> HelperMethods.loadScene("Alarm.fxml", AlarmButton));
-        WidgetsButton.setOnAction(e -> toggleMenuVisibility());
-        LogoutButton.setOnAction(e -> HelperMethods.loadScene("Login.fxml", LogoutButton));
-        ExportCSVButton.setOnAction(e -> HelperMethods.loadScene("Export.fxml", ExportCSVButton));
-        ImportCSVButton.setOnAction(e -> HelperMethods.loadScene("ImportCSV.fxml", ImportCSVButton));
-        DashboardsButton.setOnAction(e -> HelperMethods.loadScene("Dashboard.fxml", DashboardsButton));
-        KPIButton.setOnAction(e -> HelperMethods.loadScene("KPI.fxml", KPIButton));
-
-        Widget1.setOnAction(event -> {
-            if (Widget1.isSelected()) {
-                graphPlaceholder.addLineChart();
-            } else {
-                InnerAnchor.getChildren().removeIf(node -> node instanceof LineChart);
-            }
-        });
-
-        Widget2.setOnAction(event -> {
-            if (Widget2.isSelected()) {
-                graphPlaceholder.addScatterChart();
-            } else {
-                InnerAnchor.getChildren().removeIf(node -> node instanceof ScatterChart);
-            }
-        });
-
-        Widget3.setOnAction(event -> {
-            if (Widget3.isSelected()) {
-                graphPlaceholder.addPieChart();
-            } else {
-                InnerAnchor.getChildren().removeIf(node -> node instanceof PieChart);
-            }
-        });
-
-        // Added Widget4 handling
-        Widget4.setOnAction(event -> {
-            if (Widget4.isSelected()) {
-                graphPlaceholder.addBarChart();
-            } else {
-                InnerAnchor.getChildren().removeIf(node -> node instanceof BarChart);
-            }
-        });
-    }
-
-    private void displaySelectedKPIs() {
-        for (String kpi : KPIStorage.getSavedKPIs()) {
-            try {
-
-                Label kpiLabel = new Label(kpi);
-                kpiLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
-
-                VBox kpiContainer = new VBox(5, kpiLabel);
-                InnerAnchor.getChildren().add(kpiContainer);
-            } catch (Exception e) {
-                System.err.println("Failed to load pig head image: " + e.getMessage());
-            }
-        }
-    }
-
-    @FXML
-    private void handleFetchResponderData() {
-        String responderId = ResponderIDField.getText();
-        long responderIdLong = Long.parseLong(responderId);
-        GraphPlaceholderSingle.addBarChart (InnerAnchor, responderIdLong);
-        GraphPlaceholderSingle.addScatterChart(InnerAnchor, responderIdLong);
-        if (responderId.isEmpty()) {
-            HelperMethods.Alert2("Error", "Please enter a Responder ID.");
-            return;
-        }
-
-    }
-
-    private void fetchResponderData(String responderId) {
-        try {
-            long responderIdLong;
-            try {
-                responderIdLong = Long.parseLong(responderId);
-            } catch (NumberFormatException e) {
-                HelperMethods.Alert2("Error", "Responder ID must be a numeric value.");
-                return;
+                setupEventHandlers();
             }
 
-            try (Connection connection = DatabaseManager.getConnection()) {
-                String query = "SELECT * FROM madserkaiser_dk_db_agrisys.dbo.[PPT data] WHERE Responder = ?";
-                PreparedStatement statement = connection.prepareStatement(query);
-                statement.setLong(1, responderIdLong);
+            private void setupEventHandlers() {
+                AlarmButton.setOnAction(e -> HelperMethods.loadScene("Alarm.fxml", AlarmButton));
+                WidgetsButton.setOnAction(e -> toggleMenuVisibility());
+                LogoutButton.setOnAction(e -> HelperMethods.loadScene("Login.fxml", LogoutButton));
+                ExportCSVButton.setOnAction(e -> HelperMethods.loadScene("Export.fxml", ExportCSVButton));
+                ImportCSVButton.setOnAction(e -> HelperMethods.loadScene("ImportCSV.fxml", ImportCSVButton));
+                DashboardsButton.setOnAction(e -> HelperMethods.loadScene("Dashboard.fxml", DashboardsButton));
+                KPIButton.setOnAction(e -> HelperMethods.loadScene("KPI.fxml", KPIButton));
 
-                ResultSet resultSet = statement.executeQuery();
+                Widget1.setOnAction(event -> toggleWidget(Widget1, LineChart.class, responderId ->
+                    GraphPlaceholderSingle.addLineChart(InnerAnchor, responderId)));
+                Widget2.setOnAction(event -> toggleWidget(Widget2, ScatterChart.class, responderId ->
+                    GraphPlaceholderSingle.addScatterChart(InnerAnchor, responderId)));
+                Widget3.setOnAction(event -> toggleWidget(Widget3, PieChart.class, responderId ->
+                    GraphPlaceholderSingle.addPieChart(InnerAnchor, responderId)));
+                Widget4.setOnAction(event -> toggleWidget(Widget4, BarChart.class, responderId ->
+                    GraphPlaceholderSingle.addBarChart(InnerAnchor, responderId)));
+            }
 
-                if (resultSet.next()) {
-                    ResultSetMetaData metaData = resultSet.getMetaData();
-                    int columnCount = metaData.getColumnCount();
+            private void toggleMenuVisibility() {
+                hiddenMenu.setVisible(!hiddenMenu.isVisible());
+            }
 
-                    VBox responderWidget = new VBox();
-                    responderWidget.setStyle("-fx-padding: 10; -fx-border-color: gray; -fx-border-width: 1; -fx-spacing: 5;");
-                    responderWidget.getChildren().add(new Label("Responder Data:"));
-
-                    for (int i = 1; i <= columnCount; i++) {
-                        String columnName = metaData.getColumnName(i);
-                        String columnValue = resultSet.getString(i);
-                        responderWidget.getChildren().add(new Label(columnName + ": " + columnValue));
+            private void toggleWidget(CheckBox widget, Class<?> chartType, WidgetAction action) {
+                if (widget.isSelected()) {
+                    long responderId = getResponderId();
+                    if (responderId != -1) {
+                        action.execute(responderId);
                     }
-
-                    InnerAnchor.setSpacing(10.0);
-                    InnerAnchor.getChildren().add(responderWidget);
                 } else {
-                    HelperMethods.Alert2("Info", "No data found for Responder: " + responderId);
+                    InnerAnchor.getChildren().removeIf(node -> chartType.isInstance(node));
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            HelperMethods.Alert2("Error", "Failed to fetch responder data: " + e.getMessage());
+
+            @FXML
+            private void handleFetchResponderData() {
+                long responderId = getResponderId();
+                if (responderId == -1) return;
+
+                GraphPlaceholderSingle.clearWidgets(InnerAnchor);
+                GraphPlaceholderSingle.addLineChart(InnerAnchor, responderId);
+                GraphPlaceholderSingle.addScatterChart(InnerAnchor, responderId);
+                GraphPlaceholderSingle.addPieChart(InnerAnchor, responderId);
+                GraphPlaceholderSingle.addBarChart(InnerAnchor, responderId);
+            }
+
+            private long getResponderId() {
+                String responderIdText = ResponderIDField.getText();
+                if (responderIdText.isEmpty()) {
+                    HelperMethods.Alert2("Error", "Please enter a Responder ID.");
+                    return -1;
+                }
+
+                try {
+                    return Long.parseLong(responderIdText);
+                } catch (NumberFormatException e) {
+                    HelperMethods.Alert2("Error", "Responder ID must be a numeric value.");
+                    return -1;
+                }
+            }
+
+            private void fetchResponderData(String responderId) {
+                try {
+                    long responderIdLong = Long.parseLong(responderId);
+
+                    try (Connection connection = DatabaseManager.getConnection()) {
+                        String query = "SELECT * FROM madserkaiser_dk_db_agrisys.dbo.[PPT data] WHERE Responder = ?";
+                        PreparedStatement statement = connection.prepareStatement(query);
+                        statement.setLong(1, responderIdLong);
+
+                        ResultSet resultSet = statement.executeQuery();
+
+                        if (resultSet.next()) {
+                            ResultSetMetaData metaData = resultSet.getMetaData();
+                            int columnCount = metaData.getColumnCount();
+
+                            VBox responderWidget = new VBox();
+                            responderWidget.setStyle("-fx-padding: 10; -fx-border-color: gray; -fx-border-width: 1; -fx-spacing: 5;");
+                            responderWidget.getChildren().add(new Label("Responder Data:"));
+
+                            for (int i = 1; i <= columnCount; i++) {
+                                String columnName = metaData.getColumnName(i);
+                                String columnValue = resultSet.getString(i);
+                                responderWidget.getChildren().add(new Label(columnName + ": " + columnValue));
+                            }
+
+                            InnerAnchor.getChildren().add(responderWidget);
+                        } else {
+                            HelperMethods.Alert2("Info", "No data found for Responder: " + responderId);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    HelperMethods.Alert2("Error", "Failed to fetch responder data: " + e.getMessage());
+                }
+            }
+
+            public void loadKPIs(Map<String, String> kpiValues) {
+                kpiValues.forEach((kpi, value) -> {
+                    Label kpiLabel = new Label(kpi + ": " + value);
+                    kpiLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
+                    InnerAnchor.getChildren().add(kpiLabel);
+                });
+            }
+
+            @FunctionalInterface
+            private interface WidgetAction {
+                void execute(long responderId);
+            }
         }
-    }
-    public void loadKPIs(Map<String, String> kpiValues) {
-        // Logic to handle the loaded KPIs
-        kpiValues.forEach((kpi, value) -> {
-            System.out.println("KPI: " + kpi + ", Value: " + value);
-            // Add UI update logic here if needed
-        });
-    }
-}

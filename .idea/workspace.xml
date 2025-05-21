@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="Preset Widget">
-      <change afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/GraphPlaceholderSingle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/PigDataController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/SMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/SMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/resources/com/example/agrisys/PigData.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/AlarmController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/AlarmController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/DashboardState.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/DashboardState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/PigData.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/PigDataController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenuController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,12 +29,12 @@
     &quot;assignee&quot;: &quot;MadsKaiser&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/MadsKaiser/1.-rspr-ve.git",
-    "accountId": "48f021c1-5732-4c46-ad60-539d2020b501"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/MadsKaiser/1.-rspr-ve.git&quot;,
+    &quot;accountId&quot;: &quot;48f021c1-5732-4c46-ad60-539d2020b501&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -59,7 +52,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Morten---Main",
+    "git-widget-placeholder": "Før-det-gik-i-stykker",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/MN-EM/OneDrive/Skrivebord/JDBC driver/sqljdbc_12.10.0.0_enu.zip",
     "node.js.detected.package.eslint": "true",
