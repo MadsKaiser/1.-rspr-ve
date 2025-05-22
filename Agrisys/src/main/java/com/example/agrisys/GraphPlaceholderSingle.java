@@ -21,7 +21,7 @@ public class GraphPlaceholderSingle {
     public static void searchResponder(VBox container, long responderId) {
         String query = """
             SELECT Responder, [Weight_gain_kg], FCR
-            FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]
+            FROM madserkaiser_dk_db_agrisys.dbo.[PPT data], [Visit data]
             WHERE Responder = ?
         """;
 
@@ -43,7 +43,7 @@ public class GraphPlaceholderSingle {
                 container.getChildren().addAll(weightGainLabel, fcrLabel);
 
                 addLineChart(container, responderId);
-                addScatterChart(container, responderId);
+                addBarChartComparison(container, responderId);
                 addPieChart(container, responderId);
                 addBarChart(container, responderId);
             } else {
@@ -57,93 +57,19 @@ public class GraphPlaceholderSingle {
 
     public static void addLineChart(VBox container, long responderId) {
         NumberAxis xAxis = new NumberAxis();
-        xAxis.setLabel("Index");
+        xAxis.setLabel("Completed Days in Test");
 
         NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("FCR");
+        yAxis.setLabel("Weight (kg)");
 
         LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
-        lineChart.setTitle("Responder Index vs FCR");
-
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     "SELECT Responder, FCR FROM madserkaiser_dk_db_agrisys.dbo.[PPT data] WHERE Responder = ?")) {
-
-            statement.setLong(1, responderId);
-            ResultSet resultSet = statement.executeQuery();
-
-            XYChart.Series<Number, Number> series = new XYChart.Series<>();
-            series.setName("Foderudnyttelse");
-
-            int index = 1;
-            while (resultSet.next()) {
-                double fcr = resultSet.getDouble("FCR");
-                if (fcr < -500 || fcr > 1000) continue;
-                series.getData().add(new XYChart.Data<>(index++, fcr));
-            }
-
-            lineChart.getData().add(series);
-        } catch (SQLException e) {
-            Logger.getLogger(GraphPlaceholderSingle.class.getName()).log(Level.SEVERE, "Error loading line chart data", e);
-        }
-
-        container.getChildren().add(lineChart);
-    }
-
-    public static void addScatterChart(VBox container, long responderId) {
-        NumberAxis xAxis = new NumberAxis();
-        xAxis.setLabel("Weight gain");
-
-        NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("FCR");
-
-        ScatterChart<Number, Number> scatterChart = new ScatterChart<>(xAxis, yAxis);
-        scatterChart.setTitle("FCR vs. Weight gain");
-
-        try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     "SELECT [Weight_gain_kg], FCR FROM madserkaiser_dk_db_agrisys.dbo.[PPT data] WHERE Responder = ?")) {
-
-            statement.setLong(1, responderId);
-            ResultSet resultSet = statement.executeQuery();
-
-            XYChart.Series<Number, Number> series = new XYChart.Series<>();
-            series.setName("Foderudnyttelse vs Weight gain");
-
-            while (resultSet.next()) {
-                double weightGain = resultSet.getDouble("Weight_gain_kg");
-                double fcr = resultSet.getDouble("FCR");
-                if (fcr < -500 || fcr > 1000 || weightGain < 0) continue;
-                series.getData().add(new XYChart.Data<>(weightGain, fcr));
-            }
-
-            scatterChart.getData().add(series);
-        } catch (SQLException e) {
-            Logger.getLogger(GraphPlaceholderSingle.class.getName()).log(Level.SEVERE, "Error loading scatter chart data", e);
-        }
-
-        container.getChildren().add(scatterChart);
-    }
-
-    public static void addPieChart(VBox container, long responderId) {
-        PieChart pieChart = new PieChart();
-        pieChart.setTitle("Weight Distribution of Pigs");
+        lineChart.setTitle("Weight Progress Over Test Days");
 
         String query = """
-            SELECT CASE
-                WHEN [Weight_gain_kg] BETWEEN 0 AND 50 THEN '0-50 kg'
-                WHEN [Weight_gain_kg] BETWEEN 51 AND 100 THEN '51-100 kg'
-                WHEN [Weight_gain_kg] BETWEEN 101 AND 150 THEN '101-150 kg'
-                ELSE '151+ kg' END AS WeightRange,
-                COUNT(*) AS Count
-            FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]
-            WHERE Responder = ?
-            GROUP BY CASE
-                WHEN [Weight_gain_kg] BETWEEN 0 AND 50 THEN '0-50 kg'
-                WHEN [Weight_gain_kg] BETWEEN 51 AND 100 THEN '51-100 kg'
-                WHEN [Weight_gain_kg] BETWEEN 101 AND 150 THEN '101-150 kg'
-                ELSE '151+ kg' END
-        """;
+        SELECT Completed_days_in_test, Start_weight_kg, End_weight_kg
+        FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]
+        WHERE Responder = ?
+    """;
 
         try (Connection connection = DatabaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -151,10 +77,109 @@ public class GraphPlaceholderSingle {
             statement.setLong(1, responderId);
             ResultSet resultSet = statement.executeQuery();
 
+            XYChart.Series<Number, Number> weightSeries = new XYChart.Series<>();
+            weightSeries.setName("Weight Progress");
+
             while (resultSet.next()) {
-                String weightRange = resultSet.getString("WeightRange");
-                int count = resultSet.getInt("Count");
-                pieChart.getData().add(new PieChart.Data(weightRange, count));
+                int days = resultSet.getInt("Completed_days_in_test");
+                double startWeight = resultSet.getDouble("Start_weight_kg");
+                double endWeight = resultSet.getDouble("End_weight_kg");
+
+                // Add start weight at day 0
+                weightSeries.getData().add(new XYChart.Data<>(0, startWeight));
+
+                // Add end weight at the last day
+                weightSeries.getData().add(new XYChart.Data<>(days, endWeight));
+            }
+
+            lineChart.getData().add(weightSeries);
+        } catch (SQLException e) {
+            Logger.getLogger(GraphPlaceholderSingle.class.getName()).log(Level.SEVERE, "Error loading line chart data", e);
+        }
+
+        container.getChildren().add(lineChart);
+    }
+
+    public static void addBarChartComparison(VBox container, long responderId) {
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setLabel("Measurement Type");
+
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Value (kg)");
+
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+        barChart.setTitle("Comparison of Key Metrics");
+
+        String query = """
+        SELECT Start_weight_kg, End_weight_kg, FCR
+        FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]
+        WHERE Responder = ?
+    """;
+
+        try (Connection connection = DatabaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setLong(1, responderId);
+            ResultSet resultSet = statement.executeQuery();
+
+            XYChart.Series<String, Number> metricsSeries = new XYChart.Series<>();
+            metricsSeries.setName("Pig Metrics");
+
+            if (resultSet.next()) {
+                double startWeight = resultSet.getDouble("Start_weight_kg");
+                double endWeight = resultSet.getDouble("End_weight_kg");
+                double fcr = resultSet.getDouble("FCR");
+                double weightGain = endWeight - startWeight;
+
+                // Add data to the series
+                metricsSeries.getData().add(new XYChart.Data<>("Start", startWeight));
+                metricsSeries.getData().add(new XYChart.Data<>("End", endWeight));
+                metricsSeries.getData().add(new XYChart.Data<>("Gain", weightGain));
+                metricsSeries.getData().add(new XYChart.Data<>("FCR", fcr));
+            }
+
+            barChart.getData().add(metricsSeries);
+        } catch (SQLException e) {
+            Logger.getLogger(GraphPlaceholderSingle.class.getName()).log(Level.SEVERE, "Error loading bar chart data", e);
+        }
+
+        container.getChildren().add(barChart);
+    }
+
+    public static void addPieChart(VBox container, long responderId) {
+        PieChart pieChart = new PieChart();
+        pieChart.setTitle("Final Weight Composition");
+
+        String query = """
+        SELECT Start_weight_kg, End_weight_kg
+        FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]
+        WHERE Responder = ?
+    """;
+
+        try (Connection connection = DatabaseManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setLong(1, responderId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                double startWeight = resultSet.getDouble("Start_weight_kg");
+                double endWeight = resultSet.getDouble("End_weight_kg");
+                double weightGain = endWeight - startWeight;
+
+                double totalWeight = startWeight + weightGain;
+
+                // Add data to the pie chart with custom labels
+                PieChart.Data startWeightData = new PieChart.Data(
+                        String.format("Start Weight: %.2f kg (%.1f%%)", startWeight, (startWeight / totalWeight) * 100),
+                        startWeight
+                );
+                PieChart.Data weightGainData = new PieChart.Data(
+                        String.format("Weight Gain: %.2f kg (%.1f%%)", weightGain, (weightGain / totalWeight) * 100),
+                        weightGain
+                );
+
+                pieChart.getData().addAll(startWeightData, weightGainData);
             }
         } catch (SQLException e) {
             Logger.getLogger(GraphPlaceholderSingle.class.getName()).log(Level.SEVERE, "Error loading pie chart data", e);
@@ -165,32 +190,41 @@ public class GraphPlaceholderSingle {
 
     public static void addBarChart(VBox container, long responderId) {
         CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("Responder Index");
+        xAxis.setLabel("Metrics");
 
         NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("FCR");
+        yAxis.setLabel("Values");
 
         BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
-        barChart.setTitle("Responder Index vs FCR");
+        barChart.setTitle("FCR and Total Weight Gain");
+
+        String query = """
+        SELECT FCR, [Weight_gain_kg]
+        FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]
+        WHERE Responder = ?
+    """;
 
         try (Connection connection = DatabaseManager.getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     "SELECT Responder, FCR FROM madserkaiser_dk_db_agrisys.dbo.[PPT data] WHERE Responder = ?")) {
+             PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setLong(1, responderId);
             ResultSet resultSet = statement.executeQuery();
 
-            XYChart.Series<String, Number> series = new XYChart.Series<>();
-            series.setName("Foderudnyttelse");
+            XYChart.Series<String, Number> fcrSeries = new XYChart.Series<>();
+            fcrSeries.setName("FCR");
+
+            XYChart.Series<String, Number> weightGainSeries = new XYChart.Series<>();
+            weightGainSeries.setName("Total Weight Gain");
 
             while (resultSet.next()) {
-                String responder = resultSet.getString("Responder");
                 double fcr = resultSet.getDouble("FCR");
-                if (fcr < -500 || fcr > 1000) continue;
-                series.getData().add(new XYChart.Data<>(responder, fcr));
+                double weightGain = resultSet.getDouble("Weight_gain_kg");
+
+                fcrSeries.getData().add(new XYChart.Data<>("FCR", fcr));
+                weightGainSeries.getData().add(new XYChart.Data<>("Total Weight Gain", weightGain));
             }
 
-            barChart.getData().add(series);
+            barChart.getData().addAll(fcrSeries, weightGainSeries);
         } catch (SQLException e) {
             Logger.getLogger(GraphPlaceholderSingle.class.getName()).log(Level.SEVERE, "Error loading bar chart data", e);
         }

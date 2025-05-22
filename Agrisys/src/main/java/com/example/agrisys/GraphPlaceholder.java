@@ -99,28 +99,38 @@ public class GraphPlaceholder {
         pieChart.setTitle("Weight Distribution of Pigs");
 
         String query = """
-    SELECT CASE
-        WHEN [Weight_gain_kg] BETWEEN 0 AND 50 THEN '0-50 kg'
-        WHEN [Weight_gain_kg] BETWEEN 51 AND 100 THEN '51-100 kg'
-        WHEN [Weight_gain_kg] BETWEEN 101 AND 150 THEN '101-150 kg'
-        ELSE '151+ kg' END AS WeightRange,
-        COUNT(*) AS Count
-    FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]
-    GROUP BY CASE
-        WHEN [Weight_gain_kg] BETWEEN 0 AND 50 THEN '0-50 kg'
-        WHEN [Weight_gain_kg] BETWEEN 51 AND 100 THEN '51-100 kg'
-        WHEN [Weight_gain_kg] BETWEEN 101 AND 150 THEN '101-150 kg'
-        ELSE '151+ kg' END
+        SELECT CASE
+            WHEN [Weight_gain_kg] BETWEEN 0 AND 50 THEN '0-50 kg'
+            WHEN [Weight_gain_kg] BETWEEN 51 AND 100 THEN '51-100 kg'
+            WHEN [Weight_gain_kg] BETWEEN 101 AND 150 THEN '101-150 kg'
+            ELSE '151+ kg' END AS WeightRange,
+            COUNT(*) AS Count
+        FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]
+        GROUP BY CASE
+            WHEN [Weight_gain_kg] BETWEEN 0 AND 50 THEN '0-50 kg'
+            WHEN [Weight_gain_kg] BETWEEN 51 AND 100 THEN '51-100 kg'
+            WHEN [Weight_gain_kg] BETWEEN 101 AND 150 THEN '101-150 kg'
+            ELSE '151+ kg' END
     """;
+
+        String totalQuery = "SELECT COUNT(DISTINCT Responder) AS TotalPigs FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]";
 
         try (Connection connection = DatabaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
-             ResultSet resultSet = statement.executeQuery()) {
+             PreparedStatement totalStatement = connection.prepareStatement(totalQuery);
+             ResultSet resultSet = statement.executeQuery();
+             ResultSet totalResultSet = totalStatement.executeQuery()) {
+
+            int totalPigs = 0;
+            if (totalResultSet.next()) {
+                totalPigs = totalResultSet.getInt("TotalPigs");
+            }
 
             while (resultSet.next()) {
                 String weightRange = resultSet.getString("WeightRange");
                 int count = resultSet.getInt("Count");
-                pieChart.getData().add(new PieChart.Data(weightRange, count));
+                double percentage = (count / (double) totalPigs) * 100;
+                pieChart.getData().add(new PieChart.Data(weightRange + " (" + String.format("%.1f", percentage) + "%)", count));
             }
         } catch (SQLException e) {
             Logger.getLogger(GraphPlaceholder.class.getName()).log(Level.SEVERE, "Error loading pie chart data", e);
