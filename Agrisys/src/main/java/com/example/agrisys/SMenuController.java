@@ -52,20 +52,17 @@ package com.example.agrisys;
             public void initialize(URL url, ResourceBundle resources) {
                 DashboardState instance = DashboardState.getInstance();
 
+                setupGraphEventHandlers();
                 if (instance.isPreset()) {
-                    Widget1.setSelected(true);
-                    GraphPlaceholderSingle.addLineChart(InnerAnchor, 0); // Added default responder ID
-                    Widget2.setSelected(true);
-                    GraphPlaceholderSingle.addBarChartComparison(InnerAnchor, 0); // Added default responder ID
-                    Widget3.setSelected(true);
-                    GraphPlaceholderSingle.addPieChart(InnerAnchor, 0); // Added default responder ID
+                    Widget1.fire();
+                    Widget2.fire();
+                    Widget3.fire();
                 }
 
                 setupEventHandlers();
             }
 
             private void setupEventHandlers() {
-                GraphPlaceholder graph = new GraphPlaceholder(InnerAnchor);
                 AlarmButton.setOnAction(e -> HelperMethods.loadScene("Alarm.fxml", AlarmButton));
                 WidgetsButton.setOnAction(e -> toggleMenuVisibility());
                 LogoutButton.setOnAction(e -> HelperMethods.loadScene("Login.fxml", LogoutButton));
@@ -73,6 +70,10 @@ package com.example.agrisys;
                 ImportCSVButton.setOnAction(e -> HelperMethods.loadScene("ImportCSV.fxml", ImportCSVButton));
                 DashboardsButton.setOnAction(e -> HelperMethods.loadScene("Dashboard.fxml", DashboardsButton));
                 KPIButton.setOnAction(e -> HelperMethods.loadScene("KPI.fxml", KPIButton));
+            }
+
+            private void setupGraphEventHandlers() {
+                GraphPlaceholder graph = new GraphPlaceholder(InnerAnchor);
 
                 Widget1.setOnAction(event -> {
                     if (Widget1.isSelected()) {
