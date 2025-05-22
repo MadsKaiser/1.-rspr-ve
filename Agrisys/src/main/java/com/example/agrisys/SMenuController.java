@@ -56,7 +56,7 @@ package com.example.agrisys;
                     Widget1.setSelected(true);
                     GraphPlaceholderSingle.addLineChart(InnerAnchor, 0); // Example default ID
                     Widget2.setSelected(true);
-                    GraphPlaceholderSingle.addScatterChart(InnerAnchor, 0);
+                    GraphPlaceholderSingle.addBarChartComparison(InnerAnchor, 0);
                     Widget3.setSelected(true);
                     GraphPlaceholderSingle.addPieChart(InnerAnchor, 0);
                 }
@@ -129,7 +129,7 @@ package com.example.agrisys;
 
                 clearWidgets();
                 GraphPlaceholderSingle.addLineChart(InnerAnchor, responderId);
-                GraphPlaceholderSingle.addScatterChart(InnerAnchor, responderId);
+                GraphPlaceholderSingle.addBarChartComparison(InnerAnchor, responderId);
                 GraphPlaceholderSingle.addPieChart(InnerAnchor, responderId);
                 GraphPlaceholderSingle.addBarChart(InnerAnchor, responderId);
             }

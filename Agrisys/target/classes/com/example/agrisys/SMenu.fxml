@@ -22,7 +22,14 @@
          </children>
       </VBox>
       <Separator layoutX="1188.0" orientation="VERTICAL" prefHeight="750.0" prefWidth="9.0" />
-      <VBox fx:id="VBoxSMenu" layoutX="10.0" layoutY="10.0" prefHeight="738.0" prefWidth="1180.0" spacing="10.0" />
+      <VBox fx:id="VBoxSMenu" layoutX="10.0" layoutY="10.0" prefHeight="738.0" prefWidth="1180.0" spacing="10.0">
+         <children>
+            <ScrollPane prefHeight="739.0" prefWidth="1180.0">
+               <content>
+                  <VBox fx:id="InnerAnchor" prefWidth="650.0" spacing="10.0" />
+               </content>
+            </ScrollPane>
+         </children></VBox>
       <VBox fx:id="hiddenMenu" layoutX="1196.0" layoutY="258.0" prefHeight="281.0" prefWidth="114.0" spacing="5.0" visible="false">
          <children>
             <CheckBox fx:id="Widget1" mnemonicParsing="false" text="Widget 1" />
@@ -31,15 +38,8 @@
             <CheckBox fx:id="Widget4" mnemonicParsing="false" text="Widget 4" />
             <TextField fx:id="ResponderIDField" promptText="Enter Responder ID" />
             <Button fx:id="GetPigDataButton" mnemonicParsing="false" onAction="#handleFetchResponderData" text="Get Data" />
-            <CheckBox fx:id="Widget5" mnemonicParsing="false" text="Widget 5" />
-            <CheckBox fx:id="Widget6" mnemonicParsing="false" text="Widget 6" />
+            <Button fx:id="ClearWidgetsButton" mnemonicParsing="false" onAction="#clearWidgets" text="Clear widgets" />
          </children>
       </VBox>
-      <ScrollPane prefHeight="739.0" prefWidth="1180.0">
-         <content>
-            <VBox fx:id="InnerAnchor" prefWidth="650.0" spacing="10.0" />
-         </content>
-      </ScrollPane>
-      <Button fx:id="ClearWidgetsButton" layoutX="1212.0" layoutY="613.0" mnemonicParsing="false" onAction="#clearWidgets" text="Clear widgets" />
    </children>
 </AnchorPane>
