@@ -54,11 +54,11 @@ package com.example.agrisys;
 
                 if (instance.isPreset()) {
                     Widget1.setSelected(true);
-                    GraphPlaceholderSingle.addLineChart(InnerAnchor, 0); // Example default ID
+                    GraphPlaceholderSingle.addLineChart(InnerAnchor, 0); // Added default responder ID
                     Widget2.setSelected(true);
-                    GraphPlaceholderSingle.addScatterChart(InnerAnchor, 0);
+                    GraphPlaceholderSingle.addScatterChart(InnerAnchor, 0); // Added default responder ID
                     Widget3.setSelected(true);
-                    GraphPlaceholderSingle.addPieChart(InnerAnchor, 0);
+                    GraphPlaceholderSingle.addPieChart(InnerAnchor, 0); // Added default responder ID
                 }
 
                 setupEventHandlers();

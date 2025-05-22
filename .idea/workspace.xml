@@ -6,12 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="Preset Widget">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/GraphPlaceholderSingle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/GraphPlaceholderSingle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/SMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/SMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/resources/com/example/agrisys/SMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/resources/com/example/agrisys/SMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenuController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/WidgetController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/resources/com/example/agrisys/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/resources/com/example/agrisys/Dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/resources/com/example/agrisys/Widget.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +57,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Morten---Main",
+    "git-widget-placeholder": "Før-det-gik-i-stykker",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/MN-EM/OneDrive/Skrivebord/JDBC driver/sqljdbc_12.10.0.0_enu.zip",
     "node.js.detected.package.eslint": "true",
