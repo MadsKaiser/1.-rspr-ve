@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="Preset Widget">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/GraphPlaceholderSingle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/GraphPlaceholderSingle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/SMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/SMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/resources/com/example/agrisys/SMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/resources/com/example/agrisys/SMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenuController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/GraphPlaceholder.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/GraphPlaceholder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,12 +29,12 @@
     &quot;assignee&quot;: &quot;MadsKaiser&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/MadsKaiser/1.-rspr-ve.git&quot;,
-    &quot;accountId&quot;: &quot;48f021c1-5732-4c46-ad60-539d2020b501&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/MadsKaiser/1.-rspr-ve.git",
+    "accountId": "21313a97-c130-40fa-a8fc-143419f93d11"
   }
-}</component>
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -58,7 +53,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Morten---Main",
+    "git-widget-placeholder": "Mads",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/MN-EM/OneDrive/Skrivebord/JDBC driver/sqljdbc_12.10.0.0_enu.zip",
     "node.js.detected.package.eslint": "true",
@@ -97,8 +92,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.24978.46" />
-        <option value="bundled-js-predefined-d6986cc7102b-76f8388c3a79-JavaScript-IU-243.24978.46" />
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.25410.129" />
+        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-IU-251.25410.129" />
       </set>
     </attachedChunks>
   </component>
@@ -141,6 +136,7 @@
       <workItem from="1747816843257" duration="2014000" />
       <workItem from="1747829032344" duration="3798000" />
       <workItem from="1747894484364" duration="2766000" />
+      <workItem from="1747897648407" duration="364000" />
     </task>
     <task id="LOCAL-00001" summary="Widget hide menu">
       <option name="closed" value="true" />
