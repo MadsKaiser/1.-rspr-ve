@@ -40,5 +40,6 @@
             <VBox fx:id="InnerAnchor" prefWidth="650.0" spacing="10.0" />
          </content>
       </ScrollPane>
+      <Button fx:id="ClearWidgetsButton" layoutX="1212.0" layoutY="613.0" mnemonicParsing="false" onAction="#clearWidgets" text="Clear widgets" />
    </children>
 </AnchorPane>

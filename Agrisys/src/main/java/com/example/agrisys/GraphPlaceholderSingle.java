@@ -13,18 +13,12 @@ import java.util.logging.Logger;
 
 public class GraphPlaceholderSingle {
 
-    public static void clearWidgets(VBox container) {
-        container.getChildren().clear();
-    }
-
     public static void addResponder(VBox container, long responderId) {
         Label label = new Label("Responder ID: " + responderId);
         container.getChildren().add(label);
     }
 
     public static void searchResponder(VBox container, long responderId) {
-        clearWidgets(container);
-
         String query = """
             SELECT Responder, [Weight_gain_kg], FCR
             FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]

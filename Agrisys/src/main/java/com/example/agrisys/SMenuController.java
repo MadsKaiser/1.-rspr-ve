@@ -1,5 +1,7 @@
 package com.example.agrisys;
 
+        import com.microsoft.sqlserver.jdbc.StringUtils;
+        import javafx.event.ActionEvent;
         import javafx.fxml.FXML;
         import javafx.fxml.Initializable;
         import javafx.scene.chart.*;
@@ -27,6 +29,8 @@ package com.example.agrisys;
             private Button WidgetsButton;
             @FXML
             private Button DashboardsButton;
+            @FXML
+            private Button ClearWidgetsButton;
             @FXML
             private VBox hiddenMenu;
             @FXML
@@ -61,6 +65,7 @@ package com.example.agrisys;
             }
 
             private void setupEventHandlers() {
+                GraphPlaceholder graph = new GraphPlaceholder(InnerAnchor);
                 AlarmButton.setOnAction(e -> HelperMethods.loadScene("Alarm.fxml", AlarmButton));
                 WidgetsButton.setOnAction(e -> toggleMenuVisibility());
                 LogoutButton.setOnAction(e -> HelperMethods.loadScene("Login.fxml", LogoutButton));
@@ -69,14 +74,37 @@ package com.example.agrisys;
                 DashboardsButton.setOnAction(e -> HelperMethods.loadScene("Dashboard.fxml", DashboardsButton));
                 KPIButton.setOnAction(e -> HelperMethods.loadScene("KPI.fxml", KPIButton));
 
-                Widget1.setOnAction(event -> toggleWidget(Widget1, LineChart.class, responderId ->
-                    GraphPlaceholderSingle.addLineChart(InnerAnchor, responderId)));
-                Widget2.setOnAction(event -> toggleWidget(Widget2, ScatterChart.class, responderId ->
-                    GraphPlaceholderSingle.addScatterChart(InnerAnchor, responderId)));
-                Widget3.setOnAction(event -> toggleWidget(Widget3, PieChart.class, responderId ->
-                    GraphPlaceholderSingle.addPieChart(InnerAnchor, responderId)));
-                Widget4.setOnAction(event -> toggleWidget(Widget4, BarChart.class, responderId ->
-                    GraphPlaceholderSingle.addBarChart(InnerAnchor, responderId)));
+                Widget1.setOnAction(event -> {
+                    if (Widget1.isSelected()) {
+                        graph.addLineChart();
+                    } else {
+                        InnerAnchor.getChildren().removeIf(node -> node instanceof LineChart);
+                    }
+                });
+
+                Widget2.setOnAction(event -> {
+                    if (Widget2.isSelected()) {
+                        graph.addScatterChart();
+                    } else {
+                        InnerAnchor.getChildren().removeIf(node -> node instanceof ScatterChart);
+                    }
+                });
+
+                Widget3.setOnAction(event -> {
+                    if (Widget3.isSelected()) {
+                        graph.addPieChart();
+                    } else {
+                        InnerAnchor.getChildren().removeIf(node -> node instanceof PieChart);
+                    }
+                });
+
+                Widget4.setOnAction(event -> {
+                    if (Widget4.isSelected()) {
+                        graph.addBarChart();
+                    } else {
+                        InnerAnchor.getChildren().removeIf(node -> node instanceof BarChart);
+                    }
+                });
             }
 
             private void toggleMenuVisibility() {
@@ -97,9 +125,9 @@ package com.example.agrisys;
             @FXML
             private void handleFetchResponderData() {
                 long responderId = getResponderId();
-                if (responderId == -1) return;
+                if (responderId <= 0) return;
 
-                GraphPlaceholderSingle.clearWidgets(InnerAnchor);
+                clearWidgets();
                 GraphPlaceholderSingle.addLineChart(InnerAnchor, responderId);
                 GraphPlaceholderSingle.addScatterChart(InnerAnchor, responderId);
                 GraphPlaceholderSingle.addPieChart(InnerAnchor, responderId);
@@ -168,5 +196,14 @@ package com.example.agrisys;
             @FunctionalInterface
             private interface WidgetAction {
                 void execute(long responderId);
+            }
+
+            @FXML
+            void clearWidgets() {
+                InnerAnchor.getChildren().clear();
+                Widget1.setSelected(false);
+                Widget2.setSelected(false);
+                Widget3.setSelected(false);
+                Widget4.setSelected(false);
             }
         }
