@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="Anchor" prefHeight="750.0" prefWidth="1314.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.agrisys.SMenuController">
    <children>
-      <VBox layoutX="1201.0" layoutY="10.0" prefHeight="242.0" prefWidth="106.0" spacing="10.0">
+      <VBox layoutX="1125.0" layoutY="10.0" prefHeight="242.0" prefWidth="182.0" spacing="10.0">
          <children>
             <Button fx:id="ImportCSVButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Import CSV" />
             <Button fx:id="ExportCSVButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="81.0" text="Export CSV" />
@@ -21,23 +21,25 @@
             <Button fx:id="LogoutButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Logout" />
          </children>
       </VBox>
-      <Separator layoutX="1188.0" orientation="VERTICAL" prefHeight="750.0" prefWidth="9.0" />
-      <VBox fx:id="hiddenMenu" layoutX="1196.0" layoutY="258.0" prefHeight="281.0" prefWidth="114.0" spacing="5.0" visible="false">
+      <Separator layoutX="1118.0" layoutY="4.0" orientation="VERTICAL" prefHeight="750.0" prefWidth="7.0" />
+      <VBox fx:id="VBoxSMenu" layoutX="10.0" layoutY="10.0" prefHeight="738.0" prefWidth="1112.0" spacing="10.0">
          <children>
-            <CheckBox fx:id="Widget1" mnemonicParsing="false" text="Widget 1" />
-            <CheckBox fx:id="Widget2" mnemonicParsing="false" text="Widget 2" />
-            <CheckBox fx:id="Widget3" mnemonicParsing="false" text="Widget 3" />
-            <CheckBox fx:id="Widget4" mnemonicParsing="false" text="Widget 4" />
+            <ScrollPane prefHeight="739.0" prefWidth="1180.0">
+               <content>
+                  <VBox fx:id="InnerAnchor" prefWidth="650.0" spacing="10.0" />
+               </content>
+            </ScrollPane>
+         </children></VBox>
+      <VBox fx:id="hiddenMenu" layoutX="1128.0" layoutY="258.0" prefHeight="282.0" prefWidth="182.0" spacing="5.0" visible="false">
+         <children>
+            <CheckBox fx:id="Widget1" mnemonicParsing="false" text="Food Usage Line" />
+            <CheckBox fx:id="Widget2" mnemonicParsing="false" text="Food Usage vs Weight Gain" />
+            <CheckBox fx:id="Widget3" mnemonicParsing="false" text="Weight Distribution" />
+            <CheckBox fx:id="Widget4" mnemonicParsing="false" text="Food Usage Bar" />
             <TextField fx:id="ResponderIDField" promptText="Enter Responder ID" />
             <Button fx:id="GetPigDataButton" mnemonicParsing="false" onAction="#handleFetchResponderData" text="Get Data" />
-            <CheckBox fx:id="Widget5" mnemonicParsing="false" text="Widget 5" />
-            <CheckBox fx:id="Widget6" mnemonicParsing="false" text="Widget 6" />
+            <Button fx:id="ClearWidgetsButton" mnemonicParsing="false" onAction="#clearWidgets" text="Clear Widgets" />
          </children>
       </VBox>
-      <ScrollPane fx:id="ScrollPane" layoutX="-2.0" prefHeight="750.0" prefWidth="1194.0">
-         <content>
-            <VBox fx:id="widgetContainer" prefWidth="650.0" spacing="10.0" />
-         </content>
-      </ScrollPane>
    </children>
 </AnchorPane>

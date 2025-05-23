@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="2 skridt nærmere">
+    <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="Procentdel på pie chart">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/AlarmController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/AlarmController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/ResponderData.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/ResponderData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/AlarmController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/AlarmController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/resources/com/example/agrisys/SMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/resources/com/example/agrisys/SMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +35,9 @@
     &quot;accountId&quot;: &quot;21313a97-c130-40fa-a8fc-143419f93d11&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -48,11 +48,12 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.App.executor": "Run",
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "benjaminny",
+    "git-widget-placeholder": "Mads",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/MN-EM/OneDrive/Skrivebord/JDBC driver/sqljdbc_12.10.0.0_enu.zip",
     "node.js.detected.package.eslint": "true",
@@ -72,6 +73,22 @@
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.agrisys" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="App" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="22" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.example.agrisys.Main" />
+      <module name="Agrisys" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -108,11 +125,21 @@
       <workItem from="1747245808465" duration="2266000" />
       <workItem from="1747259068975" duration="2912000" />
       <workItem from="1747292105526" duration="2401000" />
-      <workItem from="1747294961773" duration="1838000" />
-      <workItem from="1747297888801" duration="2123000" />
-      <workItem from="1747379122164" duration="3124000" />
-      <workItem from="1747389758674" duration="1050000" />
-      <workItem from="1747391166825" duration="6311000" />
+      <workItem from="1747294921561" duration="2277000" />
+      <workItem from="1747297928697" duration="886000" />
+      <workItem from="1747310709465" duration="97000" />
+      <workItem from="1747310817234" duration="1103000" />
+      <workItem from="1747382004000" duration="641000" />
+      <workItem from="1747576741742" duration="412000" />
+      <workItem from="1747727570062" duration="8658000" />
+      <workItem from="1747811113459" duration="2578000" />
+      <workItem from="1747816843257" duration="2014000" />
+      <workItem from="1747829032344" duration="3798000" />
+      <workItem from="1747894484364" duration="2766000" />
+      <workItem from="1747897648407" duration="5371000" />
+      <workItem from="1747905198436" duration="410000" />
+      <workItem from="1747906185214" duration="2000" />
+      <workItem from="1747906336752" duration="1534000" />
     </task>
     <task id="LOCAL-00001" summary="Widget hide menu">
       <option name="closed" value="true" />
@@ -170,39 +197,31 @@
       <option name="project" value="LOCAL" />
       <updated>1747246694977</updated>
     </task>
-    <task id="LOCAL-00008" summary="Scrollpane virker">
+    <task id="LOCAL-00008" summary="Preset Widget">
       <option name="closed" value="true" />
-      <created>1747392220056</created>
+      <created>1747308349952</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1747392220056</updated>
+      <updated>1747308349952</updated>
     </task>
-    <task id="LOCAL-00009" summary="1 skridt nærmere">
+    <task id="LOCAL-00009" summary="Preset Widget">
       <option name="closed" value="true" />
-      <created>1747393407391</created>
+      <created>1747308984490</created>
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1747393407391</updated>
+      <updated>1747308984490</updated>
     </task>
-    <task id="LOCAL-00010" summary="1 skridt nærmere">
+    <task id="LOCAL-00010" summary="Procentdel på pie chart">
       <option name="closed" value="true" />
-      <created>1747395616742</created>
+      <created>1747898188407</created>
       <option name="number" value="00010" />
       <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1747395616742</updated>
+      <updated>1747898188407</updated>
     </task>
-    <task id="LOCAL-00011" summary="2 skridt nærmere">
-      <option name="closed" value="true" />
-      <created>1747396998353</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1747396998353</updated>
-    </task>
-    <option name="localTasksCounter" value="12" />
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,10 +232,9 @@
     <MESSAGE value="Widget plus SQL" />
     <MESSAGE value="Widget 1 og 2 og ny bruger og adganskode" />
     <MESSAGE value="alt er lidt for småt men kan åbne" />
-    <MESSAGE value="Scrollpane virker" />
-    <MESSAGE value="1 skridt nærmere" />
-    <MESSAGE value="2 skridt nærmere" />
-    <option name="LAST_COMMIT_MESSAGE" value="2 skridt nærmere" />
+    <MESSAGE value="Preset Widget" />
+    <MESSAGE value="Procentdel på pie chart" />
+    <option name="LAST_COMMIT_MESSAGE" value="Procentdel på pie chart" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
