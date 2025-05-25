@@ -37,7 +37,7 @@ public class ImportController {
     @FXML
     private Button BackToMenuButton;
 
-    @FXML
+    @FXML //Åbner en filvælger for at vælge en CSV-fil
     void OnBrowseButton(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Vælg CSV-fil");
@@ -48,32 +48,32 @@ public class ImportController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         File file = fileChooser.showOpenDialog(stage);
 
-        if (file != null) {
+        if (file != null) { //Gemmer den valgte fil og opdaterer tekstfeltet
             selectedFile = file;
             TextFieldID.setText(file.getAbsolutePath());
         }
     }
 
-    @FXML
+    @FXML //Indlæser og læser CSV-filen og gemmer den i databasen
     void OnImportCSVButton(ActionEvent event) {
         if (selectedFile != null) {
             String tableName = "[" + selectedFile.getName().replace(".csv", "") + "]"; // Ensure valid table name
             try (BufferedReader reader = new BufferedReader(new FileReader(selectedFile));
                  Connection connection = DatabaseManager.getConnection()) {
 
-                // Read the first line to get column names
+                //Læser den første linje for at få kolonnenavne
                 String headerLine = reader.readLine();
                 if (headerLine == null) {
                     HelperMethods.Alert2("Fejl", "CSV-filen er tom.");
                     return;
                 }
 
-                // Detect delimiter (default to comma)
+                //Regristrere delimiter som er enten semikolon eller komma
                 String delimiter = headerLine.contains(";") ? ";" : ",";
 
                 String[] columns = headerLine.split(delimiter);
 
-                // Create table with dynamic column names
+                //Laver en tabel i databsen med kolonnenavne
                 StringBuilder createTableQuery = new StringBuilder("CREATE TABLE " + tableName + " (");
                 for (String column : columns) {
                     createTableQuery.append("[").append(column.trim()).append("] NVARCHAR(MAX), ");
@@ -84,7 +84,7 @@ public class ImportController {
                     createTableStmt.execute();
                 }
 
-                // Prepare insert query
+                //Laver en INSERT query baseret på kolonnenavne
                 StringBuilder insertQuery = new StringBuilder("INSERT INTO " + tableName + " (");
                 for (String column : columns) {
                     insertQuery.append("[").append(column.trim()).append("], ");
@@ -97,7 +97,7 @@ public class ImportController {
 
                 PreparedStatement preparedStatement = connection.prepareStatement(insertQuery.toString());
 
-                // Read and insert data
+                //Læser og indsætter data fra CSV-filen
                 String line;
                 while ((line = reader.readLine()) != null) {
                     String[] values = line.split(delimiter);

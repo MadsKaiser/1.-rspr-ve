@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class KPIHelper {
-
+    //Henter en KPI fra databasen ved at udføre en SQL-forespørgsel
     public double fetchKPI(String query) {
         double result = 0.0;
 
@@ -14,16 +14,16 @@ public class KPIHelper {
              ResultSet resultSet = statement.executeQuery()) {
 
             if (resultSet.next()) {
-                result = resultSet.getDouble(1); // Fetch the value from the first column
+                result = resultSet.getDouble(1); //Henter værdien fra den første kolonne
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        // Format the number to two decimal places and handle commas
+        //Sørger for at der er 2 decimaler i resultatet
         return Double.parseDouble(String.format("%.2f", result).replace(",", "."));
     }
-
+    //3 forskellige forespørgsler der henter KPI'er fra databasen
     public String getAverageFCRQuery() {
         return "SELECT AVG([FCR]) FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]";
     }

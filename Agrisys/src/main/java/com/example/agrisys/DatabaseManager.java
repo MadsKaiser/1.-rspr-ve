@@ -6,14 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DatabaseManager {
+public class DatabaseManager { //En konstant med en databaseforbindelse
     private static final String DB_URL = "jdbc:sqlserver://mssql17.unoeuro.com;databaseName=madserkaiser_dk_db_agrisys";
     private static final String DB_USER = "madserkaiser_dk";
     private static final String DB_PASSWORD = "9dwGEek3ByAbz5FghH6R";
 
     private Connection connection;
 
-    // Establish a database connection
+    //Opretter en forbindelse til databasen
     public static Connection getConnection() {
         try {
             Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -24,7 +24,7 @@ public class DatabaseManager {
             return null;
         }
     }
-
+    //Afbryder forbindelsen til databasen Bruges?
     public void disconnect() throws SQLException {
         if (connection != null && !connection.isClosed()) {
             connection.close();
@@ -32,7 +32,7 @@ public class DatabaseManager {
         }
     }
 
-    // Execute a query and return the result
+    //Udføre en forespørgsel og returner et resultat Bruges?
     public ResultSet executeQuery(String query) throws SQLException {
         if (connection == null || connection.isClosed()) {
             throw new SQLException("No active database connection.");
@@ -41,7 +41,7 @@ public class DatabaseManager {
         return statement.executeQuery();
     }
 
-    // Execute an update (INSERT, UPDATE, DELETE)
+    //Udføre en opdatering og returner antallet af rækker påvirket Bruges?
     public int executeUpdate(String query) throws SQLException {
         if (connection == null || connection.isClosed()) {
             throw new SQLException("No active database connection.");

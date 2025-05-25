@@ -23,7 +23,7 @@ public class GraphPlaceholder {
     public GraphPlaceholder(VBox container) {
         this.container = container;
     }
-
+    //Tilføjer et linjediagram, der viser FCR i forhold til Responder Index
     public void addLineChart() {
         NumberAxis xAxis = new NumberAxis();
         xAxis.setLabel("Responder Index");
@@ -33,7 +33,7 @@ public class GraphPlaceholder {
 
         LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
         lineChart.setTitle("Responder Index vs FCR");
-
+        //Bruger en PreparedStatement fra DatabaseManager til at hente data fra databasen
         try (Connection connection = DatabaseManager.getConnection();
              PreparedStatement statement = connection.prepareStatement(
                      "SELECT Responder, FCR FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]");
@@ -41,7 +41,7 @@ public class GraphPlaceholder {
 
             XYChart.Series<Number, Number> series = new XYChart.Series<>();
             series.setName("Foderudnyttelse");
-
+            //Udelukker nogle FCR værdier der er uden for det acceptable interval
             int index = 1;
             while (resultSet.next()) {
                 double fcr = resultSet.getDouble("FCR");
@@ -58,7 +58,7 @@ public class GraphPlaceholder {
 
         container.getChildren().add(lineChart);
     }
-
+    //Tilføjer et scatter-diagram, der viser FCR i forhold til vægtøgning
     public void addScatterChart() {
         NumberAxis xAxis = new NumberAxis();
         xAxis.setLabel("Weight gain");
@@ -93,7 +93,7 @@ public class GraphPlaceholder {
 
         container.getChildren().add(scatterChart);
     }
-
+    //Tilføjer et cirkeldiagram, der viser vægtfordelingen af grise
     public void addPieChart() {
         PieChart pieChart = new PieChart();
         pieChart.setTitle("Weight Distribution of Pigs");
@@ -112,7 +112,7 @@ public class GraphPlaceholder {
             WHEN [Weight_gain_kg] BETWEEN 101 AND 150 THEN '101-150 kg'
             ELSE '151+ kg' END
     """;
-
+        //En forespørgsel til at tælle det totale antal grise
         String totalQuery = "SELECT COUNT(DISTINCT Responder) AS TotalPigs FROM madserkaiser_dk_db_agrisys.dbo.[PPT data]";
 
         try (Connection connection = DatabaseManager.getConnection();
@@ -121,12 +121,12 @@ public class GraphPlaceholder {
              ResultSet resultSet = statement.executeQuery();
              ResultSet totalResultSet = totalStatement.executeQuery()) {
 
-            int totalPigs = 0;
+            int totalPigs = 0; //En variabel til at gemme det totale antal grise
             if (totalResultSet.next()) {
                 totalPigs = totalResultSet.getInt("TotalPigs");
             }
 
-            while (resultSet.next()) {
+            while (resultSet.next()) { //Her bruges en løkke til at hente og indsætte data i cirkeldiagrammet
                 String weightRange = resultSet.getString("WeightRange");
                 int count = resultSet.getInt("Count");
                 double percentage = (count / (double) totalPigs) * 100;
@@ -138,7 +138,7 @@ public class GraphPlaceholder {
 
         container.getChildren().add(pieChart);
     }
-
+    //Tilføjer et søjlediagram, der viser FCR i forhold til Responder Index
     public void addBarChart() {
         CategoryAxis xAxis = new CategoryAxis(); // Changed to CategoryAxis
         xAxis.setLabel("Responder Index");

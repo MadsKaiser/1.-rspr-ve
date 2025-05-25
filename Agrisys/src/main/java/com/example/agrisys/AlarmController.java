@@ -22,9 +22,9 @@ package com.example.agrisys;
                  private Button DeleteAlarmButton;
                  @FXML
                  private Button BackToMenuButton;
-
+                 //En liste til at holde på ResponderData
                  private final ObservableList<ResponderData> responderData = FXCollections.observableArrayList();
-
+                 //En metode til at hente data fra databasen og laver flere SQL forespørgelser/Quaries for at finde de grise der ikke har spsist i 3 dage i den angivne periode
                  private void loadDataFromDatabase() {
                      String query = "SELECT \n" +
                              "    Responder,\n" +
@@ -37,7 +37,7 @@ package com.example.agrisys;
                      try (Connection connection = DatabaseManager.getConnection();
                           Statement statement = connection.createStatement();
                           ResultSet resultSet = statement.executeQuery(query)) {
-
+                         //En while loop der kører igennem resultSet og tilføjer data til responderData listen
                          while (resultSet.next()) {
                              String responder = resultSet.getString("Responder");
                              int daysSinceLastVisit = resultSet.getInt("days_since_last_visit");
@@ -48,8 +48,9 @@ package com.example.agrisys;
                          e.printStackTrace();
                      }
                  }
-
+                 //En initialiserings metode der kaldes automatisk når controlleren indlæses
                  public void initialize() {
+                     //Binder kolonnerne i tabellen til ResponderData klassen
                      responderColumn.setCellValueFactory(data -> data.getValue().responderProperty());
                      daysSinceLastVisitColumn.setCellValueFactory(data -> data.getValue().daysSinceLastVisitProperty());
                      ResponderTable.setItems(responderData);
@@ -68,7 +69,7 @@ package com.example.agrisys;
                      BackToMenuButton.setOnAction(e -> {
                          String currentUser = UserManager.getInstance().getCurrentUser();
                          String role = UserManager.getInstance().getRoles().getOrDefault(currentUser, "USER");
-
+                         //Får dig tilbage til den menu der passer til dit login
                          if ("SUPERUSER".equals(role)) {
                              HelperMethods.loadScene("SMenu.fxml", BackToMenuButton);
                          } else {

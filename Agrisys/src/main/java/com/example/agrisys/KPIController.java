@@ -33,7 +33,7 @@ public class KPIController {
 
     @FXML
     public void initialize() {
-        // Reload saved KPIs
+        //Læser de gemte KPI'er fra KPIStorage og markerer de relevante CheckBoxes
         for (String savedKPI : KPIStorage.getSavedKPIs()) {
             switch (savedKPI) {
                 case "Average FCR":
@@ -55,7 +55,7 @@ public class KPIController {
             }
         }
 
-        // Add event handlers
+        //Tilføjer event handlers til CheckBoxes
         KPI1.setOnAction(event -> toggleKPI(KPI1, "Average FCR"));
         KPI2.setOnAction(event -> toggleKPI(KPI2, "Average End Weight"));
         KPI3.setOnAction(event -> toggleKPI(KPI3, "Average Daily Gain"));
@@ -64,7 +64,7 @@ public class KPIController {
         KPIBack.setOnAction(event -> handleKPIBack());
         SaveButton.setOnAction(event -> handleSaveButton());
     }
-
+    //Ser om en CheckBox er valgt eller ej, og tilføjer eller fjerner KPI'en fra listen og containeren
     private void toggleKPI(CheckBox checkBox, String kpiName) {
         if (checkBox.isSelected()) {
             selectedKPIs.add(kpiName);
@@ -74,7 +74,7 @@ public class KPIController {
             removeKpiFromAnchorPane(kpiName);
         }
     }
-
+    //Tilføjer en KPI til containeren, hvis den ikke allerede er der
     private void addKpiToAnchorPane(String kpiText) {
         if (kpiLabels.containsKey(kpiText)) return;
 
@@ -88,20 +88,20 @@ public class KPIController {
         kpiLabels.put(kpiText, kpiLabel);
         anchorPane.getChildren().add(kpiLabel);
     }
-
+    //Fjerner en KPI fra containeren, hvis den er der
     private void removeKpiFromAnchorPane(String kpiName) {
         Label label = kpiLabels.remove(kpiName);
         if (label != null) {
             anchorPane.getChildren().remove(label);
         }
     }
-
+    //Finder den næste ledige Y-position i containeren, hvor KPI'en kan placeres
     private double findNextFreeYPosition() {
         double baseY = 50;
         double spacing = 30;
         return baseY + (kpiLabels.size() * spacing);
     }
-
+    //Beregner KPI'en ved hjælp af KPIHelper og returnerer den som en formateret streng med 2 decimaler
     private String calculateKPI(String kpiName) {
         try {
             switch (kpiName) {
@@ -127,7 +127,7 @@ public class KPIController {
         navigateToSMenu();
     }
 
-    @FXML
+    @FXML // Håndterer gem-knappen, som gemmer de valgte KPI'er i KPIStorage
     private void handleSaveButton() {
         KPIStorage.clearKPIs();
         for (String kpi : selectedKPIs) {
@@ -137,7 +137,7 @@ public class KPIController {
         navigateToSMenu();
     }
 
-    private void navigateToSMenu() {
+    private void navigateToSMenu() { // Navigerer tilbage til SMenu og indlæser de gemte KPI'er
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/agrisys/SMenu.fxml"));
             Parent root = loader.load();
