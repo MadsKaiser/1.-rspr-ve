@@ -141,10 +141,6 @@ public class KPIController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/agrisys/SMenu.fxml"));
             Parent root = loader.load();
-
-            SMenuController controller = loader.getController();
-            controller.loadKPIs(KPIStorage.getSavedKPIsWithValues());
-
             Stage stage = (Stage) anchorPane.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException e) {

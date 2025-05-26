@@ -58,7 +58,7 @@ package com.example.agrisys;
                     Widget2.fire();
                     Widget3.fire();
                 }
-
+                loadKPIs(KPIStorage.getSavedKPIsWithValues());
                 setupEventHandlers();
             }
 
