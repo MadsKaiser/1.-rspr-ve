@@ -27,7 +27,7 @@ public class ExportController {
     }
 
     @FXML
-    void onExportButton(ActionEvent event) {
+    void onExportButton(ActionEvent event) { //Åbner en filvælger så man kan gemme CSV-filen
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save CSV File");
         fileChooser.getExtensionFilters().add(
@@ -40,19 +40,19 @@ public class ExportController {
             try (FileWriter writer = new FileWriter(file);
                  Connection connection = DatabaseManager.getConnection()) {
 
-                // Fetch all tables from the database
+                //Henter alle tabeller i databasen
                 ResultSet tables = connection.getMetaData().getTables(null, null, "%", new String[]{"TABLE"});
 
                 while (tables.next()) {
                     String tableName = tables.getString("TABLE_NAME");
                     writer.append("Table: ").append(tableName).append("\n");
 
-                    // Fetch data from the table
+                    //Henter dataen der er i tabbelerne
                     String query = "SELECT * FROM \"" + tableName + "\"";
                     try (PreparedStatement statement = connection.prepareStatement(query);
                          ResultSet resultSet = statement.executeQuery()) {
 
-                        // Write column names
+                        //Skriver kolonnenavne
                         int columnCount = resultSet.getMetaData().getColumnCount();
                         for (int i = 1; i <= columnCount; i++) {
                             writer.append(resultSet.getMetaData().getColumnName(i));
@@ -60,7 +60,7 @@ public class ExportController {
                         }
                         writer.append("\n");
 
-                        // Write rows
+                        //Skriver rækkerne
                         while (resultSet.next()) {
                             for (int i = 1; i <= columnCount; i++) {
                                 String value = resultSet.getString(i);
@@ -75,7 +75,7 @@ public class ExportController {
 
                     writer.append("\n");
                 }
-
+                //Bruger metode fra HelperMethods klassen til at vise en besked om at eksporten er fuldført eller fejlet
                 HelperMethods.Alert2("Export Successful", "All tables have been exported successfully.");
             } catch (Exception e) {
                 HelperMethods.Alert2("Export Failed", "An error occurred while exporting the tables: " + e.getMessage());

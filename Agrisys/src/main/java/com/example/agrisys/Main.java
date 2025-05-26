@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Loader Menu.fxml
+        //Loader Login FXML filen og sætter den som scene i primaryStage
         FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
         Parent menuRoot = menuLoader.load();
         primaryStage.setTitle("Menu");
@@ -18,10 +18,9 @@ public class Main extends Application {
     }
     public static void main(String[] args) {
         try {
-            // Opretter databaseforbindelse
+            //Opretter databaseforbindelse
             DatabaseManager.getConnection();
 
-            // Starter applikationen
             launch(args);
         } catch (Exception e) {
             e.printStackTrace();

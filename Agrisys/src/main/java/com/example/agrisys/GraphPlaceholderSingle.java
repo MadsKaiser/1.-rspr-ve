@@ -17,7 +17,7 @@ public class GraphPlaceholderSingle {
         Label label = new Label("Responder ID: " + responderId);
         container.getChildren().add(label);
     }
-
+    //Søger efter data på en specifik Responder ID i databasen og tilføjer relevante grafer og labels til containeren Bruges?
     public static void searchResponder(VBox container, long responderId) {
         String query = """
             SELECT Responder, [Weight_gain_kg], FCR
@@ -41,7 +41,7 @@ public class GraphPlaceholderSingle {
                 Label fcrLabel = new Label("FCR: " + fcr);
 
                 container.getChildren().addAll(weightGainLabel, fcrLabel);
-
+                //Tilføjer alle disse grafer til containeren
                 addLineChart(container, responderId);
                 addBarChartComparison(container, responderId);
                 addPieChart(container, responderId);
@@ -85,10 +85,10 @@ public class GraphPlaceholderSingle {
                 double startWeight = resultSet.getDouble("Start_weight_kg");
                 double endWeight = resultSet.getDouble("End_weight_kg");
 
-                // Add start weight at day 0
+                //Tilføjer at startvægten skal være på den første dag
                 weightSeries.getData().add(new XYChart.Data<>(0, startWeight));
 
-                // Add end weight at the last day
+                //Tilføjer at slutvægten skal være på den sidste dag
                 weightSeries.getData().add(new XYChart.Data<>(days, endWeight));
             }
 
@@ -124,7 +124,7 @@ public class GraphPlaceholderSingle {
 
             XYChart.Series<String, Number> metricsSeries = new XYChart.Series<>();
             metricsSeries.setName("Pig Metrics");
-
+            //Tilføjer data til hver søjle i diagrammet
             if (resultSet.next()) {
                 double startWeight = resultSet.getDouble("Start_weight_kg");
                 double endWeight = resultSet.getDouble("End_weight_kg");
@@ -169,7 +169,7 @@ public class GraphPlaceholderSingle {
 
                 double totalWeight = startWeight + weightGain;
 
-                // Add data to the pie chart with custom labels
+                //Tilføjer date til cirkeldiagrammet med procentvis fordeling og kg
                 PieChart.Data startWeightData = new PieChart.Data(
                         String.format("Start Weight: %.2f kg (%.1f%%)", startWeight, (startWeight / totalWeight) * 100),
                         startWeight
