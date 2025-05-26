@@ -4,25 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="Procentdel på pie chart">
+    <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="Har lavet om i kommentarene i næsten alle klasser">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/AlarmController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/AlarmController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/DashboardState.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/DashboardState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/DatabaseManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/ExportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/ExportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/GraphPlaceholder.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/GraphPlaceholder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/GraphPlaceholderSingle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/GraphPlaceholderSingle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/HelperMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/HelperMethods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/ImportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/ImportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/KPIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/KPIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/KPIHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/KPIHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/KPIStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/KPIStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/WidgetController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/resources/com/example/agrisys/Widget.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/target/classes/com/example/agrisys/SMenuController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +140,7 @@
       <workItem from="1747906185214" duration="2000" />
       <workItem from="1747906336752" duration="1534000" />
       <workItem from="1747908624955" duration="306000" />
-      <workItem from="1748077754594" duration="7153000" />
+      <workItem from="1748077754594" duration="8895000" />
     </task>
     <task id="LOCAL-00001" summary="Widget hide menu">
       <option name="closed" value="true" />
@@ -239,7 +222,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747898188407</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Har lavet om i kommentarene i næsten alle klasser">
+      <option name="closed" value="true" />
+      <created>1748177181140</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1748177181140</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,7 +243,8 @@
     <MESSAGE value="alt er lidt for småt men kan åbne" />
     <MESSAGE value="Preset Widget" />
     <MESSAGE value="Procentdel på pie chart" />
-    <option name="LAST_COMMIT_MESSAGE" value="Procentdel på pie chart" />
+    <MESSAGE value="Har lavet om i kommentarene i næsten alle klasser" />
+    <option name="LAST_COMMIT_MESSAGE" value="Har lavet om i kommentarene i næsten alle klasser" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
