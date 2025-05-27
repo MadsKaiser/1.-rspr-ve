@@ -20,5 +20,6 @@
                </content></ScrollPane>
          </children>
       </VBox>
+      <Button fx:id="ExportWidgets" layoutX="658.0" layoutY="116.0" mnemonicParsing="false" text="Export Widgets" />
    </children>
 </AnchorPane>
