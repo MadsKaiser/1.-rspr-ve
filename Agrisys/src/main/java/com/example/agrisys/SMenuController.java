@@ -70,7 +70,7 @@ public class SMenuController implements Initializable {
         loadKPIs(KPIStorage.getSavedKPIsWithValues());
         setupEventHandlers();
     }
-
+    //Jeg mangler at lave kommentarer på hele klassen
     private void setupEventHandlers() {
         AlarmButton.setOnAction(e -> HelperMethods.loadScene("Alarm.fxml", AlarmButton));
         WidgetsButton.setOnAction(e -> toggleMenuVisibility());
