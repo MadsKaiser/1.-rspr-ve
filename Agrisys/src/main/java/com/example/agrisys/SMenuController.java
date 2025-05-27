@@ -74,38 +74,65 @@ package com.example.agrisys;
 
             private void setupGraphEventHandlers() {
                 GraphPlaceholder graph = new GraphPlaceholder(InnerAnchor);
+                WidgetState widgetState = WidgetState.getInstance();
 
                 Widget1.setOnAction(event -> {
                     if (Widget1.isSelected()) {
                         graph.addLineChart();
+                        widgetState.selectWidget("LineChart");
                     } else {
                         InnerAnchor.getChildren().removeIf(node -> node instanceof LineChart);
+                        widgetState.deselectWidget("LineChart");
                     }
                 });
 
                 Widget2.setOnAction(event -> {
                     if (Widget2.isSelected()) {
                         graph.addScatterChart();
+                        widgetState.selectWidget("ScatterChart");
                     } else {
                         InnerAnchor.getChildren().removeIf(node -> node instanceof ScatterChart);
+                        widgetState.deselectWidget("ScatterChart");
                     }
                 });
 
                 Widget3.setOnAction(event -> {
                     if (Widget3.isSelected()) {
                         graph.addPieChart();
+                        widgetState.selectWidget("PieChart");
                     } else {
                         InnerAnchor.getChildren().removeIf(node -> node instanceof PieChart);
+                        widgetState.deselectWidget("PieChart");
                     }
                 });
 
                 Widget4.setOnAction(event -> {
                     if (Widget4.isSelected()) {
                         graph.addBarChart();
+                        widgetState.selectWidget("BarChart");
                     } else {
                         InnerAnchor.getChildren().removeIf(node -> node instanceof BarChart);
+                        widgetState.deselectWidget("BarChart");
                     }
                 });
+
+                // Genindlæs widgets baseret på gemt tilstand
+                if (widgetState.isWidgetSelected("LineChart")) {
+                    Widget1.setSelected(true);
+                    graph.addLineChart();
+                }
+                if (widgetState.isWidgetSelected("ScatterChart")) {
+                    Widget2.setSelected(true);
+                    graph.addScatterChart();
+                }
+                if (widgetState.isWidgetSelected("PieChart")) {
+                    Widget3.setSelected(true);
+                    graph.addPieChart();
+                }
+                if (widgetState.isWidgetSelected("BarChart")) {
+                    Widget4.setSelected(true);
+                    graph.addBarChart();
+                }
             }
 
             private void toggleMenuVisibility() {
@@ -206,5 +233,8 @@ package com.example.agrisys;
                 Widget2.setSelected(false);
                 Widget3.setSelected(false);
                 Widget4.setSelected(false);
+
+                // Ryd alle gemte widgets i WidgetState
+                WidgetState.getInstance().clear();
             }
         }
