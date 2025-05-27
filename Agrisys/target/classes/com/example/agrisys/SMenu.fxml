@@ -39,6 +39,7 @@
             <TextField fx:id="ResponderIDField" promptText="Enter Responder ID" />
             <Button fx:id="GetPigDataButton" mnemonicParsing="false" onAction="#handleFetchResponderData" text="Get Data" />
             <Button fx:id="ClearWidgetsButton" mnemonicParsing="false" onAction="#clearWidgets" text="Clear Widgets" />
+            <Button fx:id="ExportWidget" mnemonicParsing="false" text="Export Widgets" />
          </children>
       </VBox>
    </children>
