@@ -7,6 +7,7 @@ import com.lowagie.text.pdf.PdfWriter;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
@@ -166,12 +167,27 @@ public class SMenuController implements Initializable {
         long responderId = getResponderId();
         if (responderId <= 0) return;
 
-        clearWidgets();
-        GraphPlaceholderSingle.addLineChart(InnerAnchor, responderId);
-        GraphPlaceholderSingle.addBarChartComparison(InnerAnchor, responderId);
-        GraphPlaceholderSingle.addPieChart(InnerAnchor, responderId);
-        GraphPlaceholderSingle.addBarChart(InnerAnchor, responderId);
+        // Add graphs to the current layout
+        GraphService.loadPigGraphs(InnerAnchor, responderId);
+
+        // Debug: Log the number of graphs added to InnerAnchor
+        System.out.println("Graphs added to InnerAnchor: " + InnerAnchor.getChildren().size());
+        InnerAnchor.getChildren().forEach(node -> System.out.println(node.getClass().getName()));
+
+        // Save graphs in GraphStorage
+        GraphStorage.getInstance().clearGraphs(); // Clear previous graphs
+        InnerAnchor.getChildren().forEach(node -> {
+            if (node instanceof Node) { // Ensure compatibility
+                GraphStorage.getInstance().addGraph(node);
+            } else {
+                System.out.println("Incompatible node type: " + node.getClass().getName());
+            }
+        });
+
+        // Debug: Log the number of graphs stored in GraphStorage
+        System.out.println("Graphs stored in GraphStorage: " + GraphStorage.getInstance().getGraphs().size());
     }
+
 
     private long getResponderId() {
         String responderIdText = ResponderIDField.getText();

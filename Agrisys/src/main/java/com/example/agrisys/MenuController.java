@@ -38,13 +38,17 @@ public class MenuController {
 
     public void initialize() {
         loadKPIs(KPIStorage.getSavedKPIsWithValues());
-        loadWidget(); // Indlæs widgets ved initialisering
+        loadWidget();
+
+        // Load graphs from GraphStorage
+        InnerVBox.getChildren().addAll(GraphStorage.getInstance().getGraphs());
+
         LogoutButton.setOnAction(e -> loadScene("Login.fxml", LogoutButton));
         AlarmButton.setOnAction(e -> loadScene("Alarm.fxml", AlarmButton));
         ExportCSVButton.setOnAction(e -> loadScene("Export.fxml", ExportCSVButton));
         ExportWidgets.setOnAction(e -> handleExportWidget());
-
     }
+
 
     public void loadKPIs(Map<String, String> kpiValues) {
         InnerVBox.setSpacing(10); // Tilføj spacing mellem elementer
