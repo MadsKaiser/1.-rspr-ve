@@ -3,14 +3,14 @@ package com.example.agrisys;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-
+// Morten
 public class DashboardController {
 
     @FXML
     private Button BackToMenuButton;
 
-    @FXML
-    private Button SaveDashboard;
+//    @FXML
+//    private Button SaveDashboard;
 
     @FXML
     private CheckBox PresetDashboard1;

@@ -2,7 +2,7 @@ package com.example.agrisys;
 
 import java.util.HashSet;
 import java.util.Set;
-
+// Benjamin
 public class WidgetState {
     private static final WidgetState instance = new WidgetState();
     private final Set<String> selectedWidgets = new HashSet<>();

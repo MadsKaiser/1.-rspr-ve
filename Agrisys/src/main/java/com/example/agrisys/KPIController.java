@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+// Mads
 public class KPIController {
 
     @FXML
@@ -138,13 +138,9 @@ public class KPIController {
     }
 
     private void navigateToSMenu() { // Navigerer tilbage til SMenu og indlæser de gemte KPI'er
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/agrisys/SMenu.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) anchorPane.getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        HelperMethods.loadScene("SMenu.fxml", KPIBack);
+        Stage stage = (Stage) KPIBack.getScene().getWindow();
+        stage.setTitle("Agrisys - SMenu");
+        stage.show();
     }
 }
