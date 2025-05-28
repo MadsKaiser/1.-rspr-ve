@@ -62,6 +62,8 @@ public class SMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle resources) {
         DashboardState instance = DashboardState.getInstance();
 
+        InnerAnchor.getChildren().addAll(GraphStorage.getInstance().getGraphs());
+
         setupGraphEventHandlers();
         if (instance.isPreset()) {
             Widget1.fire();
