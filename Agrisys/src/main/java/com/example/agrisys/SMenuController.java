@@ -153,26 +153,17 @@ public class SMenuController implements Initializable {
         hiddenMenu.setVisible(!hiddenMenu.isVisible());
     }
 
-    private void toggleWidget(CheckBox widget, Class<?> chartType, WidgetAction action) {
-        if (widget.isSelected()) {
-            long responderId = getResponderId();
-            if (responderId != -1) {
-                action.execute(responderId);
-            }
-        } else {
-            InnerAnchor.getChildren().removeIf(node -> chartType.isInstance(node));
-        }
-    }
 
     @FXML
     private void handleFetchResponderData() {
         long responderId = getResponderId();
         if (responderId <= 0) return;
 
-        // Add graphs to the current layout
+        // Tilføjer grafer til current layout
         GraphService.loadPigGraphs(InnerAnchor, responderId);
 
-        // Debug: Log the number of graphs added to InnerAnchor
+
+        // logger antalet af grafer added til InnerAnchor
         System.out.println("Graphs added to InnerAnchor: " + InnerAnchor.getChildren().size());
         InnerAnchor.getChildren().forEach(node -> System.out.println(node.getClass().getName()));
 
@@ -186,7 +177,7 @@ public class SMenuController implements Initializable {
             }
         });
 
-        // Debug: Log the number of graphs stored in GraphStorage
+        // Logger antallet af grafer i GraphStorage
         System.out.println("Graphs stored in GraphStorage: " + GraphStorage.getInstance().getGraphs().size());
     }
 
@@ -206,41 +197,6 @@ public class SMenuController implements Initializable {
         }
     }
 
-    private void fetchResponderData(String responderId) {
-        try {
-            long responderIdLong = Long.parseLong(responderId);
-
-            try (Connection connection = DatabaseManager.getConnection()) {
-                String query = "SELECT * FROM madserkaiser_dk_db_agrisys.dbo.[PPT data] WHERE Responder = ?";
-                PreparedStatement statement = connection.prepareStatement(query);
-                statement.setLong(1, responderIdLong);
-
-                ResultSet resultSet = statement.executeQuery();
-
-                if (resultSet.next()) {
-                    ResultSetMetaData metaData = resultSet.getMetaData();
-                    int columnCount = metaData.getColumnCount();
-
-                    VBox responderWidget = new VBox();
-                    responderWidget.setStyle("-fx-padding: 10; -fx-border-color: gray; -fx-border-width: 1; -fx-spacing: 5;");
-                    responderWidget.getChildren().add(new Label("Responder Data:"));
-
-                    for (int i = 1; i <= columnCount; i++) {
-                        String columnName = metaData.getColumnName(i);
-                        String columnValue = resultSet.getString(i);
-                        responderWidget.getChildren().add(new Label(columnName + ": " + columnValue));
-                    }
-
-                    InnerAnchor.getChildren().add(responderWidget);
-                } else {
-                    HelperMethods.Alert2("Info", "No data found for Responder: " + responderId);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            HelperMethods.Alert2("Error", "Failed to fetch responder data: " + e.getMessage());
-        }
-    }
 
     public void loadKPIs(Map<String, String> kpiValues) {
         kpiValues.forEach((kpi, value) -> {
@@ -287,10 +243,6 @@ public class SMenuController implements Initializable {
         }
     }
 
-    @FunctionalInterface
-    private interface WidgetAction {
-        void execute(long responderId);
-    }
 
     @FXML
     void clearWidgets() {

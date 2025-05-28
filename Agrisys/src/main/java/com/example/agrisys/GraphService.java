@@ -1,7 +1,7 @@
 package com.example.agrisys;
 
 import javafx.scene.layout.VBox;
-
+// Mads
 public class GraphService {
 
     public static void loadPigGraphs(VBox container, long responderId) {

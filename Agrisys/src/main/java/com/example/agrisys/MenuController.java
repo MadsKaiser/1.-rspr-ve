@@ -40,7 +40,7 @@ public class MenuController {
         loadKPIs(KPIStorage.getSavedKPIsWithValues());
         loadWidget();
 
-        // Load graphs from GraphStorage
+        // Loader grafer fra GraphStorage
         InnerVBox.getChildren().addAll(GraphStorage.getInstance().getGraphs());
 
         LogoutButton.setOnAction(e -> loadScene("Login.fxml", LogoutButton));

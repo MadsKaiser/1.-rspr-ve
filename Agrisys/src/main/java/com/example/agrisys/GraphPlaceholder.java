@@ -155,7 +155,7 @@ public class GraphPlaceholder {
              ResultSet resultSet = statement.executeQuery()) {
 
             XYChart.Series<String, Number> series = new XYChart.Series<>();
-            series.setName("Foderudnyttelse");
+            series.setName("Feed Consumption");
 
             while (resultSet.next()) {
                 String responder = resultSet.getString("Responder");

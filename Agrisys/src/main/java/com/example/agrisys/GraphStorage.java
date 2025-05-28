@@ -4,7 +4,7 @@ import javafx.scene.Node;
 
 import java.util.ArrayList;
 import java.util.List;
-
+// Mads
 public class GraphStorage {
     private static final GraphStorage instance = new GraphStorage();
     private final List<Node> graphs = new ArrayList<>();
