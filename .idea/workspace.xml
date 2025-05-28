@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="Det hele kan ses i Bruger">
-      <change beforePath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/SMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Agrisys/src/main/java/com/example/agrisys/SMenuController.java" afterDir="false" />
-    </list>
+    <list default="true" id="3d90381f-7a7a-4940-8182-860e53ab971f" name="Changes" comment="Det hele kan ses i Bruger" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,7 +50,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Mads",
+    "git-widget-placeholder": "Main2",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/MN-EM/OneDrive/Skrivebord/JDBC driver/sqljdbc_12.10.0.0_enu.zip",
     "node.js.detected.package.eslint": "true",
@@ -147,6 +145,7 @@
       <workItem from="1748340015691" duration="1032000" />
       <workItem from="1748344627120" duration="811000" />
       <workItem from="1748421498007" duration="4636000" />
+      <workItem from="1748427640179" duration="242000" />
     </task>
     <task id="LOCAL-00001" summary="Widget hide menu">
       <option name="closed" value="true" />
@@ -260,7 +259,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748427166093</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Det hele kan ses i Bruger">
+      <option name="closed" value="true" />
+      <created>1748427870215</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1748427870215</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
