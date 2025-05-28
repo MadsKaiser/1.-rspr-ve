@@ -23,8 +23,5 @@ public class ResponderData {
     public String getResponder() {
         return responder.get();
     }
-
-    public String getDaysSinceLastVisit() {
-        return daysSinceLastVisit.get();
-    }
+    
 }
