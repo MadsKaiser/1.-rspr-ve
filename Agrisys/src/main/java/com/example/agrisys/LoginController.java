@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 
 import java.util.HashMap;
-
+// Morten
 public class LoginController {
 
     @FXML
@@ -21,13 +21,13 @@ public class LoginController {
 
     @FXML
     private Button forgotLoginButton;
-    // Måske kig på det her? Ved ikke om der er en nemmere løsning
+
     @FXML
     public void initialize() {
         loginButton.setOnAction(event -> handleLogin());
         forgotLoginButton.setOnAction(event -> HelperMethods.loadScene("ForgotLogin.fxml", forgotLoginButton));
 
-        // Add Enter key functionality to passwordField
+
         passwordField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 handleLogin();
@@ -59,16 +59,3 @@ public class LoginController {
         }
     }
 }
-//       Dette skal nok fikses på en eller andet måde, ved ikke hvordan det skal være sat op
-//       Håber Morten fikser det :)
-
-//       if (fxmlFile.equals("SMenu.fxml")) {
-//        stage.setMaximized(true); // eller stage.setFullScreen(true);
-//            }
-//
-//                    stage.show();
-//        } catch (IOException e) {
-//        e.printStackTrace();
-//showAlert("Error", "Failed to load the scene: " + fxmlFile);
-//        }
-//                }

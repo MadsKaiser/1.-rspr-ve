@@ -12,7 +12,7 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+// Mads
 public class ExportController {
 
     @FXML

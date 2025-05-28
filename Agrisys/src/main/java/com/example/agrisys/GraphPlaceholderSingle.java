@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+// Alle
 public class GraphPlaceholderSingle {
 
     public static void addResponder(VBox container, long responderId) {

@@ -4,7 +4,7 @@ import javafx.scene.control.CheckBox;
 
 import java.util.HashMap;
 import java.util.Map;
-
+// Morten
 public class DashboardState {
     private boolean isPreset; //Boolean for at se om isPreset er true eller false
     private static DashboardState instance; //Her laves en singleton instans af klassen
@@ -40,12 +40,11 @@ public class DashboardState {
         return checkBoxes;
     }
 
-    //Metode til at se i map'et hvilke widgets der er valgt
-    public Map<String, Boolean> getWidgetStates() {
-        Map<String, Boolean> widgetStates = new HashMap<>();
-        for (Map.Entry<String, CheckBox> entry : checkBoxes.entrySet()) {
-            widgetStates.put(entry.getKey(), entry.getValue().isSelected());
-        }
-        return widgetStates;
+//    //Metode til at se i map'et hvilke widgets der er valgt
+//    public Map<String, Boolean> getWidgetStates() {
+//        Map<String, Boolean> widgetStates = new HashMap<>();
+//        for (Map.Entry<String, CheckBox> entry : checkBoxes.entrySet()) {
+//            widgetStates.put(entry.getKey(), entry.getValue().isSelected());
+//        }
+//        return widgetStates;
     }
-}

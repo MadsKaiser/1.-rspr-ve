@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+// Benjamin
 public class HelperMethods {
     //Metode der kan kaldes og den loader den FXML-fil der er givet som parameter
     public static void loadScene(String fxmlFile, Button button) {

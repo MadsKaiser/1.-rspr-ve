@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static com.example.agrisys.HelperMethods.loadScene;
-
+// Benjamin og Mads
 public class MenuController {
     @FXML
     private VBox VBoxMenu; // Opdateret fra AnchorPane til VBox
@@ -37,8 +37,8 @@ public class MenuController {
     private Button ExportWidgets;
 
     public void initialize() {
-        loadKPIs(KPIStorage.getSavedKPIsWithValues());
-        loadWidget(); // Indlæs widgets ved initialisering
+        loadKPIs(KPIStorage.getSavedKPIsWithValues()); // Loader dine gemte KPI'er
+        loadWidget(); // Loader dine gemte widgets
         LogoutButton.setOnAction(e -> loadScene("Login.fxml", LogoutButton));
         AlarmButton.setOnAction(e -> loadScene("Alarm.fxml", AlarmButton));
         ExportCSVButton.setOnAction(e -> loadScene("Export.fxml", ExportCSVButton));
@@ -47,7 +47,7 @@ public class MenuController {
     }
 
     public void loadKPIs(Map<String, String> kpiValues) {
-        InnerVBox.setSpacing(10); // Tilføj spacing mellem elementer
+        InnerVBox.setSpacing(10); // Laver mellemrum mellem KPI'er
         InnerVBox.setStyle("-fx-padding: 10; -fx-alignment: top-left;"); // Juster layout
 
         kpiValues.forEach((kpi, value) -> {
@@ -60,7 +60,7 @@ public class MenuController {
     InnerVBox.setSpacing(20);
     InnerVBox.setStyle("-fx-padding: 10; -fx-alignment: top-left;");
 
-    // Brug GraphPlaceholder til at tilføje grafer
+    // GraphPlaceholder bruges til at tilføje grafer
     GraphPlaceholder graphPlaceholder = new GraphPlaceholder(InnerVBox);
 
     Set<String> selectedWidgets = WidgetState.getInstance().getSelectedWidgets();
@@ -71,28 +71,20 @@ public class MenuController {
     } else {
         for (String widgetName : selectedWidgets) {
             switch (widgetName.toLowerCase()) {
-                case "linjediagram":
                 case "linechart":
-                case "temperatur":
                     graphPlaceholder.addLineChart();
                     break;
-                case "scatter":
                 case "scatterchart":
-                case "fugtighed":
                     graphPlaceholder.addScatterChart();
                     break;
-                case "søjlediagram":
                 case "barchart":
-                case "tryk":
                     graphPlaceholder.addBarChart();
                     break;
-                case "cirkeldiagram":
                 case "piechart":
-                case "vægtfordeling":
                     graphPlaceholder.addPieChart();
                     break;
                 default:
-                    Label unknown = new Label("Ukendt widget: " + widgetName);
+                    Label unknown = new Label("Unknown widget: " + widgetName);
                     InnerVBox.getChildren().add(unknown);
             }
         }
@@ -100,7 +92,7 @@ public class MenuController {
     }
     private void handleExportWidget() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Gem grafer som PDF");
+        fileChooser.setTitle("Save graphs as PDF");
         fileChooser.setInitialFileName("widgets.pdf");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
         File file = fileChooser.showSaveDialog(InnerVBox.getScene().getWindow());
@@ -127,10 +119,10 @@ public class MenuController {
             document.add(image);
             document.close();
 
-            HelperMethods.Alert2("Info", "PDF gemt som: " + file.getAbsolutePath());
+            HelperMethods.Alert2("Info", "PDF saved as: " + file.getAbsolutePath());
         } catch (Exception e) {
             e.printStackTrace();
-            HelperMethods.Alert2("Fejl", "Kunne ikke gemme PDF: " + e.getMessage());
+            HelperMethods.Alert2("Fejl", "Could not save PDF: " + e.getMessage());
         }
     }
 }

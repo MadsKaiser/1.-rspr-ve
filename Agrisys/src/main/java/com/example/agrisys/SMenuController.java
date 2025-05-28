@@ -22,7 +22,7 @@ import java.net.URL;
 import java.sql.*;
 import java.util.Map;
 import java.util.ResourceBundle;
-
+// Mikkel, Benjamin, Mads, Morten
 public class SMenuController implements Initializable {
     @FXML
     private Button AlarmButton;

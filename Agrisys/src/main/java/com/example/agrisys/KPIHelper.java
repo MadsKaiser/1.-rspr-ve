@@ -3,7 +3,7 @@ package com.example.agrisys;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+// Mads
 public class KPIHelper {
     //Henter en KPI fra databasen ved at udføre en SQL-forespørgsel
     public double fetchKPI(String query) {

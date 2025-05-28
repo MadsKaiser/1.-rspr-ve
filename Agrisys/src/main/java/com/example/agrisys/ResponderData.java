@@ -2,7 +2,7 @@ package com.example.agrisys;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-
+// Benjamin
 public class ResponderData {
     private final StringProperty responder;
     private final StringProperty daysSinceLastVisit;

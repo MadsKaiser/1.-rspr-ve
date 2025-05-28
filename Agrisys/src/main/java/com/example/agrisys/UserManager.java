@@ -1,7 +1,7 @@
 package com.example.agrisys;
 
 import java.util.HashMap;
-
+// Benjamin
 public class UserManager {
 
     private static UserManager instance;
@@ -48,8 +48,4 @@ public class UserManager {
         return currentUser != null ? currentUser : "";
     }
 
-    // Reset the current user (e.g., on logout)
-    public void resetCurrentUser() {
-        currentUser = null;
-    }
 }
