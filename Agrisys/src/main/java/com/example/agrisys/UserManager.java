@@ -10,10 +10,10 @@ public class UserManager {
     private String currentUser; // Variable to store the current user
 
     private UserManager() {
+        // Laver en liste over brugere og deres roller
         users = new HashMap<>();
         roles = new HashMap<>();
-
-        // Add a superuser and a normal user
+        // Tilføjer brugere og deres roller
         users.put("s", "s");
         roles.put("s", "SUPERUSER");
 
@@ -36,14 +36,14 @@ public class UserManager {
         return roles;
     }
 
-    // Set the current logged-in user
+    // Set current user hvis username findes i users
     public void setCurrentUser(String username) {
         if (username != null && users.containsKey(username)) {
             currentUser = username;
         }
     }
 
-    // Get the current logged-in user
+    // får current user
     public String getCurrentUser() {
         return currentUser != null ? currentUser : "";
     }

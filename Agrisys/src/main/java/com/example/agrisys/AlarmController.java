@@ -32,6 +32,36 @@ public class AlarmController {
     // Hashset sikrer at der ikke er dubletter samt er hurtigere at søge i (Ikke at vi kan mærke det)
     // Den er static, så den kan bruges i hele klassen
 
+    // initialize metoden bliver kaldt når man åbner Alarm.fxml
+    public void initialize() {
+        responderColumn.setCellValueFactory(data -> data.getValue().responderProperty());
+        daysSinceLastVisitColumn.setCellValueFactory(data -> data.getValue().daysSinceLastVisitProperty());
+        ResponderTable.setItems(responderData);
+
+        loadDataFromDatabase(); // Loader data fra metoden loadDataFromDatabase hvor der bliver lavet en SQL forespørgsel fra databasen
+        // og fylder ResponderTable med dataen
+
+        DeleteAlarmButton.setOnAction(e -> {
+            ResponderData selectedItem = ResponderTable.getSelectionModel().getSelectedItem();
+            if (selectedItem != null) {
+                deletedIds.add(selectedItem.getResponder());
+                responderData.remove(selectedItem);
+            }
+        });
+
+        BackToMenuButton.setOnAction(e -> {
+            String currentUser = UserManager.getInstance().getCurrentUser();
+            String role = UserManager.getInstance().getRoles().getOrDefault(currentUser, "USER");
+
+            if ("SUPERUSER".equals(role)) {
+                HelperMethods.loadScene("SMenu.fxml", BackToMenuButton);
+            } else {
+                HelperMethods.loadScene("Menu.fxml", BackToMenuButton);
+            }
+
+        });
+    }
+
 
     private void loadDataFromDatabase() {
         responderData.clear(); //Rydder listen før man fylder den op igen
@@ -64,33 +94,5 @@ public class AlarmController {
     }
     ;
 
-    public void initialize() {
-        responderColumn.setCellValueFactory(data -> data.getValue().responderProperty());
-        daysSinceLastVisitColumn.setCellValueFactory(data -> data.getValue().daysSinceLastVisitProperty());
-        ResponderTable.setItems(responderData);
 
-        loadDataFromDatabase();
-
-        DeleteAlarmButton.setOnAction(e -> {
-            ResponderData selectedItem = ResponderTable.getSelectionModel().getSelectedItem();
-            if (selectedItem != null) {
-                deletedIds.add(selectedItem.getResponder());
-                responderData.remove(selectedItem);
-
-
-            }
-        });
-
-        BackToMenuButton.setOnAction(e -> {
-            String currentUser = UserManager.getInstance().getCurrentUser();
-            String role = UserManager.getInstance().getRoles().getOrDefault(currentUser, "USER");
-
-            if ("SUPERUSER".equals(role)) {
-                HelperMethods.loadScene("SMenu.fxml", BackToMenuButton);
-            } else {
-                HelperMethods.loadScene("Menu.fxml", BackToMenuButton);
-            }
-
-        });
-    }
 }

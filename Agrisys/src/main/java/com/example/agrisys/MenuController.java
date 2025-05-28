@@ -75,28 +75,20 @@ public class MenuController {
     } else {
         for (String widgetName : selectedWidgets) {
             switch (widgetName.toLowerCase()) {
-                case "linjediagram":
                 case "linechart":
-                case "temperatur":
                     graphPlaceholder.addLineChart();
                     break;
-                case "scatter":
                 case "scatterchart":
-                case "fugtighed":
                     graphPlaceholder.addScatterChart();
                     break;
-                case "søjlediagram":
                 case "barchart":
-                case "tryk":
                     graphPlaceholder.addBarChart();
                     break;
-                case "cirkeldiagram":
                 case "piechart":
-                case "vægtfordeling":
                     graphPlaceholder.addPieChart();
                     break;
                 default:
-                    Label unknown = new Label("Ukendt widget: " + widgetName);
+                    Label unknown = new Label("Unknown widget: " + widgetName);
                     InnerVBox.getChildren().add(unknown);
             }
         }
@@ -104,7 +96,7 @@ public class MenuController {
     }
     private void handleExportWidget() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Gem grafer som PDF");
+        fileChooser.setTitle("Save graphs as PDF");
         fileChooser.setInitialFileName("widgets.pdf");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
         File file = fileChooser.showSaveDialog(InnerVBox.getScene().getWindow());
@@ -131,10 +123,10 @@ public class MenuController {
             document.add(image);
             document.close();
 
-            HelperMethods.Alert2("Info", "PDF gemt som: " + file.getAbsolutePath());
+            HelperMethods.Alert2("Info", "PDF saved as: " + file.getAbsolutePath());
         } catch (Exception e) {
             e.printStackTrace();
-            HelperMethods.Alert2("Fejl", "Kunne ikke gemme PDF: " + e.getMessage());
+            HelperMethods.Alert2("Error", "Could not save PDF: " + e.getMessage());
         }
     }
 }
