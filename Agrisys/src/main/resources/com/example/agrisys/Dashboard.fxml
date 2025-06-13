@@ -10,9 +10,9 @@
         <VBox layoutX="14.0" layoutY="14.0" prefHeight="81.0" prefWidth="138.0">
             <children>
                 <CheckBox fx:id="PresetDashboard1" mnemonicParsing="false" text="Preset Dashboard 1" />
-                <CheckBox mnemonicParsing="false" text="CheckBox" />
-                <CheckBox mnemonicParsing="false" text="CheckBox" />
-                <CheckBox mnemonicParsing="false" text="CheckBox" />
+                <CheckBox fx:id="PresetDashboard2" mnemonicParsing="false" text="Preset Dashboard 2" />
+                <CheckBox fx:id="PresetDashboard3" mnemonicParsing="false" text="Preset Dashboard 3" />
+                <CheckBox fx:id="PresetDashboard1" mnemonicParsing="false" text="Preset Dashboard 4" />
             </children>
         </VBox>
       <Button fx:id="SaveDashboard" layoutX="63.0" layoutY="199.0" mnemonicParsing="false" text="Save" />
