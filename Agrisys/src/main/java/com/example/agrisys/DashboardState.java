@@ -15,15 +15,20 @@ public class DashboardState {
     private boolean preset3;
     private boolean preset4;
 
-    // Map to store CheckBoxes by name
-    private final Map<String, CheckBox> checkBoxes;
+    // deklarer gemmested til et map til at gemme CheckBox objekter (felt til at opbevare hashmap med CheckBox objekter)
 
-    // Private constructor to prevent direct instantiation
+    //her opretter vi et felt som kun kan holde hashmaps med med værdier string og checkbox, og den kalder vi så for checkbox:
+//    private final Map<String, CheckBox> checkBoxes;
+
+    //opretter et map til at gemme CheckBox objekter og gemmer i checkboxe
+
+    //her opretter vi så et nyt hashmap og gemmer det tomme hashmap i feltet
     private DashboardState() {
-        checkBoxes = new HashMap<>();
+//        checkBoxes = new HashMap<>();
     }
 
-    // Public method to access the singleton instance
+    // kan kaldes fra andre klasser, den tjekker om der allerede er en instans af DashboardState og returnere den, hvis der ikke
+    //er en instans, opretter den en ny og returnerer den
     public static DashboardState getInstance() {
         if (instance == null) {
             instance = new DashboardState();
@@ -31,7 +36,7 @@ public class DashboardState {
         return instance;
     }
 
-    // Setters for presets
+    // metoden der opretter en ny instans af DashboardState
     public void setPreset1(boolean value) {
         this.preset1 = value;
     }
@@ -48,7 +53,7 @@ public class DashboardState {
         this.preset4 = value;
     }
 
-    // Getters for presets
+    // den metode der returnerer værdien af de forskellige presets (kan kaldes i fx smenuen)
     public boolean isPreset1() {
         return preset1;
     }
@@ -65,18 +70,18 @@ public class DashboardState {
         return preset4;
     }
 
-    // Add a checkbox to the map
-    public void addCheckBox(String name, CheckBox checkBox) {
-        checkBoxes.put(name, checkBox);
-    }
-
-    // Retrieve a checkbox by name
-    public CheckBox getCheckBox(String name) {
-        return checkBoxes.get(name);
-    }
-
-    // Retrieve all checkboxes
-    public Map<String, CheckBox> getAllCheckBoxes() {
-        return checkBoxes;
-    }
+//    // Add a checkbox to the map
+//    public void addCheckBox(String name, CheckBox checkBox) {
+//        checkBoxes.put(name, checkBox);
+//    }
+//
+//    // Retrieve a checkbox by name
+//    public CheckBox getCheckBox(String name) {
+//        return checkBoxes.get(name);
+//    }
+//
+//    // Retrieve all checkboxes
+//    public Map<String, CheckBox> getAllCheckBoxes() {
+//        return checkBoxes;
+//    }
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -9,7 +8,6 @@
    <children>
       <Button fx:id="ImportCSVButton" layoutX="27.0" layoutY="24.0" mnemonicParsing="false" onAction="#OnImportCSVButton" text="Import CSV" />
       <Button fx:id="BrowseButton" layoutX="643.0" layoutY="117.0" mnemonicParsing="false" onAction="#OnBrowseButton" prefHeight="26.0" prefWidth="77.0" text="Browse" />
-      <Label fx:id="DirectoryLabel" layoutX="14.0" layoutY="116.0" prefHeight="26.0" prefWidth="622.0" text="Label" />
       <TextField fx:id="TextFieldID" layoutX="11.0" layoutY="149.0" prefHeight="247.0" prefWidth="713.0" />
       <Button fx:id="BackToMenuButton" layoutX="5.0" layoutY="83.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="Back to Menu" />
    </children>

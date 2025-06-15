@@ -27,9 +27,10 @@ public class DashboardController {
         DashboardState singleton = DashboardState.getInstance();
 
         // Event handler for den første Preset knap
-        PresetDashboard1.setOnAction(event -> {
-            boolean isSelected = PresetDashboard1.isSelected();
-            singleton.setPreset1(isSelected);
+        //
+        PresetDashboard1.setOnAction(event -> { // holder øje med klik på presetdashboard1
+            boolean isSelected = PresetDashboard1.isSelected();//hvis der bliver trykket på den sætter den tilstanden til true eller false
+            singleton.setPreset1(isSelected);//her gemmer den tilstanden true eller false i singleton instansen
         });
         PresetDashboard2.setOnAction(event -> {
             boolean isSelected = PresetDashboard2.isSelected();
