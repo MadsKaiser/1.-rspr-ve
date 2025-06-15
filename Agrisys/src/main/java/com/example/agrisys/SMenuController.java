@@ -65,11 +65,30 @@ public class SMenuController implements Initializable {
         InnerAnchor.getChildren().addAll(GraphStorage.getInstance().getGraphs());
 
         setupGraphEventHandlers();
-        if (instance.isPreset()) {
+        if (instance.isPreset1()) {
+            Widget1.fire();
+
+        }
+
+        if (instance.isPreset2()) {
+            Widget1.fire();
+            Widget2.fire();
+
+        }
+        if (instance.isPreset3()) {
             Widget1.fire();
             Widget2.fire();
             Widget3.fire();
+
         }
+        if (instance.isPreset4()) {
+            Widget1.fire();
+            Widget2.fire();
+            Widget3.fire();
+            Widget4.fire();
+
+        }
+
         loadKPIs(KPIStorage.getSavedKPIsWithValues());
         setupEventHandlers();
     }
